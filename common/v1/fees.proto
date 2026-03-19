@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package tradebot.common.v1;
+
+option go_package = "github.com/pulsoats/contracts/gen/go/common/v1;commonpb";
+
+message Fees {
+  int64 taker_fee = 1;
+  int64 maker_fee = 2;
+}
