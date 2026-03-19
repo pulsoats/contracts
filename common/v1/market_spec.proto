@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package tradebot.common.v1;
+package pulsoats.common.v1;
 
 option go_package = "github.com/pulsoats/contracts/gen/go/common/v1;commonpb";
 

@@ -268,7 +268,7 @@ func (x *GetRunRequest) GetRunId() string {
 
 type GetRunStatusResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        RunStatus              `protobuf:"varint,1,opt,name=status,proto3,enum=tradebot.analysis.v1.RunStatus" json:"status,omitempty"`
+	Status        RunStatus              `protobuf:"varint,1,opt,name=status,proto3,enum=pulsoats.analysis.v1.RunStatus" json:"status,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -321,7 +321,7 @@ func (x *GetRunStatusResponse) GetMessage() string {
 type RunMeta struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
-	Status        RunStatus              `protobuf:"varint,2,opt,name=status,proto3,enum=tradebot.analysis.v1.RunStatus" json:"status,omitempty"`
+	Status        RunStatus              `protobuf:"varint,2,opt,name=status,proto3,enum=pulsoats.analysis.v1.RunStatus" json:"status,omitempty"`
 	UserId        string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Market        *v1.MarketSpec         `protobuf:"bytes,4,opt,name=market,proto3" json:"market,omitempty"`
 	Interval      string                 `protobuf:"bytes,5,opt,name=interval,proto3" json:"interval,omitempty"`
@@ -498,36 +498,36 @@ var File_analysis_v1_analysis_proto protoreflect.FileDescriptor
 
 const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\n" +
-	"\x1aanalysis/v1/analysis.proto\x12\x14tradebot.analysis.v1\x1a\x1bcommon/v1/detectorcfg.proto\x1a\x14common/v1/fees.proto\x1a\x1bcommon/v1/market_spec.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe7\x02\n" +
+	"\x1aanalysis/v1/analysis.proto\x12\x14pulsoats.analysis.v1\x1a\x1bcommon/v1/detectorcfg.proto\x1a\x14common/v1/fees.proto\x1a\x1bcommon/v1/market_spec.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe7\x02\n" +
 	"\x0fStartRunRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x126\n" +
-	"\x06market\x18\x02 \x01(\v2\x1e.tradebot.common.v1.MarketSpecR\x06market\x12\x1a\n" +
+	"\x06market\x18\x02 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x03 \x01(\tR\binterval\x12.\n" +
 	"\x04from\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
 	"\x02to\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12\x1d\n" +
 	"\n" +
 	"price_type\x18\x06 \x01(\tR\tpriceType\x12>\n" +
-	"\bdetector\x18\a \x01(\v2\".tradebot.common.v1.DetectorConfigR\bdetector\x12,\n" +
-	"\x04fees\x18\b \x01(\v2\x18.tradebot.common.v1.FeesR\x04fees\")\n" +
+	"\bdetector\x18\a \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x12,\n" +
+	"\x04fees\x18\b \x01(\v2\x18.pulsoats.common.v1.FeesR\x04fees\")\n" +
 	"\x10StartRunResponse\x12\x15\n" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\"&\n" +
 	"\rGetRunRequest\x12\x15\n" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\"i\n" +
 	"\x14GetRunStatusResponse\x127\n" +
-	"\x06status\x18\x01 \x01(\x0e2\x1f.tradebot.analysis.v1.RunStatusR\x06status\x12\x18\n" +
+	"\x06status\x18\x01 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunStatusR\x06status\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\x87\x04\n" +
 	"\aRunMeta\x12\x15\n" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\x127\n" +
-	"\x06status\x18\x02 \x01(\x0e2\x1f.tradebot.analysis.v1.RunStatusR\x06status\x12\x17\n" +
+	"\x06status\x18\x02 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunStatusR\x06status\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\tR\x06userId\x126\n" +
-	"\x06market\x18\x04 \x01(\v2\x1e.tradebot.common.v1.MarketSpecR\x06market\x12\x1a\n" +
+	"\x06market\x18\x04 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x05 \x01(\tR\binterval\x12.\n" +
 	"\x04from\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
 	"\x02to\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12#\n" +
 	"\rsignals_count\x18\b \x01(\x03R\fsignalsCount\x12$\n" +
 	"\x0eavg_profit_ppm\x18\t \x01(\x03R\favgProfitPpm\x12>\n" +
 	"\bdetector\x18\n" +
-	" \x01(\v2\".tradebot.common.v1.DetectorConfigR\bdetector\x12\x1d\n" +
+	" \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x12\x1d\n" +
 	"\n" +
 	"price_type\x18\v \x01(\tR\tpriceType\x129\n" +
 	"\n" +
@@ -541,11 +541,11 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x0fRUN_STATUS_DONE\x10\x03\x12\x15\n" +
 	"\x11RUN_STATUS_FAILED\x10\x042\xfc\x02\n" +
 	"\x0fAnalysisService\x12Y\n" +
-	"\bStartRun\x12%.tradebot.analysis.v1.StartRunRequest\x1a&.tradebot.analysis.v1.StartRunResponse\x12_\n" +
-	"\fGetRunStatus\x12#.tradebot.analysis.v1.GetRunRequest\x1a*.tradebot.analysis.v1.GetRunStatusResponse\x12P\n" +
+	"\bStartRun\x12%.pulsoats.analysis.v1.StartRunRequest\x1a&.pulsoats.analysis.v1.StartRunResponse\x12_\n" +
+	"\fGetRunStatus\x12#.pulsoats.analysis.v1.GetRunRequest\x1a*.pulsoats.analysis.v1.GetRunStatusResponse\x12P\n" +
 	"\n" +
-	"GetRunMeta\x12#.tradebot.analysis.v1.GetRunRequest\x1a\x1d.tradebot.analysis.v1.RunMeta\x12[\n" +
-	"\fGetRunResult\x12#.tradebot.analysis.v1.GetRunRequest\x1a$.tradebot.analysis.v1.RunResultChunk0\x01B=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
+	"GetRunMeta\x12#.pulsoats.analysis.v1.GetRunRequest\x1a\x1d.pulsoats.analysis.v1.RunMeta\x12[\n" +
+	"\fGetRunResult\x12#.pulsoats.analysis.v1.GetRunRequest\x1a$.pulsoats.analysis.v1.RunResultChunk0\x01B=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
 
 var (
 	file_analysis_v1_analysis_proto_rawDescOnce sync.Once
@@ -562,39 +562,39 @@ func file_analysis_v1_analysis_proto_rawDescGZIP() []byte {
 var file_analysis_v1_analysis_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_analysis_v1_analysis_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_analysis_v1_analysis_proto_goTypes = []any{
-	(RunStatus)(0),                // 0: tradebot.analysis.v1.RunStatus
-	(*StartRunRequest)(nil),       // 1: tradebot.analysis.v1.StartRunRequest
-	(*StartRunResponse)(nil),      // 2: tradebot.analysis.v1.StartRunResponse
-	(*GetRunRequest)(nil),         // 3: tradebot.analysis.v1.GetRunRequest
-	(*GetRunStatusResponse)(nil),  // 4: tradebot.analysis.v1.GetRunStatusResponse
-	(*RunMeta)(nil),               // 5: tradebot.analysis.v1.RunMeta
-	(*RunResultChunk)(nil),        // 6: tradebot.analysis.v1.RunResultChunk
-	(*v1.MarketSpec)(nil),         // 7: tradebot.common.v1.MarketSpec
+	(RunStatus)(0),                // 0: pulsoats.analysis.v1.RunStatus
+	(*StartRunRequest)(nil),       // 1: pulsoats.analysis.v1.StartRunRequest
+	(*StartRunResponse)(nil),      // 2: pulsoats.analysis.v1.StartRunResponse
+	(*GetRunRequest)(nil),         // 3: pulsoats.analysis.v1.GetRunRequest
+	(*GetRunStatusResponse)(nil),  // 4: pulsoats.analysis.v1.GetRunStatusResponse
+	(*RunMeta)(nil),               // 5: pulsoats.analysis.v1.RunMeta
+	(*RunResultChunk)(nil),        // 6: pulsoats.analysis.v1.RunResultChunk
+	(*v1.MarketSpec)(nil),         // 7: pulsoats.common.v1.MarketSpec
 	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
-	(*v1.DetectorConfig)(nil),     // 9: tradebot.common.v1.DetectorConfig
-	(*v1.Fees)(nil),               // 10: tradebot.common.v1.Fees
+	(*v1.DetectorConfig)(nil),     // 9: pulsoats.common.v1.DetectorConfig
+	(*v1.Fees)(nil),               // 10: pulsoats.common.v1.Fees
 }
 var file_analysis_v1_analysis_proto_depIdxs = []int32{
-	7,  // 0: tradebot.analysis.v1.StartRunRequest.market:type_name -> tradebot.common.v1.MarketSpec
-	8,  // 1: tradebot.analysis.v1.StartRunRequest.from:type_name -> google.protobuf.Timestamp
-	8,  // 2: tradebot.analysis.v1.StartRunRequest.to:type_name -> google.protobuf.Timestamp
-	9,  // 3: tradebot.analysis.v1.StartRunRequest.detector:type_name -> tradebot.common.v1.DetectorConfig
-	10, // 4: tradebot.analysis.v1.StartRunRequest.fees:type_name -> tradebot.common.v1.Fees
-	0,  // 5: tradebot.analysis.v1.GetRunStatusResponse.status:type_name -> tradebot.analysis.v1.RunStatus
-	0,  // 6: tradebot.analysis.v1.RunMeta.status:type_name -> tradebot.analysis.v1.RunStatus
-	7,  // 7: tradebot.analysis.v1.RunMeta.market:type_name -> tradebot.common.v1.MarketSpec
-	8,  // 8: tradebot.analysis.v1.RunMeta.from:type_name -> google.protobuf.Timestamp
-	8,  // 9: tradebot.analysis.v1.RunMeta.to:type_name -> google.protobuf.Timestamp
-	9,  // 10: tradebot.analysis.v1.RunMeta.detector:type_name -> tradebot.common.v1.DetectorConfig
-	8,  // 11: tradebot.analysis.v1.RunMeta.created_at:type_name -> google.protobuf.Timestamp
-	1,  // 12: tradebot.analysis.v1.AnalysisService.StartRun:input_type -> tradebot.analysis.v1.StartRunRequest
-	3,  // 13: tradebot.analysis.v1.AnalysisService.GetRunStatus:input_type -> tradebot.analysis.v1.GetRunRequest
-	3,  // 14: tradebot.analysis.v1.AnalysisService.GetRunMeta:input_type -> tradebot.analysis.v1.GetRunRequest
-	3,  // 15: tradebot.analysis.v1.AnalysisService.GetRunResult:input_type -> tradebot.analysis.v1.GetRunRequest
-	2,  // 16: tradebot.analysis.v1.AnalysisService.StartRun:output_type -> tradebot.analysis.v1.StartRunResponse
-	4,  // 17: tradebot.analysis.v1.AnalysisService.GetRunStatus:output_type -> tradebot.analysis.v1.GetRunStatusResponse
-	5,  // 18: tradebot.analysis.v1.AnalysisService.GetRunMeta:output_type -> tradebot.analysis.v1.RunMeta
-	6,  // 19: tradebot.analysis.v1.AnalysisService.GetRunResult:output_type -> tradebot.analysis.v1.RunResultChunk
+	7,  // 0: pulsoats.analysis.v1.StartRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
+	8,  // 1: pulsoats.analysis.v1.StartRunRequest.from:type_name -> google.protobuf.Timestamp
+	8,  // 2: pulsoats.analysis.v1.StartRunRequest.to:type_name -> google.protobuf.Timestamp
+	9,  // 3: pulsoats.analysis.v1.StartRunRequest.detector:type_name -> pulsoats.common.v1.DetectorConfig
+	10, // 4: pulsoats.analysis.v1.StartRunRequest.fees:type_name -> pulsoats.common.v1.Fees
+	0,  // 5: pulsoats.analysis.v1.GetRunStatusResponse.status:type_name -> pulsoats.analysis.v1.RunStatus
+	0,  // 6: pulsoats.analysis.v1.RunMeta.status:type_name -> pulsoats.analysis.v1.RunStatus
+	7,  // 7: pulsoats.analysis.v1.RunMeta.market:type_name -> pulsoats.common.v1.MarketSpec
+	8,  // 8: pulsoats.analysis.v1.RunMeta.from:type_name -> google.protobuf.Timestamp
+	8,  // 9: pulsoats.analysis.v1.RunMeta.to:type_name -> google.protobuf.Timestamp
+	9,  // 10: pulsoats.analysis.v1.RunMeta.detector:type_name -> pulsoats.common.v1.DetectorConfig
+	8,  // 11: pulsoats.analysis.v1.RunMeta.created_at:type_name -> google.protobuf.Timestamp
+	1,  // 12: pulsoats.analysis.v1.AnalysisService.StartRun:input_type -> pulsoats.analysis.v1.StartRunRequest
+	3,  // 13: pulsoats.analysis.v1.AnalysisService.GetRunStatus:input_type -> pulsoats.analysis.v1.GetRunRequest
+	3,  // 14: pulsoats.analysis.v1.AnalysisService.GetRunMeta:input_type -> pulsoats.analysis.v1.GetRunRequest
+	3,  // 15: pulsoats.analysis.v1.AnalysisService.GetRunResult:input_type -> pulsoats.analysis.v1.GetRunRequest
+	2,  // 16: pulsoats.analysis.v1.AnalysisService.StartRun:output_type -> pulsoats.analysis.v1.StartRunResponse
+	4,  // 17: pulsoats.analysis.v1.AnalysisService.GetRunStatus:output_type -> pulsoats.analysis.v1.GetRunStatusResponse
+	5,  // 18: pulsoats.analysis.v1.AnalysisService.GetRunMeta:output_type -> pulsoats.analysis.v1.RunMeta
+	6,  // 19: pulsoats.analysis.v1.AnalysisService.GetRunResult:output_type -> pulsoats.analysis.v1.RunResultChunk
 	16, // [16:20] is the sub-list for method output_type
 	12, // [12:16] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name

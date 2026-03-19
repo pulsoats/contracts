@@ -77,7 +77,7 @@ var File_common_v1_fees_proto protoreflect.FileDescriptor
 
 const file_common_v1_fees_proto_rawDesc = "" +
 	"\n" +
-	"\x14common/v1/fees.proto\x12\x12tradebot.common.v1\"@\n" +
+	"\x14common/v1/fees.proto\x12\x12pulsoats.common.v1\"@\n" +
 	"\x04Fees\x12\x1b\n" +
 	"\ttaker_fee\x18\x01 \x01(\x03R\btakerFee\x12\x1b\n" +
 	"\tmaker_fee\x18\x02 \x01(\x03R\bmakerFeeB9Z7github.com/pulsoats/contracts/gen/go/common/v1;commonpbb\x06proto3"
@@ -96,7 +96,7 @@ func file_common_v1_fees_proto_rawDescGZIP() []byte {
 
 var file_common_v1_fees_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_common_v1_fees_proto_goTypes = []any{
-	(*Fees)(nil), // 0: tradebot.common.v1.Fees
+	(*Fees)(nil), // 0: pulsoats.common.v1.Fees
 }
 var file_common_v1_fees_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

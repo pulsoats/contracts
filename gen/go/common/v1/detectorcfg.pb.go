@@ -85,7 +85,7 @@ var File_common_v1_detectorcfg_proto protoreflect.FileDescriptor
 
 const file_common_v1_detectorcfg_proto_rawDesc = "" +
 	"\n" +
-	"\x1bcommon/v1/detectorcfg.proto\x12\x12tradebot.common.v1\"N\n" +
+	"\x1bcommon/v1/detectorcfg.proto\x12\x12pulsoats.common.v1\"N\n" +
 	"\x0eDetectorConfig\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x12\x12\n" +
@@ -105,7 +105,7 @@ func file_common_v1_detectorcfg_proto_rawDescGZIP() []byte {
 
 var file_common_v1_detectorcfg_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_common_v1_detectorcfg_proto_goTypes = []any{
-	(*DetectorConfig)(nil), // 0: tradebot.common.v1.DetectorConfig
+	(*DetectorConfig)(nil), // 0: pulsoats.common.v1.DetectorConfig
 }
 var file_common_v1_detectorcfg_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

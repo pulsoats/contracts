@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AnalysisService_StartRun_FullMethodName     = "/tradebot.analysis.v1.AnalysisService/StartRun"
-	AnalysisService_GetRunStatus_FullMethodName = "/tradebot.analysis.v1.AnalysisService/GetRunStatus"
-	AnalysisService_GetRunMeta_FullMethodName   = "/tradebot.analysis.v1.AnalysisService/GetRunMeta"
-	AnalysisService_GetRunResult_FullMethodName = "/tradebot.analysis.v1.AnalysisService/GetRunResult"
+	AnalysisService_StartRun_FullMethodName     = "/pulsoats.analysis.v1.AnalysisService/StartRun"
+	AnalysisService_GetRunStatus_FullMethodName = "/pulsoats.analysis.v1.AnalysisService/GetRunStatus"
+	AnalysisService_GetRunMeta_FullMethodName   = "/pulsoats.analysis.v1.AnalysisService/GetRunMeta"
+	AnalysisService_GetRunResult_FullMethodName = "/pulsoats.analysis.v1.AnalysisService/GetRunResult"
 )
 
 // AnalysisServiceClient is the client API for AnalysisService service.
@@ -212,7 +212,7 @@ type AnalysisService_GetRunResultServer = grpc.ServerStreamingServer[RunResultCh
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AnalysisService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "tradebot.analysis.v1.AnalysisService",
+	ServiceName: "pulsoats.analysis.v1.AnalysisService",
 	HandlerType: (*AnalysisServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

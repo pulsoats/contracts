@@ -85,7 +85,7 @@ var File_common_v1_market_spec_proto protoreflect.FileDescriptor
 
 const file_common_v1_market_spec_proto_rawDesc = "" +
 	"\n" +
-	"\x1bcommon/v1/market_spec.proto\x12\x12tradebot.common.v1\"\\\n" +
+	"\x1bcommon/v1/market_spec.proto\x12\x12pulsoats.common.v1\"\\\n" +
 	"\n" +
 	"MarketSpec\x12\x1a\n" +
 	"\bexchange\x18\x01 \x01(\tR\bexchange\x12\x1a\n" +
@@ -106,7 +106,7 @@ func file_common_v1_market_spec_proto_rawDescGZIP() []byte {
 
 var file_common_v1_market_spec_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_common_v1_market_spec_proto_goTypes = []any{
-	(*MarketSpec)(nil), // 0: tradebot.common.v1.MarketSpec
+	(*MarketSpec)(nil), // 0: pulsoats.common.v1.MarketSpec
 }
 var file_common_v1_market_spec_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

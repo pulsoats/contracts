@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package tradebot.analysis.v1;
+package pulsoats.analysis.v1;
 
 import "common/v1/detectorcfg.proto";
 import "common/v1/fees.proto";
@@ -26,13 +26,13 @@ service AnalysisService {
 
 message StartRunRequest {
   string user_id = 1;
-  tradebot.common.v1.MarketSpec market = 2;
+  pulsoats.common.v1.MarketSpec market = 2;
   string interval = 3;
   google.protobuf.Timestamp from = 4;
   google.protobuf.Timestamp to = 5;
   string price_type = 6;
-  tradebot.common.v1.DetectorConfig detector = 7;
-  tradebot.common.v1.Fees fees = 8;
+  pulsoats.common.v1.DetectorConfig detector = 7;
+  pulsoats.common.v1.Fees fees = 8;
 }
 
 message StartRunResponse {
@@ -52,13 +52,13 @@ message RunMeta {
   string run_id = 1;
   RunStatus status = 2;
   string user_id = 3;
-  tradebot.common.v1.MarketSpec market = 4;
+  pulsoats.common.v1.MarketSpec market = 4;
   string interval = 5;
   google.protobuf.Timestamp from = 6;
   google.protobuf.Timestamp to = 7;
   int64 signals_count = 8;
   int64 avg_profit_ppm = 9;
-  tradebot.common.v1.DetectorConfig detector = 10;
+  pulsoats.common.v1.DetectorConfig detector = 10;
   string price_type = 11;
   google.protobuf.Timestamp created_at = 12;
 }
