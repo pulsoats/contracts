@@ -180,7 +180,7 @@ func (x *StartRunRequest) GetFees() *v1.Fees {
 
 type StartRunResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunId         int64                  `protobuf:"varint,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
+	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -215,16 +215,16 @@ func (*StartRunResponse) Descriptor() ([]byte, []int) {
 	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *StartRunResponse) GetRunId() int64 {
+func (x *StartRunResponse) GetRunId() string {
 	if x != nil {
 		return x.RunId
 	}
-	return 0
+	return ""
 }
 
 type GetRunRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunId         int64                  `protobuf:"varint,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
+	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -259,11 +259,11 @@ func (*GetRunRequest) Descriptor() ([]byte, []int) {
 	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetRunRequest) GetRunId() int64 {
+func (x *GetRunRequest) GetRunId() string {
 	if x != nil {
 		return x.RunId
 	}
-	return 0
+	return ""
 }
 
 type GetRunStatusResponse struct {
@@ -320,7 +320,7 @@ func (x *GetRunStatusResponse) GetMessage() string {
 
 type RunMeta struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Status        RunStatus              `protobuf:"varint,2,opt,name=status,proto3,enum=pulsoats.analysis.v1.RunStatus" json:"status,omitempty"`
 	UserId        string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Market        *v1.MarketSpec         `protobuf:"bytes,4,opt,name=market,proto3" json:"market,omitempty"`
@@ -366,11 +366,11 @@ func (*RunMeta) Descriptor() ([]byte, []int) {
 	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *RunMeta) GetId() int64 {
+func (x *RunMeta) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *RunMeta) GetStatus() RunStatus {
@@ -510,14 +510,14 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\bdetector\x18\a \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x12,\n" +
 	"\x04fees\x18\b \x01(\v2\x18.pulsoats.common.v1.FeesR\x04fees\")\n" +
 	"\x10StartRunResponse\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\x03R\x05runId\"&\n" +
+	"\x06run_id\x18\x01 \x01(\tR\x05runId\"&\n" +
 	"\rGetRunRequest\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\x03R\x05runId\"i\n" +
+	"\x06run_id\x18\x01 \x01(\tR\x05runId\"i\n" +
 	"\x14GetRunStatusResponse\x127\n" +
 	"\x06status\x18\x01 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunStatusR\x06status\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\x80\x04\n" +
 	"\aRunMeta\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x127\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x127\n" +
 	"\x06status\x18\x02 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunStatusR\x06status\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\tR\x06userId\x126\n" +
 	"\x06market\x18\x04 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
@@ -539,8 +539,8 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x12RUN_STATUS_PENDING\x10\x01\x12\x16\n" +
 	"\x12RUN_STATUS_RUNNING\x10\x02\x12\x13\n" +
 	"\x0fRUN_STATUS_DONE\x10\x03\x12\x15\n" +
-	"\x11RUN_STATUS_FAILED\x10\x042\xfc\x02\n" +
-	"\x0fAnalysisService\x12Y\n" +
+	"\x11RUN_STATUS_FAILED\x10\x042\xf5\x02\n" +
+	"\bAnalysis\x12Y\n" +
 	"\bStartRun\x12%.pulsoats.analysis.v1.StartRunRequest\x1a&.pulsoats.analysis.v1.StartRunResponse\x12_\n" +
 	"\fGetRunStatus\x12#.pulsoats.analysis.v1.GetRunRequest\x1a*.pulsoats.analysis.v1.GetRunStatusResponse\x12P\n" +
 	"\n" +
@@ -587,14 +587,14 @@ var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	8,  // 9: pulsoats.analysis.v1.RunMeta.to:type_name -> google.protobuf.Timestamp
 	9,  // 10: pulsoats.analysis.v1.RunMeta.detector:type_name -> pulsoats.common.v1.DetectorConfig
 	8,  // 11: pulsoats.analysis.v1.RunMeta.created_at:type_name -> google.protobuf.Timestamp
-	1,  // 12: pulsoats.analysis.v1.AnalysisService.StartRun:input_type -> pulsoats.analysis.v1.StartRunRequest
-	3,  // 13: pulsoats.analysis.v1.AnalysisService.GetRunStatus:input_type -> pulsoats.analysis.v1.GetRunRequest
-	3,  // 14: pulsoats.analysis.v1.AnalysisService.GetRunMeta:input_type -> pulsoats.analysis.v1.GetRunRequest
-	3,  // 15: pulsoats.analysis.v1.AnalysisService.GetRunResult:input_type -> pulsoats.analysis.v1.GetRunRequest
-	2,  // 16: pulsoats.analysis.v1.AnalysisService.StartRun:output_type -> pulsoats.analysis.v1.StartRunResponse
-	4,  // 17: pulsoats.analysis.v1.AnalysisService.GetRunStatus:output_type -> pulsoats.analysis.v1.GetRunStatusResponse
-	5,  // 18: pulsoats.analysis.v1.AnalysisService.GetRunMeta:output_type -> pulsoats.analysis.v1.RunMeta
-	6,  // 19: pulsoats.analysis.v1.AnalysisService.GetRunResult:output_type -> pulsoats.analysis.v1.RunResultChunk
+	1,  // 12: pulsoats.analysis.v1.Analysis.StartRun:input_type -> pulsoats.analysis.v1.StartRunRequest
+	3,  // 13: pulsoats.analysis.v1.Analysis.GetRunStatus:input_type -> pulsoats.analysis.v1.GetRunRequest
+	3,  // 14: pulsoats.analysis.v1.Analysis.GetRunMeta:input_type -> pulsoats.analysis.v1.GetRunRequest
+	3,  // 15: pulsoats.analysis.v1.Analysis.GetRunResult:input_type -> pulsoats.analysis.v1.GetRunRequest
+	2,  // 16: pulsoats.analysis.v1.Analysis.StartRun:output_type -> pulsoats.analysis.v1.StartRunResponse
+	4,  // 17: pulsoats.analysis.v1.Analysis.GetRunStatus:output_type -> pulsoats.analysis.v1.GetRunStatusResponse
+	5,  // 18: pulsoats.analysis.v1.Analysis.GetRunMeta:output_type -> pulsoats.analysis.v1.RunMeta
+	6,  // 19: pulsoats.analysis.v1.Analysis.GetRunResult:output_type -> pulsoats.analysis.v1.RunResultChunk
 	16, // [16:20] is the sub-list for method output_type
 	12, // [12:16] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name

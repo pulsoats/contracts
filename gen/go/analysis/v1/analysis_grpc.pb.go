@@ -19,63 +19,63 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AnalysisService_StartRun_FullMethodName     = "/pulsoats.analysis.v1.AnalysisService/StartRun"
-	AnalysisService_GetRunStatus_FullMethodName = "/pulsoats.analysis.v1.AnalysisService/GetRunStatus"
-	AnalysisService_GetRunMeta_FullMethodName   = "/pulsoats.analysis.v1.AnalysisService/GetRunMeta"
-	AnalysisService_GetRunResult_FullMethodName = "/pulsoats.analysis.v1.AnalysisService/GetRunResult"
+	Analysis_StartRun_FullMethodName     = "/pulsoats.analysis.v1.Analysis/StartRun"
+	Analysis_GetRunStatus_FullMethodName = "/pulsoats.analysis.v1.Analysis/GetRunStatus"
+	Analysis_GetRunMeta_FullMethodName   = "/pulsoats.analysis.v1.Analysis/GetRunMeta"
+	Analysis_GetRunResult_FullMethodName = "/pulsoats.analysis.v1.Analysis/GetRunResult"
 )
 
-// AnalysisServiceClient is the client API for AnalysisService service.
+// AnalysisClient is the client API for Analysis service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AnalysisServiceClient interface {
+type AnalysisClient interface {
 	StartRun(ctx context.Context, in *StartRunRequest, opts ...grpc.CallOption) (*StartRunResponse, error)
 	GetRunStatus(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*GetRunStatusResponse, error)
 	GetRunMeta(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*RunMeta, error)
 	GetRunResult(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunResultChunk], error)
 }
 
-type analysisServiceClient struct {
+type analysisClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAnalysisServiceClient(cc grpc.ClientConnInterface) AnalysisServiceClient {
-	return &analysisServiceClient{cc}
+func NewAnalysisClient(cc grpc.ClientConnInterface) AnalysisClient {
+	return &analysisClient{cc}
 }
 
-func (c *analysisServiceClient) StartRun(ctx context.Context, in *StartRunRequest, opts ...grpc.CallOption) (*StartRunResponse, error) {
+func (c *analysisClient) StartRun(ctx context.Context, in *StartRunRequest, opts ...grpc.CallOption) (*StartRunResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StartRunResponse)
-	err := c.cc.Invoke(ctx, AnalysisService_StartRun_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Analysis_StartRun_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *analysisServiceClient) GetRunStatus(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*GetRunStatusResponse, error) {
+func (c *analysisClient) GetRunStatus(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*GetRunStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetRunStatusResponse)
-	err := c.cc.Invoke(ctx, AnalysisService_GetRunStatus_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Analysis_GetRunStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *analysisServiceClient) GetRunMeta(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*RunMeta, error) {
+func (c *analysisClient) GetRunMeta(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*RunMeta, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RunMeta)
-	err := c.cc.Invoke(ctx, AnalysisService_GetRunMeta_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Analysis_GetRunMeta_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *analysisServiceClient) GetRunResult(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunResultChunk], error) {
+func (c *analysisClient) GetRunResult(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunResultChunk], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AnalysisService_ServiceDesc.Streams[0], AnalysisService_GetRunResult_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Analysis_ServiceDesc.Streams[0], Analysis_GetRunResult_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,148 +90,148 @@ func (c *analysisServiceClient) GetRunResult(ctx context.Context, in *GetRunRequ
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AnalysisService_GetRunResultClient = grpc.ServerStreamingClient[RunResultChunk]
+type Analysis_GetRunResultClient = grpc.ServerStreamingClient[RunResultChunk]
 
-// AnalysisServiceServer is the server API for AnalysisService service.
-// All implementations must embed UnimplementedAnalysisServiceServer
+// AnalysisServer is the server API for Analysis service.
+// All implementations must embed UnimplementedAnalysisServer
 // for forward compatibility.
-type AnalysisServiceServer interface {
+type AnalysisServer interface {
 	StartRun(context.Context, *StartRunRequest) (*StartRunResponse, error)
 	GetRunStatus(context.Context, *GetRunRequest) (*GetRunStatusResponse, error)
 	GetRunMeta(context.Context, *GetRunRequest) (*RunMeta, error)
 	GetRunResult(*GetRunRequest, grpc.ServerStreamingServer[RunResultChunk]) error
-	mustEmbedUnimplementedAnalysisServiceServer()
+	mustEmbedUnimplementedAnalysisServer()
 }
 
-// UnimplementedAnalysisServiceServer must be embedded to have
+// UnimplementedAnalysisServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedAnalysisServiceServer struct{}
+type UnimplementedAnalysisServer struct{}
 
-func (UnimplementedAnalysisServiceServer) StartRun(context.Context, *StartRunRequest) (*StartRunResponse, error) {
+func (UnimplementedAnalysisServer) StartRun(context.Context, *StartRunRequest) (*StartRunResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method StartRun not implemented")
 }
-func (UnimplementedAnalysisServiceServer) GetRunStatus(context.Context, *GetRunRequest) (*GetRunStatusResponse, error) {
+func (UnimplementedAnalysisServer) GetRunStatus(context.Context, *GetRunRequest) (*GetRunStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetRunStatus not implemented")
 }
-func (UnimplementedAnalysisServiceServer) GetRunMeta(context.Context, *GetRunRequest) (*RunMeta, error) {
+func (UnimplementedAnalysisServer) GetRunMeta(context.Context, *GetRunRequest) (*RunMeta, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetRunMeta not implemented")
 }
-func (UnimplementedAnalysisServiceServer) GetRunResult(*GetRunRequest, grpc.ServerStreamingServer[RunResultChunk]) error {
+func (UnimplementedAnalysisServer) GetRunResult(*GetRunRequest, grpc.ServerStreamingServer[RunResultChunk]) error {
 	return status.Error(codes.Unimplemented, "method GetRunResult not implemented")
 }
-func (UnimplementedAnalysisServiceServer) mustEmbedUnimplementedAnalysisServiceServer() {}
-func (UnimplementedAnalysisServiceServer) testEmbeddedByValue()                         {}
+func (UnimplementedAnalysisServer) mustEmbedUnimplementedAnalysisServer() {}
+func (UnimplementedAnalysisServer) testEmbeddedByValue()                  {}
 
-// UnsafeAnalysisServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AnalysisServiceServer will
+// UnsafeAnalysisServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AnalysisServer will
 // result in compilation errors.
-type UnsafeAnalysisServiceServer interface {
-	mustEmbedUnimplementedAnalysisServiceServer()
+type UnsafeAnalysisServer interface {
+	mustEmbedUnimplementedAnalysisServer()
 }
 
-func RegisterAnalysisServiceServer(s grpc.ServiceRegistrar, srv AnalysisServiceServer) {
-	// If the following call panics, it indicates UnimplementedAnalysisServiceServer was
+func RegisterAnalysisServer(s grpc.ServiceRegistrar, srv AnalysisServer) {
+	// If the following call panics, it indicates UnimplementedAnalysisServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&AnalysisService_ServiceDesc, srv)
+	s.RegisterService(&Analysis_ServiceDesc, srv)
 }
 
-func _AnalysisService_StartRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Analysis_StartRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AnalysisServiceServer).StartRun(ctx, in)
+		return srv.(AnalysisServer).StartRun(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AnalysisService_StartRun_FullMethodName,
+		FullMethod: Analysis_StartRun_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalysisServiceServer).StartRun(ctx, req.(*StartRunRequest))
+		return srv.(AnalysisServer).StartRun(ctx, req.(*StartRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AnalysisService_GetRunStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Analysis_GetRunStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AnalysisServiceServer).GetRunStatus(ctx, in)
+		return srv.(AnalysisServer).GetRunStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AnalysisService_GetRunStatus_FullMethodName,
+		FullMethod: Analysis_GetRunStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalysisServiceServer).GetRunStatus(ctx, req.(*GetRunRequest))
+		return srv.(AnalysisServer).GetRunStatus(ctx, req.(*GetRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AnalysisService_GetRunMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Analysis_GetRunMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AnalysisServiceServer).GetRunMeta(ctx, in)
+		return srv.(AnalysisServer).GetRunMeta(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AnalysisService_GetRunMeta_FullMethodName,
+		FullMethod: Analysis_GetRunMeta_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalysisServiceServer).GetRunMeta(ctx, req.(*GetRunRequest))
+		return srv.(AnalysisServer).GetRunMeta(ctx, req.(*GetRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AnalysisService_GetRunResult_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _Analysis_GetRunResult_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetRunRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AnalysisServiceServer).GetRunResult(m, &grpc.GenericServerStream[GetRunRequest, RunResultChunk]{ServerStream: stream})
+	return srv.(AnalysisServer).GetRunResult(m, &grpc.GenericServerStream[GetRunRequest, RunResultChunk]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AnalysisService_GetRunResultServer = grpc.ServerStreamingServer[RunResultChunk]
+type Analysis_GetRunResultServer = grpc.ServerStreamingServer[RunResultChunk]
 
-// AnalysisService_ServiceDesc is the grpc.ServiceDesc for AnalysisService service.
+// Analysis_ServiceDesc is the grpc.ServiceDesc for Analysis service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var AnalysisService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pulsoats.analysis.v1.AnalysisService",
-	HandlerType: (*AnalysisServiceServer)(nil),
+var Analysis_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pulsoats.analysis.v1.Analysis",
+	HandlerType: (*AnalysisServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "StartRun",
-			Handler:    _AnalysisService_StartRun_Handler,
+			Handler:    _Analysis_StartRun_Handler,
 		},
 		{
 			MethodName: "GetRunStatus",
-			Handler:    _AnalysisService_GetRunStatus_Handler,
+			Handler:    _Analysis_GetRunStatus_Handler,
 		},
 		{
 			MethodName: "GetRunMeta",
-			Handler:    _AnalysisService_GetRunMeta_Handler,
+			Handler:    _Analysis_GetRunMeta_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "GetRunResult",
-			Handler:       _AnalysisService_GetRunResult_Handler,
+			Handler:       _Analysis_GetRunResult_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -17,7 +17,7 @@ enum RunStatus {
   RUN_STATUS_FAILED = 4;
 }
 
-service AnalysisService {
+service Analysis {
   rpc StartRun(StartRunRequest) returns (StartRunResponse);
   rpc GetRunStatus(GetRunRequest) returns (GetRunStatusResponse);
   rpc GetRunMeta(GetRunRequest) returns (RunMeta);
@@ -36,11 +36,11 @@ message StartRunRequest {
 }
 
 message StartRunResponse {
-  int64 run_id = 1;
+  string run_id = 1;
 }
 
 message GetRunRequest {
-  int64 run_id = 1;
+  string run_id = 1;
 }
 
 message GetRunStatusResponse {
@@ -49,7 +49,7 @@ message GetRunStatusResponse {
 }
 
 message RunMeta {
-  int64 id = 1;
+  string id = 1;
   RunStatus status = 2;
   string user_id = 3;
   pulsoats.common.v1.MarketSpec market = 4;
