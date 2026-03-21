@@ -22,6 +22,7 @@ service Analysis {
   rpc GetRunStatus(GetRunRequest) returns (GetRunStatusResponse);
   rpc GetRunMeta(GetRunRequest) returns (RunMeta);
   rpc GetRunResult(GetRunRequest) returns (stream RunResultChunk);
+  rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse);
 }
 
 message StartRunRequest {
@@ -65,4 +66,15 @@ message RunMeta {
 
 message RunResultChunk {
   bytes data = 1;
+}
+
+message ListRunsRequest {
+  int32 limit = 1;
+  int64 before_id = 2; // 0 = не передан => первые limit
+}
+
+message ListRunsResponse {
+  repeated RunMeta items = 1;
+  int64 next_before_id = 2; // 0 = нет следующей страницы
+  bool has_more = 3;
 }

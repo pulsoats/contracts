@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Analysis_StartRun_FullMethodName     = "/pulsoats.analysis.v1.Analysis/StartRun"
-	Analysis_GetRunStatus_FullMethodName = "/pulsoats.analysis.v1.Analysis/GetRunStatus"
-	Analysis_GetRunMeta_FullMethodName   = "/pulsoats.analysis.v1.Analysis/GetRunMeta"
-	Analysis_GetRunResult_FullMethodName = "/pulsoats.analysis.v1.Analysis/GetRunResult"
+	Analysis_StartRun_FullMethodName      = "/pulsoats.analysis.v1.Analysis/StartRun"
+	Analysis_GetRunStatus_FullMethodName  = "/pulsoats.analysis.v1.Analysis/GetRunStatus"
+	Analysis_GetRunMeta_FullMethodName    = "/pulsoats.analysis.v1.Analysis/GetRunMeta"
+	Analysis_GetRunResult_FullMethodName  = "/pulsoats.analysis.v1.Analysis/GetRunResult"
+	Analysis_ListRunsPaged_FullMethodName = "/pulsoats.analysis.v1.Analysis/ListRunsPaged"
 )
 
 // AnalysisClient is the client API for Analysis service.
@@ -33,6 +34,7 @@ type AnalysisClient interface {
 	GetRunStatus(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*GetRunStatusResponse, error)
 	GetRunMeta(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*RunMeta, error)
 	GetRunResult(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunResultChunk], error)
+	ListRunsPaged(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error)
 }
 
 type analysisClient struct {
@@ -92,6 +94,16 @@ func (c *analysisClient) GetRunResult(ctx context.Context, in *GetRunRequest, op
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type Analysis_GetRunResultClient = grpc.ServerStreamingClient[RunResultChunk]
 
+func (c *analysisClient) ListRunsPaged(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRunsResponse)
+	err := c.cc.Invoke(ctx, Analysis_ListRunsPaged_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalysisServer is the server API for Analysis service.
 // All implementations must embed UnimplementedAnalysisServer
 // for forward compatibility.
@@ -100,6 +112,7 @@ type AnalysisServer interface {
 	GetRunStatus(context.Context, *GetRunRequest) (*GetRunStatusResponse, error)
 	GetRunMeta(context.Context, *GetRunRequest) (*RunMeta, error)
 	GetRunResult(*GetRunRequest, grpc.ServerStreamingServer[RunResultChunk]) error
+	ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error)
 	mustEmbedUnimplementedAnalysisServer()
 }
 
@@ -121,6 +134,9 @@ func (UnimplementedAnalysisServer) GetRunMeta(context.Context, *GetRunRequest) (
 }
 func (UnimplementedAnalysisServer) GetRunResult(*GetRunRequest, grpc.ServerStreamingServer[RunResultChunk]) error {
 	return status.Error(codes.Unimplemented, "method GetRunResult not implemented")
+}
+func (UnimplementedAnalysisServer) ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListRunsPaged not implemented")
 }
 func (UnimplementedAnalysisServer) mustEmbedUnimplementedAnalysisServer() {}
 func (UnimplementedAnalysisServer) testEmbeddedByValue()                  {}
@@ -208,6 +224,24 @@ func _Analysis_GetRunResult_Handler(srv interface{}, stream grpc.ServerStream) e
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type Analysis_GetRunResultServer = grpc.ServerStreamingServer[RunResultChunk]
 
+func _Analysis_ListRunsPaged_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRunsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalysisServer).ListRunsPaged(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Analysis_ListRunsPaged_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalysisServer).ListRunsPaged(ctx, req.(*ListRunsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Analysis_ServiceDesc is the grpc.ServiceDesc for Analysis service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -226,6 +260,10 @@ var Analysis_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRunMeta",
 			Handler:    _Analysis_GetRunMeta_Handler,
+		},
+		{
+			MethodName: "ListRunsPaged",
+			Handler:    _Analysis_ListRunsPaged_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
