@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pulsoats/contracts/gen/go/analysis/v1;analysispb";
 
-enum RunStatus {
+enum RunStatusCode {
   RUN_STATUS_UNSPECIFIED = 0;
   RUN_STATUS_PENDING = 1;
   RUN_STATUS_RUNNING = 2;
@@ -17,12 +17,19 @@ enum RunStatus {
   RUN_STATUS_FAILED = 4;
 }
 
+enum RunFilter {
+  RUN_FILTER_UNSPECIFIED = 0;
+  RUN_FILTER_MINE = 1;
+  RUN_FILTER_SHARED = 2;
+  RUN_FILTER_ALL = 3;
+}
+
 service Analysis {
   rpc StartRun(StartRunRequest) returns (StartRunResponse);
-  rpc GetRunStatus(GetRunRequest) returns (GetRunStatusResponse);
   rpc GetRunMeta(GetRunRequest) returns (RunMeta);
   rpc GetRunResult(GetRunRequest) returns (stream RunResultChunk);
   rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse);
+  rpc ShareRun(ShareRunRequest) returns (ShareRunResponse);
 }
 
 message StartRunRequest {
@@ -44,24 +51,26 @@ message GetRunRequest {
   string run_id = 1;
 }
 
-message GetRunStatusResponse {
-  RunStatus status = 1;
+message Status {
+  RunStatusCode code = 1;
   string message = 2;
 }
 
 message RunMeta {
   string id = 1;
-  RunStatus status = 2;
-  string user_id = 3;
-  pulsoats.common.v1.MarketSpec market = 4;
+  Status status = 2;
+  pulsoats.common.v1.MarketSpec market = 3;
+  string price_type = 4;
   string interval = 5;
   google.protobuf.Timestamp from = 6;
   google.protobuf.Timestamp to = 7;
-  int64 signals_count = 8;
-  int64 avg_profit_ppm = 9;
-  pulsoats.common.v1.DetectorConfig detector = 10;
-  string price_type = 11;
+  pulsoats.common.v1.DetectorConfig detector = 8;
+  int64 signals_count = 9;
+  int64 avg_profit_ppm = 10;
+  string created_by = 11;
   google.protobuf.Timestamp created_at = 12;
+  bool is_shared = 13;
+  google.protobuf.Timestamp shared_at = 14;
 }
 
 message RunResultChunk {
@@ -70,11 +79,20 @@ message RunResultChunk {
 
 message ListRunsRequest {
   int32 limit = 1;
-  int64 before_id = 2; // 0 = не передан => первые limit
+  int64 before_id = 2;
+  RunFilter filter = 3;
 }
 
 message ListRunsResponse {
   repeated RunMeta items = 1;
-  int64 next_before_id = 2; // 0 = нет следующей страницы
+  int64 next_before_id = 2;
   bool has_more = 3;
+}
+
+message ShareRunRequest {
+  string run_id = 1;
+}
+
+message ShareRunResponse {
+  bool success = 1;
 }

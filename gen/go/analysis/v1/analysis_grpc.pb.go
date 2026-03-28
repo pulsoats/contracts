@@ -20,10 +20,10 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Analysis_StartRun_FullMethodName      = "/pulsoats.analysis.v1.Analysis/StartRun"
-	Analysis_GetRunStatus_FullMethodName  = "/pulsoats.analysis.v1.Analysis/GetRunStatus"
 	Analysis_GetRunMeta_FullMethodName    = "/pulsoats.analysis.v1.Analysis/GetRunMeta"
 	Analysis_GetRunResult_FullMethodName  = "/pulsoats.analysis.v1.Analysis/GetRunResult"
 	Analysis_ListRunsPaged_FullMethodName = "/pulsoats.analysis.v1.Analysis/ListRunsPaged"
+	Analysis_ShareRun_FullMethodName      = "/pulsoats.analysis.v1.Analysis/ShareRun"
 )
 
 // AnalysisClient is the client API for Analysis service.
@@ -31,10 +31,10 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AnalysisClient interface {
 	StartRun(ctx context.Context, in *StartRunRequest, opts ...grpc.CallOption) (*StartRunResponse, error)
-	GetRunStatus(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*GetRunStatusResponse, error)
 	GetRunMeta(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*RunMeta, error)
 	GetRunResult(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunResultChunk], error)
 	ListRunsPaged(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error)
+	ShareRun(ctx context.Context, in *ShareRunRequest, opts ...grpc.CallOption) (*ShareRunResponse, error)
 }
 
 type analysisClient struct {
@@ -49,16 +49,6 @@ func (c *analysisClient) StartRun(ctx context.Context, in *StartRunRequest, opts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StartRunResponse)
 	err := c.cc.Invoke(ctx, Analysis_StartRun_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *analysisClient) GetRunStatus(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*GetRunStatusResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRunStatusResponse)
-	err := c.cc.Invoke(ctx, Analysis_GetRunStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -104,15 +94,25 @@ func (c *analysisClient) ListRunsPaged(ctx context.Context, in *ListRunsRequest,
 	return out, nil
 }
 
+func (c *analysisClient) ShareRun(ctx context.Context, in *ShareRunRequest, opts ...grpc.CallOption) (*ShareRunResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShareRunResponse)
+	err := c.cc.Invoke(ctx, Analysis_ShareRun_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalysisServer is the server API for Analysis service.
 // All implementations must embed UnimplementedAnalysisServer
 // for forward compatibility.
 type AnalysisServer interface {
 	StartRun(context.Context, *StartRunRequest) (*StartRunResponse, error)
-	GetRunStatus(context.Context, *GetRunRequest) (*GetRunStatusResponse, error)
 	GetRunMeta(context.Context, *GetRunRequest) (*RunMeta, error)
 	GetRunResult(*GetRunRequest, grpc.ServerStreamingServer[RunResultChunk]) error
 	ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error)
+	ShareRun(context.Context, *ShareRunRequest) (*ShareRunResponse, error)
 	mustEmbedUnimplementedAnalysisServer()
 }
 
@@ -126,9 +126,6 @@ type UnimplementedAnalysisServer struct{}
 func (UnimplementedAnalysisServer) StartRun(context.Context, *StartRunRequest) (*StartRunResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method StartRun not implemented")
 }
-func (UnimplementedAnalysisServer) GetRunStatus(context.Context, *GetRunRequest) (*GetRunStatusResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRunStatus not implemented")
-}
 func (UnimplementedAnalysisServer) GetRunMeta(context.Context, *GetRunRequest) (*RunMeta, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetRunMeta not implemented")
 }
@@ -137,6 +134,9 @@ func (UnimplementedAnalysisServer) GetRunResult(*GetRunRequest, grpc.ServerStrea
 }
 func (UnimplementedAnalysisServer) ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListRunsPaged not implemented")
+}
+func (UnimplementedAnalysisServer) ShareRun(context.Context, *ShareRunRequest) (*ShareRunResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ShareRun not implemented")
 }
 func (UnimplementedAnalysisServer) mustEmbedUnimplementedAnalysisServer() {}
 func (UnimplementedAnalysisServer) testEmbeddedByValue()                  {}
@@ -173,24 +173,6 @@ func _Analysis_StartRun_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AnalysisServer).StartRun(ctx, req.(*StartRunRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Analysis_GetRunStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRunRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AnalysisServer).GetRunStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Analysis_GetRunStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalysisServer).GetRunStatus(ctx, req.(*GetRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -242,6 +224,24 @@ func _Analysis_ListRunsPaged_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Analysis_ShareRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShareRunRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalysisServer).ShareRun(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Analysis_ShareRun_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalysisServer).ShareRun(ctx, req.(*ShareRunRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Analysis_ServiceDesc is the grpc.ServiceDesc for Analysis service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -254,16 +254,16 @@ var Analysis_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Analysis_StartRun_Handler,
 		},
 		{
-			MethodName: "GetRunStatus",
-			Handler:    _Analysis_GetRunStatus_Handler,
-		},
-		{
 			MethodName: "GetRunMeta",
 			Handler:    _Analysis_GetRunMeta_Handler,
 		},
 		{
 			MethodName: "ListRunsPaged",
 			Handler:    _Analysis_ListRunsPaged_Handler,
+		},
+		{
+			MethodName: "ShareRun",
+			Handler:    _Analysis_ShareRun_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
