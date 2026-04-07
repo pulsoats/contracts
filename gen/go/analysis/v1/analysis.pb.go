@@ -686,6 +686,7 @@ func (x *ListRunsResponse) GetHasMore() bool {
 type ShareRunRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -723,6 +724,13 @@ func (*ShareRunRequest) Descriptor() ([]byte, []int) {
 func (x *ShareRunRequest) GetRunId() string {
 	if x != nil {
 		return x.RunId
+	}
+	return ""
+}
+
+func (x *ShareRunRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
 	}
 	return ""
 }
@@ -873,9 +881,10 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x10ListRunsResponse\x123\n" +
 	"\x05items\x18\x01 \x03(\v2\x1d.pulsoats.analysis.v1.RunMetaR\x05items\x12$\n" +
 	"\x0enext_before_id\x18\x02 \x01(\x03R\fnextBeforeId\x12\x19\n" +
-	"\bhas_more\x18\x03 \x01(\bR\ahasMore\"(\n" +
+	"\bhas_more\x18\x03 \x01(\bR\ahasMore\"A\n" +
 	"\x0fShareRunRequest\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\tR\x05runId\",\n" +
+	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\",\n" +
 	"\x10ShareRunResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"B\n" +
 	"\x10DeleteRunRequest\x12\x15\n" +

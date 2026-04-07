@@ -93,6 +93,7 @@ message ListRunsResponse {
 
 message ShareRunRequest {
   string run_id = 1;
+  string user_id = 2;
 }
 
 message ShareRunResponse {
