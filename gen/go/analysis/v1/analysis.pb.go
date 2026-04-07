@@ -568,6 +568,7 @@ type ListRunsRequest struct {
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	BeforeId      int64                  `protobuf:"varint,2,opt,name=before_id,json=beforeId,proto3" json:"before_id,omitempty"`
 	Filter        RunFilter              `protobuf:"varint,3,opt,name=filter,proto3,enum=pulsoats.analysis.v1.RunFilter" json:"filter,omitempty"`
+	User_Id       string                 `protobuf:"bytes,4,opt,name=user_Id,json=userId,proto3" json:"user_Id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -621,6 +622,13 @@ func (x *ListRunsRequest) GetFilter() RunFilter {
 		return x.Filter
 	}
 	return RunFilter_RUN_FILTER_UNSPECIFIED
+}
+
+func (x *ListRunsRequest) GetUser_Id() string {
+	if x != nil {
+		return x.User_Id
+	}
+	return ""
 }
 
 type ListRunsResponse struct {
@@ -873,11 +881,12 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\tis_shared\x18\r \x01(\bR\bisShared\x127\n" +
 	"\tshared_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\bsharedAt\"$\n" +
 	"\x0eRunResultChunk\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\fR\x04data\"}\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\"\x96\x01\n" +
 	"\x0fListRunsRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x1b\n" +
 	"\tbefore_id\x18\x02 \x01(\x03R\bbeforeId\x127\n" +
-	"\x06filter\x18\x03 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunFilterR\x06filter\"\x88\x01\n" +
+	"\x06filter\x18\x03 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunFilterR\x06filter\x12\x17\n" +
+	"\auser_Id\x18\x04 \x01(\tR\x06userId\"\x88\x01\n" +
 	"\x10ListRunsResponse\x123\n" +
 	"\x05items\x18\x01 \x03(\v2\x1d.pulsoats.analysis.v1.RunMetaR\x05items\x12$\n" +
 	"\x0enext_before_id\x18\x02 \x01(\x03R\fnextBeforeId\x12\x19\n" +
