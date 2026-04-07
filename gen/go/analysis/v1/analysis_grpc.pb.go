@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -24,6 +25,7 @@ const (
 	Analysis_GetRunResult_FullMethodName  = "/pulsoats.analysis.v1.Analysis/GetRunResult"
 	Analysis_ListRunsPaged_FullMethodName = "/pulsoats.analysis.v1.Analysis/ListRunsPaged"
 	Analysis_ShareRun_FullMethodName      = "/pulsoats.analysis.v1.Analysis/ShareRun"
+	Analysis_DeleteRun_FullMethodName     = "/pulsoats.analysis.v1.Analysis/DeleteRun"
 )
 
 // AnalysisClient is the client API for Analysis service.
@@ -35,6 +37,7 @@ type AnalysisClient interface {
 	GetRunResult(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunResultChunk], error)
 	ListRunsPaged(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error)
 	ShareRun(ctx context.Context, in *ShareRunRequest, opts ...grpc.CallOption) (*ShareRunResponse, error)
+	DeleteRun(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type analysisClient struct {
@@ -104,6 +107,16 @@ func (c *analysisClient) ShareRun(ctx context.Context, in *ShareRunRequest, opts
 	return out, nil
 }
 
+func (c *analysisClient) DeleteRun(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Analysis_DeleteRun_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalysisServer is the server API for Analysis service.
 // All implementations must embed UnimplementedAnalysisServer
 // for forward compatibility.
@@ -113,6 +126,7 @@ type AnalysisServer interface {
 	GetRunResult(*GetRunRequest, grpc.ServerStreamingServer[RunResultChunk]) error
 	ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error)
 	ShareRun(context.Context, *ShareRunRequest) (*ShareRunResponse, error)
+	DeleteRun(context.Context, *GetRunRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAnalysisServer()
 }
 
@@ -137,6 +151,9 @@ func (UnimplementedAnalysisServer) ListRunsPaged(context.Context, *ListRunsReque
 }
 func (UnimplementedAnalysisServer) ShareRun(context.Context, *ShareRunRequest) (*ShareRunResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ShareRun not implemented")
+}
+func (UnimplementedAnalysisServer) DeleteRun(context.Context, *GetRunRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteRun not implemented")
 }
 func (UnimplementedAnalysisServer) mustEmbedUnimplementedAnalysisServer() {}
 func (UnimplementedAnalysisServer) testEmbeddedByValue()                  {}
@@ -242,6 +259,24 @@ func _Analysis_ShareRun_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Analysis_DeleteRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRunRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalysisServer).DeleteRun(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Analysis_DeleteRun_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalysisServer).DeleteRun(ctx, req.(*GetRunRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Analysis_ServiceDesc is the grpc.ServiceDesc for Analysis service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -264,6 +299,10 @@ var Analysis_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ShareRun",
 			Handler:    _Analysis_ShareRun_Handler,
+		},
+		{
+			MethodName: "DeleteRun",
+			Handler:    _Analysis_DeleteRun_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

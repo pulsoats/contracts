@@ -10,6 +10,7 @@ import (
 	v1 "github.com/pulsoats/contracts/gen/go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -774,7 +775,7 @@ var File_analysis_v1_analysis_proto protoreflect.FileDescriptor
 
 const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\n" +
-	"\x1aanalysis/v1/analysis.proto\x12\x14pulsoats.analysis.v1\x1a\x1bcommon/v1/detectorcfg.proto\x1a\x14common/v1/fees.proto\x1a\x1bcommon/v1/market_spec.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe7\x02\n" +
+	"\x1aanalysis/v1/analysis.proto\x12\x14pulsoats.analysis.v1\x1a\x1bcommon/v1/detectorcfg.proto\x1a\x14common/v1/fees.proto\x1a\x1bcommon/v1/market_spec.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xe7\x02\n" +
 	"\x0fStartRunRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x126\n" +
 	"\x06market\x18\x02 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
@@ -835,14 +836,15 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x16RUN_FILTER_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fRUN_FILTER_MINE\x10\x01\x12\x15\n" +
 	"\x11RUN_FILTER_SHARED\x10\x02\x12\x12\n" +
-	"\x0eRUN_FILTER_ALL\x10\x032\xcf\x03\n" +
+	"\x0eRUN_FILTER_ALL\x10\x032\x99\x04\n" +
 	"\bAnalysis\x12Y\n" +
 	"\bStartRun\x12%.pulsoats.analysis.v1.StartRunRequest\x1a&.pulsoats.analysis.v1.StartRunResponse\x12P\n" +
 	"\n" +
 	"GetRunMeta\x12#.pulsoats.analysis.v1.GetRunRequest\x1a\x1d.pulsoats.analysis.v1.RunMeta\x12[\n" +
 	"\fGetRunResult\x12#.pulsoats.analysis.v1.GetRunRequest\x1a$.pulsoats.analysis.v1.RunResultChunk0\x01\x12^\n" +
 	"\rListRunsPaged\x12%.pulsoats.analysis.v1.ListRunsRequest\x1a&.pulsoats.analysis.v1.ListRunsResponse\x12Y\n" +
-	"\bShareRun\x12%.pulsoats.analysis.v1.ShareRunRequest\x1a&.pulsoats.analysis.v1.ShareRunResponseB=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
+	"\bShareRun\x12%.pulsoats.analysis.v1.ShareRunRequest\x1a&.pulsoats.analysis.v1.ShareRunResponse\x12H\n" +
+	"\tDeleteRun\x12#.pulsoats.analysis.v1.GetRunRequest\x1a\x16.google.protobuf.EmptyB=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
 
 var (
 	file_analysis_v1_analysis_proto_rawDescOnce sync.Once
@@ -875,6 +877,7 @@ var file_analysis_v1_analysis_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
 	(*v1.DetectorConfig)(nil),     // 14: pulsoats.common.v1.DetectorConfig
 	(*v1.Fees)(nil),               // 15: pulsoats.common.v1.Fees
+	(*emptypb.Empty)(nil),         // 16: google.protobuf.Empty
 }
 var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	12, // 0: pulsoats.analysis.v1.StartRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
@@ -897,13 +900,15 @@ var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	4,  // 17: pulsoats.analysis.v1.Analysis.GetRunResult:input_type -> pulsoats.analysis.v1.GetRunRequest
 	8,  // 18: pulsoats.analysis.v1.Analysis.ListRunsPaged:input_type -> pulsoats.analysis.v1.ListRunsRequest
 	10, // 19: pulsoats.analysis.v1.Analysis.ShareRun:input_type -> pulsoats.analysis.v1.ShareRunRequest
-	3,  // 20: pulsoats.analysis.v1.Analysis.StartRun:output_type -> pulsoats.analysis.v1.StartRunResponse
-	6,  // 21: pulsoats.analysis.v1.Analysis.GetRunMeta:output_type -> pulsoats.analysis.v1.RunMeta
-	7,  // 22: pulsoats.analysis.v1.Analysis.GetRunResult:output_type -> pulsoats.analysis.v1.RunResultChunk
-	9,  // 23: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsResponse
-	11, // 24: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> pulsoats.analysis.v1.ShareRunResponse
-	20, // [20:25] is the sub-list for method output_type
-	15, // [15:20] is the sub-list for method input_type
+	4,  // 20: pulsoats.analysis.v1.Analysis.DeleteRun:input_type -> pulsoats.analysis.v1.GetRunRequest
+	3,  // 21: pulsoats.analysis.v1.Analysis.StartRun:output_type -> pulsoats.analysis.v1.StartRunResponse
+	6,  // 22: pulsoats.analysis.v1.Analysis.GetRunMeta:output_type -> pulsoats.analysis.v1.RunMeta
+	7,  // 23: pulsoats.analysis.v1.Analysis.GetRunResult:output_type -> pulsoats.analysis.v1.RunResultChunk
+	9,  // 24: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsResponse
+	11, // 25: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> pulsoats.analysis.v1.ShareRunResponse
+	16, // 26: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
+	21, // [21:27] is the sub-list for method output_type
+	15, // [15:21] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
 	15, // [15:15] is the sub-list for extension extendee
 	0,  // [0:15] is the sub-list for field type_name

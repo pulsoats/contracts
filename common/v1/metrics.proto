@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package pulsoats.common.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pulsoats/contracts/gen/go/common/v1;commonpb";
+
+enum ServiceStatus {
+  SERVICE_STATUS_UNSPECIFIED = 0;
+  SERVICE_STATUS_HEALTHY = 1;
+  SERVICE_STATUS_DEGRADED = 2;
+  SERVICE_STATUS_DOWN = 3;
+}
+
+message ServiceMetrics {
+  string service_name = 1;
+  ServiceStatus status = 2;
+  double cpu_percent = 3;
+  double memory_percent = 4;
+  int64 uptime_seconds = 5;
+  google.protobuf.Timestamp reported_at = 6;
+}

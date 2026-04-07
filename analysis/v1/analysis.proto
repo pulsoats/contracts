@@ -6,6 +6,7 @@ import "common/v1/detectorcfg.proto";
 import "common/v1/fees.proto";
 import "common/v1/market_spec.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 option go_package = "github.com/pulsoats/contracts/gen/go/analysis/v1;analysispb";
 
@@ -30,6 +31,7 @@ service Analysis {
   rpc GetRunResult(GetRunRequest) returns (stream RunResultChunk);
   rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse);
   rpc ShareRun(ShareRunRequest) returns (ShareRunResponse);
+  rpc DeleteRun(GetRunRequest) returns (google.protobuf.Empty);
 }
 
 message StartRunRequest {
