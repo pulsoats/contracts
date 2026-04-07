@@ -771,6 +771,58 @@ func (x *ShareRunResponse) GetSuccess() bool {
 	return false
 }
 
+type DeleteRunRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteRunRequest) Reset() {
+	*x = DeleteRunRequest{}
+	mi := &file_analysis_v1_analysis_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteRunRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteRunRequest) ProtoMessage() {}
+
+func (x *DeleteRunRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analysis_v1_analysis_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteRunRequest.ProtoReflect.Descriptor instead.
+func (*DeleteRunRequest) Descriptor() ([]byte, []int) {
+	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DeleteRunRequest) GetRunId() string {
+	if x != nil {
+		return x.RunId
+	}
+	return ""
+}
+
+func (x *DeleteRunRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
 var File_analysis_v1_analysis_proto protoreflect.FileDescriptor
 
 const file_analysis_v1_analysis_proto_rawDesc = "" +
@@ -825,7 +877,10 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x0fShareRunRequest\x12\x15\n" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\",\n" +
 	"\x10ShareRunResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess*\x87\x01\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"B\n" +
+	"\x10DeleteRunRequest\x12\x15\n" +
+	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId*\x87\x01\n" +
 	"\rRunStatusCode\x12\x1a\n" +
 	"\x16RUN_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12RUN_STATUS_PENDING\x10\x01\x12\x16\n" +
@@ -836,15 +891,15 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x16RUN_FILTER_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fRUN_FILTER_MINE\x10\x01\x12\x15\n" +
 	"\x11RUN_FILTER_SHARED\x10\x02\x12\x12\n" +
-	"\x0eRUN_FILTER_ALL\x10\x032\x99\x04\n" +
+	"\x0eRUN_FILTER_ALL\x10\x032\x9c\x04\n" +
 	"\bAnalysis\x12Y\n" +
 	"\bStartRun\x12%.pulsoats.analysis.v1.StartRunRequest\x1a&.pulsoats.analysis.v1.StartRunResponse\x12P\n" +
 	"\n" +
 	"GetRunMeta\x12#.pulsoats.analysis.v1.GetRunRequest\x1a\x1d.pulsoats.analysis.v1.RunMeta\x12[\n" +
 	"\fGetRunResult\x12#.pulsoats.analysis.v1.GetRunRequest\x1a$.pulsoats.analysis.v1.RunResultChunk0\x01\x12^\n" +
 	"\rListRunsPaged\x12%.pulsoats.analysis.v1.ListRunsRequest\x1a&.pulsoats.analysis.v1.ListRunsResponse\x12Y\n" +
-	"\bShareRun\x12%.pulsoats.analysis.v1.ShareRunRequest\x1a&.pulsoats.analysis.v1.ShareRunResponse\x12H\n" +
-	"\tDeleteRun\x12#.pulsoats.analysis.v1.GetRunRequest\x1a\x16.google.protobuf.EmptyB=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
+	"\bShareRun\x12%.pulsoats.analysis.v1.ShareRunRequest\x1a&.pulsoats.analysis.v1.ShareRunResponse\x12K\n" +
+	"\tDeleteRun\x12&.pulsoats.analysis.v1.DeleteRunRequest\x1a\x16.google.protobuf.EmptyB=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
 
 var (
 	file_analysis_v1_analysis_proto_rawDescOnce sync.Once
@@ -859,7 +914,7 @@ func file_analysis_v1_analysis_proto_rawDescGZIP() []byte {
 }
 
 var file_analysis_v1_analysis_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_analysis_v1_analysis_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_analysis_v1_analysis_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_analysis_v1_analysis_proto_goTypes = []any{
 	(RunStatusCode)(0),            // 0: pulsoats.analysis.v1.RunStatusCode
 	(RunFilter)(0),                // 1: pulsoats.analysis.v1.RunFilter
@@ -873,26 +928,27 @@ var file_analysis_v1_analysis_proto_goTypes = []any{
 	(*ListRunsResponse)(nil),      // 9: pulsoats.analysis.v1.ListRunsResponse
 	(*ShareRunRequest)(nil),       // 10: pulsoats.analysis.v1.ShareRunRequest
 	(*ShareRunResponse)(nil),      // 11: pulsoats.analysis.v1.ShareRunResponse
-	(*v1.MarketSpec)(nil),         // 12: pulsoats.common.v1.MarketSpec
-	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
-	(*v1.DetectorConfig)(nil),     // 14: pulsoats.common.v1.DetectorConfig
-	(*v1.Fees)(nil),               // 15: pulsoats.common.v1.Fees
-	(*emptypb.Empty)(nil),         // 16: google.protobuf.Empty
+	(*DeleteRunRequest)(nil),      // 12: pulsoats.analysis.v1.DeleteRunRequest
+	(*v1.MarketSpec)(nil),         // 13: pulsoats.common.v1.MarketSpec
+	(*timestamppb.Timestamp)(nil), // 14: google.protobuf.Timestamp
+	(*v1.DetectorConfig)(nil),     // 15: pulsoats.common.v1.DetectorConfig
+	(*v1.Fees)(nil),               // 16: pulsoats.common.v1.Fees
+	(*emptypb.Empty)(nil),         // 17: google.protobuf.Empty
 }
 var file_analysis_v1_analysis_proto_depIdxs = []int32{
-	12, // 0: pulsoats.analysis.v1.StartRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
-	13, // 1: pulsoats.analysis.v1.StartRunRequest.from:type_name -> google.protobuf.Timestamp
-	13, // 2: pulsoats.analysis.v1.StartRunRequest.to:type_name -> google.protobuf.Timestamp
-	14, // 3: pulsoats.analysis.v1.StartRunRequest.detector:type_name -> pulsoats.common.v1.DetectorConfig
-	15, // 4: pulsoats.analysis.v1.StartRunRequest.fees:type_name -> pulsoats.common.v1.Fees
+	13, // 0: pulsoats.analysis.v1.StartRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
+	14, // 1: pulsoats.analysis.v1.StartRunRequest.from:type_name -> google.protobuf.Timestamp
+	14, // 2: pulsoats.analysis.v1.StartRunRequest.to:type_name -> google.protobuf.Timestamp
+	15, // 3: pulsoats.analysis.v1.StartRunRequest.detector:type_name -> pulsoats.common.v1.DetectorConfig
+	16, // 4: pulsoats.analysis.v1.StartRunRequest.fees:type_name -> pulsoats.common.v1.Fees
 	0,  // 5: pulsoats.analysis.v1.Status.code:type_name -> pulsoats.analysis.v1.RunStatusCode
 	5,  // 6: pulsoats.analysis.v1.RunMeta.status:type_name -> pulsoats.analysis.v1.Status
-	12, // 7: pulsoats.analysis.v1.RunMeta.market:type_name -> pulsoats.common.v1.MarketSpec
-	13, // 8: pulsoats.analysis.v1.RunMeta.from:type_name -> google.protobuf.Timestamp
-	13, // 9: pulsoats.analysis.v1.RunMeta.to:type_name -> google.protobuf.Timestamp
-	14, // 10: pulsoats.analysis.v1.RunMeta.detector:type_name -> pulsoats.common.v1.DetectorConfig
-	13, // 11: pulsoats.analysis.v1.RunMeta.created_at:type_name -> google.protobuf.Timestamp
-	13, // 12: pulsoats.analysis.v1.RunMeta.shared_at:type_name -> google.protobuf.Timestamp
+	13, // 7: pulsoats.analysis.v1.RunMeta.market:type_name -> pulsoats.common.v1.MarketSpec
+	14, // 8: pulsoats.analysis.v1.RunMeta.from:type_name -> google.protobuf.Timestamp
+	14, // 9: pulsoats.analysis.v1.RunMeta.to:type_name -> google.protobuf.Timestamp
+	15, // 10: pulsoats.analysis.v1.RunMeta.detector:type_name -> pulsoats.common.v1.DetectorConfig
+	14, // 11: pulsoats.analysis.v1.RunMeta.created_at:type_name -> google.protobuf.Timestamp
+	14, // 12: pulsoats.analysis.v1.RunMeta.shared_at:type_name -> google.protobuf.Timestamp
 	1,  // 13: pulsoats.analysis.v1.ListRunsRequest.filter:type_name -> pulsoats.analysis.v1.RunFilter
 	6,  // 14: pulsoats.analysis.v1.ListRunsResponse.items:type_name -> pulsoats.analysis.v1.RunMeta
 	2,  // 15: pulsoats.analysis.v1.Analysis.StartRun:input_type -> pulsoats.analysis.v1.StartRunRequest
@@ -900,13 +956,13 @@ var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	4,  // 17: pulsoats.analysis.v1.Analysis.GetRunResult:input_type -> pulsoats.analysis.v1.GetRunRequest
 	8,  // 18: pulsoats.analysis.v1.Analysis.ListRunsPaged:input_type -> pulsoats.analysis.v1.ListRunsRequest
 	10, // 19: pulsoats.analysis.v1.Analysis.ShareRun:input_type -> pulsoats.analysis.v1.ShareRunRequest
-	4,  // 20: pulsoats.analysis.v1.Analysis.DeleteRun:input_type -> pulsoats.analysis.v1.GetRunRequest
+	12, // 20: pulsoats.analysis.v1.Analysis.DeleteRun:input_type -> pulsoats.analysis.v1.DeleteRunRequest
 	3,  // 21: pulsoats.analysis.v1.Analysis.StartRun:output_type -> pulsoats.analysis.v1.StartRunResponse
 	6,  // 22: pulsoats.analysis.v1.Analysis.GetRunMeta:output_type -> pulsoats.analysis.v1.RunMeta
 	7,  // 23: pulsoats.analysis.v1.Analysis.GetRunResult:output_type -> pulsoats.analysis.v1.RunResultChunk
 	9,  // 24: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsResponse
 	11, // 25: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> pulsoats.analysis.v1.ShareRunResponse
-	16, // 26: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
+	17, // 26: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
 	21, // [21:27] is the sub-list for method output_type
 	15, // [15:21] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
@@ -925,7 +981,7 @@ func file_analysis_v1_analysis_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_analysis_v1_analysis_proto_rawDesc), len(file_analysis_v1_analysis_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

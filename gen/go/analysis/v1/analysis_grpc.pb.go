@@ -37,7 +37,7 @@ type AnalysisClient interface {
 	GetRunResult(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunResultChunk], error)
 	ListRunsPaged(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error)
 	ShareRun(ctx context.Context, in *ShareRunRequest, opts ...grpc.CallOption) (*ShareRunResponse, error)
-	DeleteRun(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteRun(ctx context.Context, in *DeleteRunRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type analysisClient struct {
@@ -107,7 +107,7 @@ func (c *analysisClient) ShareRun(ctx context.Context, in *ShareRunRequest, opts
 	return out, nil
 }
 
-func (c *analysisClient) DeleteRun(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *analysisClient) DeleteRun(ctx context.Context, in *DeleteRunRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Analysis_DeleteRun_FullMethodName, in, out, cOpts...)
@@ -126,7 +126,7 @@ type AnalysisServer interface {
 	GetRunResult(*GetRunRequest, grpc.ServerStreamingServer[RunResultChunk]) error
 	ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error)
 	ShareRun(context.Context, *ShareRunRequest) (*ShareRunResponse, error)
-	DeleteRun(context.Context, *GetRunRequest) (*emptypb.Empty, error)
+	DeleteRun(context.Context, *DeleteRunRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAnalysisServer()
 }
 
@@ -152,7 +152,7 @@ func (UnimplementedAnalysisServer) ListRunsPaged(context.Context, *ListRunsReque
 func (UnimplementedAnalysisServer) ShareRun(context.Context, *ShareRunRequest) (*ShareRunResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ShareRun not implemented")
 }
-func (UnimplementedAnalysisServer) DeleteRun(context.Context, *GetRunRequest) (*emptypb.Empty, error) {
+func (UnimplementedAnalysisServer) DeleteRun(context.Context, *DeleteRunRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteRun not implemented")
 }
 func (UnimplementedAnalysisServer) mustEmbedUnimplementedAnalysisServer() {}
@@ -260,7 +260,7 @@ func _Analysis_ShareRun_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _Analysis_DeleteRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRunRequest)
+	in := new(DeleteRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -272,7 +272,7 @@ func _Analysis_DeleteRun_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: Analysis_DeleteRun_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalysisServer).DeleteRun(ctx, req.(*GetRunRequest))
+		return srv.(AnalysisServer).DeleteRun(ctx, req.(*DeleteRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

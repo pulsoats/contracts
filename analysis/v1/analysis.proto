@@ -31,7 +31,7 @@ service Analysis {
   rpc GetRunResult(GetRunRequest) returns (stream RunResultChunk);
   rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse);
   rpc ShareRun(ShareRunRequest) returns (ShareRunResponse);
-  rpc DeleteRun(GetRunRequest) returns (google.protobuf.Empty);
+  rpc DeleteRun(DeleteRunRequest) returns (google.protobuf.Empty);
 }
 
 message StartRunRequest {
@@ -97,4 +97,9 @@ message ShareRunRequest {
 
 message ShareRunResponse {
   bool success = 1;
+}
+
+message DeleteRunRequest {
+  string run_id = 1;
+  string user_id = 2;
 }
