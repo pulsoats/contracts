@@ -524,7 +524,7 @@ type ListSignalsPagedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	BeforeId      *string                `protobuf:"bytes,2,opt,name=before_id,json=beforeId,proto3,oneof" json:"before_id,omitempty"`
-	Filter        *ListRunsFilter        `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
+	Filter        *ListSignalsFilter     `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -573,7 +573,7 @@ func (x *ListSignalsPagedRequest) GetBeforeId() string {
 	return ""
 }
 
-func (x *ListSignalsPagedRequest) GetFilter() *ListRunsFilter {
+func (x *ListSignalsPagedRequest) GetFilter() *ListSignalsFilter {
 	if x != nil {
 		return x.Filter
 	}
@@ -940,11 +940,11 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\a_symbolB\a\n" +
 	"\x05_fromB\x05\n" +
 	"\x03_toB\x10\n" +
-	"\x0e_order_dir_asc\"\x99\x01\n" +
+	"\x0e_order_dir_asc\"\x9c\x01\n" +
 	"\x17ListSignalsPagedRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12 \n" +
-	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x128\n" +
-	"\x06filter\x18\x03 \x01(\v2 .pulsoats.live.v1.ListRunsFilterR\x06filterB\f\n" +
+	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12;\n" +
+	"\x06filter\x18\x03 \x01(\v2#.pulsoats.live.v1.ListSignalsFilterR\x06filterB\f\n" +
 	"\n" +
 	"_before_id\"\xa7\x01\n" +
 	"\x18ListSignalsPagedResponse\x122\n" +
@@ -1028,7 +1028,7 @@ var file_live_v1_live_proto_depIdxs = []int32{
 	1,  // 10: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
 	13, // 11: pulsoats.live.v1.ListSignalsFilter.from:type_name -> google.protobuf.Timestamp
 	13, // 12: pulsoats.live.v1.ListSignalsFilter.to:type_name -> google.protobuf.Timestamp
-	2,  // 13: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter
+	5,  // 13: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
 	8,  // 14: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
 	10, // 15: pulsoats.live.v1.Signal.market:type_name -> pulsoats.common.v1.MarketSpec
 	13, // 16: pulsoats.live.v1.Signal.time:type_name -> google.protobuf.Timestamp
