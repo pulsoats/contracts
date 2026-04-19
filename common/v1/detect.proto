@@ -8,7 +8,7 @@ option go_package = "github.com/pulsoats/contracts/gen/go/common/v1;commonpb";
 
 message DetectorConfig {
   string code = 1;
-  string label = 2;
+  string opts_label = 2;
   bytes opts = 4;
 }
 

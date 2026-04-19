@@ -25,7 +25,7 @@ const (
 type DetectorConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	Label         string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	OptsLabel     string                 `protobuf:"bytes,2,opt,name=opts_label,json=optsLabel,proto3" json:"opts_label,omitempty"`
 	Opts          []byte                 `protobuf:"bytes,4,opt,name=opts,proto3" json:"opts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -68,9 +68,9 @@ func (x *DetectorConfig) GetCode() string {
 	return ""
 }
 
-func (x *DetectorConfig) GetLabel() string {
+func (x *DetectorConfig) GetOptsLabel() string {
 	if x != nil {
-		return x.Label
+		return x.OptsLabel
 	}
 	return ""
 }
@@ -206,10 +206,11 @@ var File_common_v1_detect_proto protoreflect.FileDescriptor
 
 const file_common_v1_detect_proto_rawDesc = "" +
 	"\n" +
-	"\x16common/v1/detect.proto\x12\x12pulsoats.common.v1\x1a\x1bgoogle/protobuf/empty.proto\"N\n" +
+	"\x16common/v1/detect.proto\x12\x12pulsoats.common.v1\x1a\x1bgoogle/protobuf/empty.proto\"W\n" +
 	"\x0eDetectorConfig\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
-	"\x05label\x18\x02 \x01(\tR\x05label\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1d\n" +
+	"\n" +
+	"opts_label\x18\x02 \x01(\tR\toptsLabel\x12\x12\n" +
 	"\x04opts\x18\x04 \x01(\fR\x04opts\"\x93\x01\n" +
 	"\fDetectorMeta\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12 \n" +
