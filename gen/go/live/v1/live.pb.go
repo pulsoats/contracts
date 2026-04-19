@@ -963,7 +963,7 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12)\n" +
 	"\x03run\x18\x02 \x01(\v2\x15.pulsoats.live.v1.RunH\x00R\x03run\x122\n" +
 	"\x06signal\x18\x03 \x01(\v2\x18.pulsoats.live.v1.SignalH\x00R\x06signalB\t\n" +
-	"\apayload2\xf0\x04\n" +
+	"\apayload2\x92\x04\n" +
 	"\x04Live\x12@\n" +
 	"\x06NewRun\x12\x1f.pulsoats.live.v1.NewRunRequest\x1a\x15.pulsoats.live.v1.Run\x12<\n" +
 	"\aStopRun\x12\x19.pulsoats.common.v1.RunID\x1a\x16.google.protobuf.Empty\x12>\n" +
@@ -972,8 +972,7 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x06GetRun\x12\x19.pulsoats.common.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x12A\n" +
 	"\fStreamEvents\x12\x16.google.protobuf.Empty\x1a\x17.pulsoats.live.v1.Event0\x01\x12`\n" +
 	"\rListRunsPaged\x12&.pulsoats.live.v1.ListRunsPagedRequest\x1a'.pulsoats.live.v1.ListRunsPagedResponse\x12i\n" +
-	"\x10ListSignalsPaged\x12).pulsoats.live.v1.ListSignalsPagedRequest\x1a*.pulsoats.live.v1.ListSignalsPagedResponse\x12\\\n" +
-	"\x16ListAvailableDetectors\x12\x16.google.protobuf.Empty\x1a*.pulsoats.common.v1.ListAvailableDetectorsB5Z3github.com/pulsoats/contracts/gen/go/live/v1;livepbb\x06proto3"
+	"\x10ListSignalsPaged\x12).pulsoats.live.v1.ListSignalsPagedRequest\x1a*.pulsoats.live.v1.ListSignalsPagedResponseB5Z3github.com/pulsoats/contracts/gen/go/live/v1;livepbb\x06proto3"
 
 var (
 	file_live_v1_live_proto_rawDescOnce sync.Once
@@ -989,22 +988,21 @@ func file_live_v1_live_proto_rawDescGZIP() []byte {
 
 var file_live_v1_live_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_live_v1_live_proto_goTypes = []any{
-	(*NewRunRequest)(nil),             // 0: pulsoats.live.v1.NewRunRequest
-	(*Run)(nil),                       // 1: pulsoats.live.v1.Run
-	(*ListRunsFilter)(nil),            // 2: pulsoats.live.v1.ListRunsFilter
-	(*ListRunsPagedRequest)(nil),      // 3: pulsoats.live.v1.ListRunsPagedRequest
-	(*ListRunsPagedResponse)(nil),     // 4: pulsoats.live.v1.ListRunsPagedResponse
-	(*ListSignalsFilter)(nil),         // 5: pulsoats.live.v1.ListSignalsFilter
-	(*ListSignalsPagedRequest)(nil),   // 6: pulsoats.live.v1.ListSignalsPagedRequest
-	(*ListSignalsPagedResponse)(nil),  // 7: pulsoats.live.v1.ListSignalsPagedResponse
-	(*Signal)(nil),                    // 8: pulsoats.live.v1.Signal
-	(*Event)(nil),                     // 9: pulsoats.live.v1.Event
-	(*v1.MarketSpec)(nil),             // 10: pulsoats.common.v1.MarketSpec
-	(*v1.DetectorConfig)(nil),         // 11: pulsoats.common.v1.DetectorConfig
-	(*timestamppb.Timestamp)(nil),     // 12: google.protobuf.Timestamp
-	(*v1.RunID)(nil),                  // 13: pulsoats.common.v1.RunID
-	(*emptypb.Empty)(nil),             // 14: google.protobuf.Empty
-	(*v1.ListAvailableDetectors)(nil), // 15: pulsoats.common.v1.ListAvailableDetectors
+	(*NewRunRequest)(nil),            // 0: pulsoats.live.v1.NewRunRequest
+	(*Run)(nil),                      // 1: pulsoats.live.v1.Run
+	(*ListRunsFilter)(nil),           // 2: pulsoats.live.v1.ListRunsFilter
+	(*ListRunsPagedRequest)(nil),     // 3: pulsoats.live.v1.ListRunsPagedRequest
+	(*ListRunsPagedResponse)(nil),    // 4: pulsoats.live.v1.ListRunsPagedResponse
+	(*ListSignalsFilter)(nil),        // 5: pulsoats.live.v1.ListSignalsFilter
+	(*ListSignalsPagedRequest)(nil),  // 6: pulsoats.live.v1.ListSignalsPagedRequest
+	(*ListSignalsPagedResponse)(nil), // 7: pulsoats.live.v1.ListSignalsPagedResponse
+	(*Signal)(nil),                   // 8: pulsoats.live.v1.Signal
+	(*Event)(nil),                    // 9: pulsoats.live.v1.Event
+	(*v1.MarketSpec)(nil),            // 10: pulsoats.common.v1.MarketSpec
+	(*v1.DetectorConfig)(nil),        // 11: pulsoats.common.v1.DetectorConfig
+	(*timestamppb.Timestamp)(nil),    // 12: google.protobuf.Timestamp
+	(*v1.RunID)(nil),                 // 13: pulsoats.common.v1.RunID
+	(*emptypb.Empty)(nil),            // 14: google.protobuf.Empty
 }
 var file_live_v1_live_proto_depIdxs = []int32{
 	10, // 0: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
@@ -1033,17 +1031,15 @@ var file_live_v1_live_proto_depIdxs = []int32{
 	14, // 23: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
 	3,  // 24: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
 	6,  // 25: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
-	14, // 26: pulsoats.live.v1.Live.ListAvailableDetectors:input_type -> google.protobuf.Empty
-	1,  // 27: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
-	14, // 28: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
-	1,  // 29: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
-	1,  // 30: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
-	9,  // 31: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
-	4,  // 32: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
-	7,  // 33: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
-	15, // 34: pulsoats.live.v1.Live.ListAvailableDetectors:output_type -> pulsoats.common.v1.ListAvailableDetectors
-	27, // [27:35] is the sub-list for method output_type
-	19, // [19:27] is the sub-list for method input_type
+	1,  // 26: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
+	14, // 27: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
+	1,  // 28: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
+	1,  // 29: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
+	9,  // 30: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
+	4,  // 31: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
+	7,  // 32: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
+	26, // [26:33] is the sub-list for method output_type
+	19, // [19:26] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name
 	19, // [19:19] is the sub-list for extension extendee
 	0,  // [0:19] is the sub-list for field type_name

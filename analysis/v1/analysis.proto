@@ -25,8 +25,6 @@ service Analysis {
   rpc ShareRun(common.v1.RunID) returns (google.protobuf.Empty); // X-User-Id METADATA IS REQUIRED
   rpc DeleteRun(common.v1.RunID) returns (google.protobuf.Empty); // X-User-Id METADATA IS REQUIRED
   rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse); // X-User-Id METADATA IS REQUIRED
-
-  rpc ListAvailableDetectors(google.protobuf.Empty) returns (common.v1.ListAvailableDetectors);
 }
 
 message NewRunRequest {

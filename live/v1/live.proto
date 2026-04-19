@@ -21,8 +21,6 @@ service Live {
 
   rpc ListRunsPaged(ListRunsPagedRequest) returns (ListRunsPagedResponse);
   rpc ListSignalsPaged(ListSignalsPagedRequest) returns (ListSignalsPagedResponse);
-
-  rpc ListAvailableDetectors(google.protobuf.Empty) returns (common.v1.ListAvailableDetectors);
 }
 
 message NewRunRequest {

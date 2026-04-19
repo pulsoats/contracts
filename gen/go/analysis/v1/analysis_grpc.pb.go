@@ -21,13 +21,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Analysis_NewRun_FullMethodName                 = "/pulsoats.analysis.v1.Analysis/NewRun"
-	Analysis_GetRun_FullMethodName                 = "/pulsoats.analysis.v1.Analysis/GetRun"
-	Analysis_GetRunArchive_FullMethodName          = "/pulsoats.analysis.v1.Analysis/GetRunArchive"
-	Analysis_ShareRun_FullMethodName               = "/pulsoats.analysis.v1.Analysis/ShareRun"
-	Analysis_DeleteRun_FullMethodName              = "/pulsoats.analysis.v1.Analysis/DeleteRun"
-	Analysis_ListRunsPaged_FullMethodName          = "/pulsoats.analysis.v1.Analysis/ListRunsPaged"
-	Analysis_ListAvailableDetectors_FullMethodName = "/pulsoats.analysis.v1.Analysis/ListAvailableDetectors"
+	Analysis_NewRun_FullMethodName        = "/pulsoats.analysis.v1.Analysis/NewRun"
+	Analysis_GetRun_FullMethodName        = "/pulsoats.analysis.v1.Analysis/GetRun"
+	Analysis_GetRunArchive_FullMethodName = "/pulsoats.analysis.v1.Analysis/GetRunArchive"
+	Analysis_ShareRun_FullMethodName      = "/pulsoats.analysis.v1.Analysis/ShareRun"
+	Analysis_DeleteRun_FullMethodName     = "/pulsoats.analysis.v1.Analysis/DeleteRun"
+	Analysis_ListRunsPaged_FullMethodName = "/pulsoats.analysis.v1.Analysis/ListRunsPaged"
 )
 
 // AnalysisClient is the client API for Analysis service.
@@ -42,7 +41,6 @@ type AnalysisClient interface {
 	ShareRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListRunsPaged(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error)
-	ListAvailableDetectors(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.ListAvailableDetectors, error)
 }
 
 type analysisClient struct {
@@ -122,16 +120,6 @@ func (c *analysisClient) ListRunsPaged(ctx context.Context, in *ListRunsRequest,
 	return out, nil
 }
 
-func (c *analysisClient) ListAvailableDetectors(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.ListAvailableDetectors, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.ListAvailableDetectors)
-	err := c.cc.Invoke(ctx, Analysis_ListAvailableDetectors_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AnalysisServer is the server API for Analysis service.
 // All implementations must embed UnimplementedAnalysisServer
 // for forward compatibility.
@@ -144,7 +132,6 @@ type AnalysisServer interface {
 	ShareRun(context.Context, *v1.RunID) (*emptypb.Empty, error)
 	DeleteRun(context.Context, *v1.RunID) (*emptypb.Empty, error)
 	ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error)
-	ListAvailableDetectors(context.Context, *emptypb.Empty) (*v1.ListAvailableDetectors, error)
 	mustEmbedUnimplementedAnalysisServer()
 }
 
@@ -172,9 +159,6 @@ func (UnimplementedAnalysisServer) DeleteRun(context.Context, *v1.RunID) (*empty
 }
 func (UnimplementedAnalysisServer) ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListRunsPaged not implemented")
-}
-func (UnimplementedAnalysisServer) ListAvailableDetectors(context.Context, *emptypb.Empty) (*v1.ListAvailableDetectors, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAvailableDetectors not implemented")
 }
 func (UnimplementedAnalysisServer) mustEmbedUnimplementedAnalysisServer() {}
 func (UnimplementedAnalysisServer) testEmbeddedByValue()                  {}
@@ -298,24 +282,6 @@ func _Analysis_ListRunsPaged_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Analysis_ListAvailableDetectors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AnalysisServer).ListAvailableDetectors(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Analysis_ListAvailableDetectors_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalysisServer).ListAvailableDetectors(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Analysis_ServiceDesc is the grpc.ServiceDesc for Analysis service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -342,10 +308,6 @@ var Analysis_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRunsPaged",
 			Handler:    _Analysis_ListRunsPaged_Handler,
-		},
-		{
-			MethodName: "ListAvailableDetectors",
-			Handler:    _Analysis_ListAvailableDetectors_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

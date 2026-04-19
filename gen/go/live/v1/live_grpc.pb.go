@@ -21,14 +21,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Live_NewRun_FullMethodName                 = "/pulsoats.live.v1.Live/NewRun"
-	Live_StopRun_FullMethodName                = "/pulsoats.live.v1.Live/StopRun"
-	Live_RestartRun_FullMethodName             = "/pulsoats.live.v1.Live/RestartRun"
-	Live_GetRun_FullMethodName                 = "/pulsoats.live.v1.Live/GetRun"
-	Live_StreamEvents_FullMethodName           = "/pulsoats.live.v1.Live/StreamEvents"
-	Live_ListRunsPaged_FullMethodName          = "/pulsoats.live.v1.Live/ListRunsPaged"
-	Live_ListSignalsPaged_FullMethodName       = "/pulsoats.live.v1.Live/ListSignalsPaged"
-	Live_ListAvailableDetectors_FullMethodName = "/pulsoats.live.v1.Live/ListAvailableDetectors"
+	Live_NewRun_FullMethodName           = "/pulsoats.live.v1.Live/NewRun"
+	Live_StopRun_FullMethodName          = "/pulsoats.live.v1.Live/StopRun"
+	Live_RestartRun_FullMethodName       = "/pulsoats.live.v1.Live/RestartRun"
+	Live_GetRun_FullMethodName           = "/pulsoats.live.v1.Live/GetRun"
+	Live_StreamEvents_FullMethodName     = "/pulsoats.live.v1.Live/StreamEvents"
+	Live_ListRunsPaged_FullMethodName    = "/pulsoats.live.v1.Live/ListRunsPaged"
+	Live_ListSignalsPaged_FullMethodName = "/pulsoats.live.v1.Live/ListSignalsPaged"
 )
 
 // LiveClient is the client API for Live service.
@@ -44,7 +43,6 @@ type LiveClient interface {
 	StreamEvents(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Event], error)
 	ListRunsPaged(ctx context.Context, in *ListRunsPagedRequest, opts ...grpc.CallOption) (*ListRunsPagedResponse, error)
 	ListSignalsPaged(ctx context.Context, in *ListSignalsPagedRequest, opts ...grpc.CallOption) (*ListSignalsPagedResponse, error)
-	ListAvailableDetectors(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.ListAvailableDetectors, error)
 }
 
 type liveClient struct {
@@ -134,16 +132,6 @@ func (c *liveClient) ListSignalsPaged(ctx context.Context, in *ListSignalsPagedR
 	return out, nil
 }
 
-func (c *liveClient) ListAvailableDetectors(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*v1.ListAvailableDetectors, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.ListAvailableDetectors)
-	err := c.cc.Invoke(ctx, Live_ListAvailableDetectors_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // LiveServer is the server API for Live service.
 // All implementations must embed UnimplementedLiveServer
 // for forward compatibility.
@@ -157,7 +145,6 @@ type LiveServer interface {
 	StreamEvents(*emptypb.Empty, grpc.ServerStreamingServer[Event]) error
 	ListRunsPaged(context.Context, *ListRunsPagedRequest) (*ListRunsPagedResponse, error)
 	ListSignalsPaged(context.Context, *ListSignalsPagedRequest) (*ListSignalsPagedResponse, error)
-	ListAvailableDetectors(context.Context, *emptypb.Empty) (*v1.ListAvailableDetectors, error)
 	mustEmbedUnimplementedLiveServer()
 }
 
@@ -188,9 +175,6 @@ func (UnimplementedLiveServer) ListRunsPaged(context.Context, *ListRunsPagedRequ
 }
 func (UnimplementedLiveServer) ListSignalsPaged(context.Context, *ListSignalsPagedRequest) (*ListSignalsPagedResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListSignalsPaged not implemented")
-}
-func (UnimplementedLiveServer) ListAvailableDetectors(context.Context, *emptypb.Empty) (*v1.ListAvailableDetectors, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAvailableDetectors not implemented")
 }
 func (UnimplementedLiveServer) mustEmbedUnimplementedLiveServer() {}
 func (UnimplementedLiveServer) testEmbeddedByValue()              {}
@@ -332,24 +316,6 @@ func _Live_ListSignalsPaged_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Live_ListAvailableDetectors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LiveServer).ListAvailableDetectors(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Live_ListAvailableDetectors_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LiveServer).ListAvailableDetectors(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Live_ServiceDesc is the grpc.ServiceDesc for Live service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -380,10 +346,6 @@ var Live_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSignalsPaged",
 			Handler:    _Live_ListSignalsPaged_Handler,
-		},
-		{
-			MethodName: "ListAvailableDetectors",
-			Handler:    _Live_ListAvailableDetectors_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

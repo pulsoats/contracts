@@ -508,15 +508,14 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x16RUN_FILTER_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fRUN_FILTER_MINE\x10\x01\x12\x15\n" +
 	"\x11RUN_FILTER_SHARED\x10\x02\x12\x12\n" +
-	"\x0eRUN_FILTER_ALL\x10\x032\xa6\x04\n" +
+	"\x0eRUN_FILTER_ALL\x10\x032\xc8\x03\n" +
 	"\bAnalysis\x12H\n" +
 	"\x06NewRun\x12#.pulsoats.analysis.v1.NewRunRequest\x1a\x19.pulsoats.analysis.v1.Run\x12>\n" +
 	"\x06GetRun\x12\x19.pulsoats.common.v1.RunID\x1a\x19.pulsoats.analysis.v1.Run\x12S\n" +
 	"\rGetRunArchive\x12\x19.pulsoats.common.v1.RunID\x1a%.pulsoats.analysis.v1.RunArchiveChunk0\x01\x12=\n" +
 	"\bShareRun\x12\x19.pulsoats.common.v1.RunID\x1a\x16.google.protobuf.Empty\x12>\n" +
 	"\tDeleteRun\x12\x19.pulsoats.common.v1.RunID\x1a\x16.google.protobuf.Empty\x12^\n" +
-	"\rListRunsPaged\x12%.pulsoats.analysis.v1.ListRunsRequest\x1a&.pulsoats.analysis.v1.ListRunsResponse\x12\\\n" +
-	"\x16ListAvailableDetectors\x12\x16.google.protobuf.Empty\x1a*.pulsoats.common.v1.ListAvailableDetectorsB=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
+	"\rListRunsPaged\x12%.pulsoats.analysis.v1.ListRunsRequest\x1a&.pulsoats.analysis.v1.ListRunsResponseB=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
 
 var (
 	file_analysis_v1_analysis_proto_rawDescOnce sync.Once
@@ -533,20 +532,19 @@ func file_analysis_v1_analysis_proto_rawDescGZIP() []byte {
 var file_analysis_v1_analysis_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_analysis_v1_analysis_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_analysis_v1_analysis_proto_goTypes = []any{
-	(RunFilter)(0),                    // 0: pulsoats.analysis.v1.RunFilter
-	(*NewRunRequest)(nil),             // 1: pulsoats.analysis.v1.NewRunRequest
-	(*Run)(nil),                       // 2: pulsoats.analysis.v1.Run
-	(*RunArchiveChunk)(nil),           // 3: pulsoats.analysis.v1.RunArchiveChunk
-	(*ListRunsRequest)(nil),           // 4: pulsoats.analysis.v1.ListRunsRequest
-	(*ListRunsResponse)(nil),          // 5: pulsoats.analysis.v1.ListRunsResponse
-	(*v1.MarketSpec)(nil),             // 6: pulsoats.common.v1.MarketSpec
-	(*timestamppb.Timestamp)(nil),     // 7: google.protobuf.Timestamp
-	(*v1.DetectorConfig)(nil),         // 8: pulsoats.common.v1.DetectorConfig
-	(*v1.Fees)(nil),                   // 9: pulsoats.common.v1.Fees
-	(*v1.Status)(nil),                 // 10: pulsoats.common.v1.Status
-	(*v1.RunID)(nil),                  // 11: pulsoats.common.v1.RunID
-	(*emptypb.Empty)(nil),             // 12: google.protobuf.Empty
-	(*v1.ListAvailableDetectors)(nil), // 13: pulsoats.common.v1.ListAvailableDetectors
+	(RunFilter)(0),                // 0: pulsoats.analysis.v1.RunFilter
+	(*NewRunRequest)(nil),         // 1: pulsoats.analysis.v1.NewRunRequest
+	(*Run)(nil),                   // 2: pulsoats.analysis.v1.Run
+	(*RunArchiveChunk)(nil),       // 3: pulsoats.analysis.v1.RunArchiveChunk
+	(*ListRunsRequest)(nil),       // 4: pulsoats.analysis.v1.ListRunsRequest
+	(*ListRunsResponse)(nil),      // 5: pulsoats.analysis.v1.ListRunsResponse
+	(*v1.MarketSpec)(nil),         // 6: pulsoats.common.v1.MarketSpec
+	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
+	(*v1.DetectorConfig)(nil),     // 8: pulsoats.common.v1.DetectorConfig
+	(*v1.Fees)(nil),               // 9: pulsoats.common.v1.Fees
+	(*v1.Status)(nil),             // 10: pulsoats.common.v1.Status
+	(*v1.RunID)(nil),              // 11: pulsoats.common.v1.RunID
+	(*emptypb.Empty)(nil),         // 12: google.protobuf.Empty
 }
 var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	6,  // 0: pulsoats.analysis.v1.NewRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
@@ -569,16 +567,14 @@ var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	11, // 17: pulsoats.analysis.v1.Analysis.ShareRun:input_type -> pulsoats.common.v1.RunID
 	11, // 18: pulsoats.analysis.v1.Analysis.DeleteRun:input_type -> pulsoats.common.v1.RunID
 	4,  // 19: pulsoats.analysis.v1.Analysis.ListRunsPaged:input_type -> pulsoats.analysis.v1.ListRunsRequest
-	12, // 20: pulsoats.analysis.v1.Analysis.ListAvailableDetectors:input_type -> google.protobuf.Empty
-	2,  // 21: pulsoats.analysis.v1.Analysis.NewRun:output_type -> pulsoats.analysis.v1.Run
-	2,  // 22: pulsoats.analysis.v1.Analysis.GetRun:output_type -> pulsoats.analysis.v1.Run
-	3,  // 23: pulsoats.analysis.v1.Analysis.GetRunArchive:output_type -> pulsoats.analysis.v1.RunArchiveChunk
-	12, // 24: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> google.protobuf.Empty
-	12, // 25: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
-	5,  // 26: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsResponse
-	13, // 27: pulsoats.analysis.v1.Analysis.ListAvailableDetectors:output_type -> pulsoats.common.v1.ListAvailableDetectors
-	21, // [21:28] is the sub-list for method output_type
-	14, // [14:21] is the sub-list for method input_type
+	2,  // 20: pulsoats.analysis.v1.Analysis.NewRun:output_type -> pulsoats.analysis.v1.Run
+	2,  // 21: pulsoats.analysis.v1.Analysis.GetRun:output_type -> pulsoats.analysis.v1.Run
+	3,  // 22: pulsoats.analysis.v1.Analysis.GetRunArchive:output_type -> pulsoats.analysis.v1.RunArchiveChunk
+	12, // 23: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> google.protobuf.Empty
+	12, // 24: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
+	5,  // 25: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsResponse
+	20, // [20:26] is the sub-list for method output_type
+	14, // [14:20] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
 	14, // [14:14] is the sub-list for extension extendee
 	0,  // [0:14] is the sub-list for field type_name

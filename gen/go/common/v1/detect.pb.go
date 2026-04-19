@@ -9,6 +9,7 @@ package commonpb
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -157,27 +158,27 @@ func (x *DetectorMeta) GetVersion() string {
 	return ""
 }
 
-type ListAvailableDetectors struct {
+type ListAvailableDetectorsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Detectors     []*DetectorMeta        `protobuf:"bytes,1,rep,name=detectors,proto3" json:"detectors,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAvailableDetectors) Reset() {
-	*x = ListAvailableDetectors{}
+func (x *ListAvailableDetectorsResponse) Reset() {
+	*x = ListAvailableDetectorsResponse{}
 	mi := &file_common_v1_detect_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAvailableDetectors) String() string {
+func (x *ListAvailableDetectorsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAvailableDetectors) ProtoMessage() {}
+func (*ListAvailableDetectorsResponse) ProtoMessage() {}
 
-func (x *ListAvailableDetectors) ProtoReflect() protoreflect.Message {
+func (x *ListAvailableDetectorsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_common_v1_detect_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -189,12 +190,12 @@ func (x *ListAvailableDetectors) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAvailableDetectors.ProtoReflect.Descriptor instead.
-func (*ListAvailableDetectors) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListAvailableDetectorsResponse.ProtoReflect.Descriptor instead.
+func (*ListAvailableDetectorsResponse) Descriptor() ([]byte, []int) {
 	return file_common_v1_detect_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListAvailableDetectors) GetDetectors() []*DetectorMeta {
+func (x *ListAvailableDetectorsResponse) GetDetectors() []*DetectorMeta {
 	if x != nil {
 		return x.Detectors
 	}
@@ -205,7 +206,7 @@ var File_common_v1_detect_proto protoreflect.FileDescriptor
 
 const file_common_v1_detect_proto_rawDesc = "" +
 	"\n" +
-	"\x16common/v1/detect.proto\x12\x12pulsoats.common.v1\"N\n" +
+	"\x16common/v1/detect.proto\x12\x12pulsoats.common.v1\x1a\x1bgoogle/protobuf/empty.proto\"N\n" +
 	"\x0eDetectorConfig\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x12\x12\n" +
@@ -216,9 +217,11 @@ const file_common_v1_detect_proto_rawDesc = "" +
 	"\x04kind\x18\x03 \x01(\tR\x04kind\x12\x1f\n" +
 	"\vopts_schema\x18\x04 \x01(\fR\n" +
 	"optsSchema\x12\x18\n" +
-	"\aversion\x18\x05 \x01(\tR\aversion\"X\n" +
-	"\x16ListAvailableDetectors\x12>\n" +
-	"\tdetectors\x18\x01 \x03(\v2 .pulsoats.common.v1.DetectorMetaR\tdetectorsB9Z7github.com/pulsoats/contracts/gen/go/common/v1;commonpbb\x06proto3"
+	"\aversion\x18\x05 \x01(\tR\aversion\"`\n" +
+	"\x1eListAvailableDetectorsResponse\x12>\n" +
+	"\tdetectors\x18\x01 \x03(\v2 .pulsoats.common.v1.DetectorMetaR\tdetectors2o\n" +
+	"\aCatalog\x12d\n" +
+	"\x16ListAvailableDetectors\x12\x16.google.protobuf.Empty\x1a2.pulsoats.common.v1.ListAvailableDetectorsResponseB9Z7github.com/pulsoats/contracts/gen/go/common/v1;commonpbb\x06proto3"
 
 var (
 	file_common_v1_detect_proto_rawDescOnce sync.Once
@@ -234,14 +237,17 @@ func file_common_v1_detect_proto_rawDescGZIP() []byte {
 
 var file_common_v1_detect_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_common_v1_detect_proto_goTypes = []any{
-	(*DetectorConfig)(nil),         // 0: pulsoats.common.v1.DetectorConfig
-	(*DetectorMeta)(nil),           // 1: pulsoats.common.v1.DetectorMeta
-	(*ListAvailableDetectors)(nil), // 2: pulsoats.common.v1.ListAvailableDetectors
+	(*DetectorConfig)(nil),                 // 0: pulsoats.common.v1.DetectorConfig
+	(*DetectorMeta)(nil),                   // 1: pulsoats.common.v1.DetectorMeta
+	(*ListAvailableDetectorsResponse)(nil), // 2: pulsoats.common.v1.ListAvailableDetectorsResponse
+	(*emptypb.Empty)(nil),                  // 3: google.protobuf.Empty
 }
 var file_common_v1_detect_proto_depIdxs = []int32{
-	1, // 0: pulsoats.common.v1.ListAvailableDetectors.detectors:type_name -> pulsoats.common.v1.DetectorMeta
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
+	1, // 0: pulsoats.common.v1.ListAvailableDetectorsResponse.detectors:type_name -> pulsoats.common.v1.DetectorMeta
+	3, // 1: pulsoats.common.v1.Catalog.ListAvailableDetectors:input_type -> google.protobuf.Empty
+	2, // 2: pulsoats.common.v1.Catalog.ListAvailableDetectors:output_type -> pulsoats.common.v1.ListAvailableDetectorsResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -260,7 +266,7 @@ func file_common_v1_detect_proto_init() {
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_common_v1_detect_proto_goTypes,
 		DependencyIndexes: file_common_v1_detect_proto_depIdxs,
