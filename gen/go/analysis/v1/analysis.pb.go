@@ -163,7 +163,7 @@ func (x *NewRunRequest) GetFees() *v1.Fees {
 type Run struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Status        *v1.Status             `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Status        *v1.RunStatus          `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	Market        *v1.MarketSpec         `protobuf:"bytes,3,opt,name=market,proto3" json:"market,omitempty"`
 	Interval      string                 `protobuf:"bytes,4,opt,name=interval,proto3" json:"interval,omitempty"`
 	From          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=from,proto3" json:"from,omitempty"`
@@ -216,7 +216,7 @@ func (x *Run) GetId() string {
 	return ""
 }
 
-func (x *Run) GetStatus() *v1.Status {
+func (x *Run) GetStatus() *v1.RunStatus {
 	if x != nil {
 		return x.Status
 	}
@@ -476,10 +476,10 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x02to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12>\n" +
 	"\bdetector\x18\x05 \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x121\n" +
 	"\x04fees\x18\x06 \x01(\v2\x18.pulsoats.common.v1.FeesH\x00R\x04fees\x88\x01\x01B\a\n" +
-	"\x05_fees\"\xb4\x04\n" +
+	"\x05_fees\"\xb7\x04\n" +
 	"\x03Run\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x122\n" +
-	"\x06status\x18\x02 \x01(\v2\x1a.pulsoats.common.v1.StatusR\x06status\x126\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x125\n" +
+	"\x06status\x18\x02 \x01(\v2\x1d.pulsoats.common.v1.RunStatusR\x06status\x126\n" +
 	"\x06market\x18\x03 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x04 \x01(\tR\binterval\x12.\n" +
 	"\x04from\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
@@ -542,7 +542,7 @@ var file_analysis_v1_analysis_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
 	(*v1.DetectorConfig)(nil),     // 8: pulsoats.common.v1.DetectorConfig
 	(*v1.Fees)(nil),               // 9: pulsoats.common.v1.Fees
-	(*v1.Status)(nil),             // 10: pulsoats.common.v1.Status
+	(*v1.RunStatus)(nil),          // 10: pulsoats.common.v1.RunStatus
 	(*v1.RunID)(nil),              // 11: pulsoats.common.v1.RunID
 	(*emptypb.Empty)(nil),         // 12: google.protobuf.Empty
 }
@@ -552,7 +552,7 @@ var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	7,  // 2: pulsoats.analysis.v1.NewRunRequest.to:type_name -> google.protobuf.Timestamp
 	8,  // 3: pulsoats.analysis.v1.NewRunRequest.detector:type_name -> pulsoats.common.v1.DetectorConfig
 	9,  // 4: pulsoats.analysis.v1.NewRunRequest.fees:type_name -> pulsoats.common.v1.Fees
-	10, // 5: pulsoats.analysis.v1.Run.status:type_name -> pulsoats.common.v1.Status
+	10, // 5: pulsoats.analysis.v1.Run.status:type_name -> pulsoats.common.v1.RunStatus
 	6,  // 6: pulsoats.analysis.v1.Run.market:type_name -> pulsoats.common.v1.MarketSpec
 	7,  // 7: pulsoats.analysis.v1.Run.from:type_name -> google.protobuf.Timestamp
 	7,  // 8: pulsoats.analysis.v1.Run.to:type_name -> google.protobuf.Timestamp

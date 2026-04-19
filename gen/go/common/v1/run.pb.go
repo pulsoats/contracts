@@ -120,7 +120,7 @@ func (x *RunID) GetRunId() string {
 	return ""
 }
 
-type Status struct {
+type RunStatus struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          RunStatusCode          `protobuf:"varint,1,opt,name=code,proto3,enum=pulsoats.common.v1.RunStatusCode" json:"code,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
@@ -128,20 +128,20 @@ type Status struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Status) Reset() {
-	*x = Status{}
+func (x *RunStatus) Reset() {
+	*x = RunStatus{}
 	mi := &file_common_v1_run_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Status) String() string {
+func (x *RunStatus) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Status) ProtoMessage() {}
+func (*RunStatus) ProtoMessage() {}
 
-func (x *Status) ProtoReflect() protoreflect.Message {
+func (x *RunStatus) ProtoReflect() protoreflect.Message {
 	mi := &file_common_v1_run_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -153,19 +153,19 @@ func (x *Status) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Status.ProtoReflect.Descriptor instead.
-func (*Status) Descriptor() ([]byte, []int) {
+// Deprecated: Use RunStatus.ProtoReflect.Descriptor instead.
+func (*RunStatus) Descriptor() ([]byte, []int) {
 	return file_common_v1_run_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Status) GetCode() RunStatusCode {
+func (x *RunStatus) GetCode() RunStatusCode {
 	if x != nil {
 		return x.Code
 	}
 	return RunStatusCode_RUN_STATUS_UNSPECIFIED
 }
 
-func (x *Status) GetMessage() string {
+func (x *RunStatus) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
@@ -178,8 +178,8 @@ const file_common_v1_run_proto_rawDesc = "" +
 	"\n" +
 	"\x13common/v1/run.proto\x12\x12pulsoats.common.v1\"\x1e\n" +
 	"\x05RunID\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\tR\x05runId\"Y\n" +
-	"\x06Status\x125\n" +
+	"\x06run_id\x18\x01 \x01(\tR\x05runId\"\\\n" +
+	"\tRunStatus\x125\n" +
 	"\x04code\x18\x01 \x01(\x0e2!.pulsoats.common.v1.RunStatusCodeR\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage*\x87\x01\n" +
 	"\rRunStatusCode\x12\x1a\n" +
@@ -206,10 +206,10 @@ var file_common_v1_run_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_common_v1_run_proto_goTypes = []any{
 	(RunStatusCode)(0), // 0: pulsoats.common.v1.RunStatusCode
 	(*RunID)(nil),      // 1: pulsoats.common.v1.RunID
-	(*Status)(nil),     // 2: pulsoats.common.v1.Status
+	(*RunStatus)(nil),  // 2: pulsoats.common.v1.RunStatus
 }
 var file_common_v1_run_proto_depIdxs = []int32{
-	0, // 0: pulsoats.common.v1.Status.code:type_name -> pulsoats.common.v1.RunStatusCode
+	0, // 0: pulsoats.common.v1.RunStatus.code:type_name -> pulsoats.common.v1.RunStatusCode
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

@@ -31,18 +31,19 @@ message NewRunRequest {
 
 message Run {
   string id = 1;
-  pulsoats.common.v1.MarketSpec market = 2;
-  string interval = 3;
-  pulsoats.common.v1.DetectorConfig detector = 4;
-  int64 signals_count = 5;
-  int64 orders_count = 6;
-  int64 sum_profit_ppm = 7;
-  optional google.protobuf.Timestamp first_candle_time = 8;
-  optional google.protobuf.Timestamp last_candle_time = 9;
-  google.protobuf.Timestamp created_at = 10;
-  optional google.protobuf.Timestamp finished_at = 11;
-  string created_by = 12;
-  optional string stopped_by = 13;
+  pulsoats.common.v1.RunStatus status = 2;
+  pulsoats.common.v1.MarketSpec market = 3;
+  string interval = 4;
+  pulsoats.common.v1.DetectorConfig detector = 5;
+  int64 signals_count = 6;
+  int64 orders_count = 7;
+  int64 sum_profit_ppm = 8;
+  optional google.protobuf.Timestamp first_candle_time = 9;
+  optional google.protobuf.Timestamp last_candle_time = 10;
+  google.protobuf.Timestamp created_at = 11;
+  string created_by = 13;
+  optional google.protobuf.Timestamp finished_at = 12;
+  optional string finished_by = 14;
 }
 
 message ListRunsFilter {

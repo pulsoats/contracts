@@ -16,7 +16,7 @@ message RunID {
   string run_id = 1;
 }
 
-message Status {
+message RunStatus {
   RunStatusCode code = 1;
   string message = 2;
 }
