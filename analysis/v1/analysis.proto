@@ -2,21 +2,13 @@ syntax = "proto3";
 
 package pulsoats.analysis.v1;
 
-import "common/v1/detectorcfg.proto";
-import "common/v1/fees.proto";
-import "common/v1/market_spec.proto";
+import "common/v1/detect.proto";
+import "common/v1/market.proto";
+import "common/v1/run.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
 option go_package = "github.com/pulsoats/contracts/gen/go/analysis/v1;analysispb";
-
-enum RunStatusCode {
-  RUN_STATUS_UNSPECIFIED = 0;
-  RUN_STATUS_PENDING = 1;
-  RUN_STATUS_RUNNING = 2;
-  RUN_STATUS_DONE = 3;
-  RUN_STATUS_FAILED = 4;
-}
 
 enum RunFilter {
   RUN_FILTER_UNSPECIFIED = 0;
@@ -25,57 +17,44 @@ enum RunFilter {
   RUN_FILTER_ALL = 3;
 }
 
+// X-Service-Token METADATA IS REQUIRED
 service Analysis {
-  rpc StartRun(StartRunRequest) returns (StartRunResponse);
-  rpc GetRunMeta(GetRunRequest) returns (RunMeta);
-  rpc GetRunResult(GetRunRequest) returns (stream RunResultChunk);
-  rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse);
-  rpc ShareRun(ShareRunRequest) returns (ShareRunResponse);
-  rpc DeleteRun(DeleteRunRequest) returns (google.protobuf.Empty);
+  rpc NewRun(NewRunRequest) returns (Run); // X-User-Id METADATA IS REQUIRED
+  rpc GetRun(common.v1.RunID) returns (Run);
+  rpc GetRunArchive(common.v1.RunID) returns (stream RunArchiveChunk);
+  rpc ShareRun(common.v1.RunID) returns (google.protobuf.Empty); // X-User-Id METADATA IS REQUIRED
+  rpc DeleteRun(common.v1.RunID) returns (google.protobuf.Empty); // X-User-Id METADATA IS REQUIRED
+  rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse); // X-User-Id METADATA IS REQUIRED
+
+  rpc ListAvailableDetectors(google.protobuf.Empty) returns (common.v1.ListAvailableDetectors);
 }
 
-message StartRunRequest {
-  string user_id = 1;
-  pulsoats.common.v1.MarketSpec market = 2;
-  string interval = 3;
-  google.protobuf.Timestamp from = 4;
-  google.protobuf.Timestamp to = 5;
-  string price_type = 6;
-  pulsoats.common.v1.DetectorConfig detector = 7;
-  pulsoats.common.v1.Fees fees = 8;
+message NewRunRequest {
+  pulsoats.common.v1.MarketSpec market = 1;
+  string interval = 2;
+  google.protobuf.Timestamp from = 3;
+  google.protobuf.Timestamp to = 4;
+  pulsoats.common.v1.DetectorConfig detector = 5;
+  optional pulsoats.common.v1.Fees fees = 6;
 }
 
-message StartRunResponse {
-  string run_id = 1;
-}
-
-message GetRunRequest {
-  string run_id = 1;
-}
-
-message Status {
-  RunStatusCode code = 1;
-  string message = 2;
-}
-
-message RunMeta {
+message Run {
   string id = 1;
-  Status status = 2;
+  pulsoats.common.v1.Status status = 2;
   pulsoats.common.v1.MarketSpec market = 3;
-  string price_type = 4;
-  string interval = 5;
-  google.protobuf.Timestamp from = 6;
-  google.protobuf.Timestamp to = 7;
-  pulsoats.common.v1.DetectorConfig detector = 8;
-  int64 signals_count = 9;
-  int64 avg_profit_ppm = 10;
+  string interval = 4;
+  google.protobuf.Timestamp from = 5;
+  google.protobuf.Timestamp to = 6;
+  pulsoats.common.v1.DetectorConfig detector = 7;
+  int64 signals_count = 8;
+  int64 avg_profit_ppm = 9;
+  google.protobuf.Timestamp created_at = 10;
   string created_by = 11;
-  google.protobuf.Timestamp created_at = 12;
-  bool is_shared = 13;
-  google.protobuf.Timestamp shared_at = 14;
+  bool is_shared = 12;
+  google.protobuf.Timestamp shared_at = 13;
 }
 
-message RunResultChunk {
+message RunArchiveChunk {
   bytes data = 1;
 }
 
@@ -83,25 +62,10 @@ message ListRunsRequest {
   int32 limit = 1;
   int64 before_id = 2;
   RunFilter filter = 3;
-  string user_Id = 4;
 }
 
 message ListRunsResponse {
-  repeated RunMeta items = 1;
+  repeated Run runs = 1;
   int64 next_before_id = 2;
   bool has_more = 3;
-}
-
-message ShareRunRequest {
-  string run_id = 1;
-  string user_id = 2;
-}
-
-message ShareRunResponse {
-  bool success = 1;
-}
-
-message DeleteRunRequest {
-  string run_id = 1;
-  string user_id = 2;
 }

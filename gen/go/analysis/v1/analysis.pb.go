@@ -24,61 +24,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type RunStatusCode int32
-
-const (
-	RunStatusCode_RUN_STATUS_UNSPECIFIED RunStatusCode = 0
-	RunStatusCode_RUN_STATUS_PENDING     RunStatusCode = 1
-	RunStatusCode_RUN_STATUS_RUNNING     RunStatusCode = 2
-	RunStatusCode_RUN_STATUS_DONE        RunStatusCode = 3
-	RunStatusCode_RUN_STATUS_FAILED      RunStatusCode = 4
-)
-
-// Enum value maps for RunStatusCode.
-var (
-	RunStatusCode_name = map[int32]string{
-		0: "RUN_STATUS_UNSPECIFIED",
-		1: "RUN_STATUS_PENDING",
-		2: "RUN_STATUS_RUNNING",
-		3: "RUN_STATUS_DONE",
-		4: "RUN_STATUS_FAILED",
-	}
-	RunStatusCode_value = map[string]int32{
-		"RUN_STATUS_UNSPECIFIED": 0,
-		"RUN_STATUS_PENDING":     1,
-		"RUN_STATUS_RUNNING":     2,
-		"RUN_STATUS_DONE":        3,
-		"RUN_STATUS_FAILED":      4,
-	}
-)
-
-func (x RunStatusCode) Enum() *RunStatusCode {
-	p := new(RunStatusCode)
-	*p = x
-	return p
-}
-
-func (x RunStatusCode) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (RunStatusCode) Descriptor() protoreflect.EnumDescriptor {
-	return file_analysis_v1_analysis_proto_enumTypes[0].Descriptor()
-}
-
-func (RunStatusCode) Type() protoreflect.EnumType {
-	return &file_analysis_v1_analysis_proto_enumTypes[0]
-}
-
-func (x RunStatusCode) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use RunStatusCode.Descriptor instead.
-func (RunStatusCode) EnumDescriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{0}
-}
-
 type RunFilter int32
 
 const (
@@ -115,11 +60,11 @@ func (x RunFilter) String() string {
 }
 
 func (RunFilter) Descriptor() protoreflect.EnumDescriptor {
-	return file_analysis_v1_analysis_proto_enumTypes[1].Descriptor()
+	return file_analysis_v1_analysis_proto_enumTypes[0].Descriptor()
 }
 
 func (RunFilter) Type() protoreflect.EnumType {
-	return &file_analysis_v1_analysis_proto_enumTypes[1]
+	return &file_analysis_v1_analysis_proto_enumTypes[0]
 }
 
 func (x RunFilter) Number() protoreflect.EnumNumber {
@@ -128,37 +73,35 @@ func (x RunFilter) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RunFilter.Descriptor instead.
 func (RunFilter) EnumDescriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{1}
+	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{0}
 }
 
-type StartRunRequest struct {
+type NewRunRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Market        *v1.MarketSpec         `protobuf:"bytes,2,opt,name=market,proto3" json:"market,omitempty"`
-	Interval      string                 `protobuf:"bytes,3,opt,name=interval,proto3" json:"interval,omitempty"`
-	From          *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from,proto3" json:"from,omitempty"`
-	To            *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to,proto3" json:"to,omitempty"`
-	PriceType     string                 `protobuf:"bytes,6,opt,name=price_type,json=priceType,proto3" json:"price_type,omitempty"`
-	Detector      *v1.DetectorConfig     `protobuf:"bytes,7,opt,name=detector,proto3" json:"detector,omitempty"`
-	Fees          *v1.Fees               `protobuf:"bytes,8,opt,name=fees,proto3" json:"fees,omitempty"`
+	Market        *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
+	Interval      string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
+	From          *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
+	To            *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`
+	Detector      *v1.DetectorConfig     `protobuf:"bytes,5,opt,name=detector,proto3" json:"detector,omitempty"`
+	Fees          *v1.Fees               `protobuf:"bytes,6,opt,name=fees,proto3,oneof" json:"fees,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartRunRequest) Reset() {
-	*x = StartRunRequest{}
+func (x *NewRunRequest) Reset() {
+	*x = NewRunRequest{}
 	mi := &file_analysis_v1_analysis_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartRunRequest) String() string {
+func (x *NewRunRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartRunRequest) ProtoMessage() {}
+func (*NewRunRequest) ProtoMessage() {}
 
-func (x *StartRunRequest) ProtoReflect() protoreflect.Message {
+func (x *NewRunRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_analysis_v1_analysis_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -170,88 +113,86 @@ func (x *StartRunRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartRunRequest.ProtoReflect.Descriptor instead.
-func (*StartRunRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use NewRunRequest.ProtoReflect.Descriptor instead.
+func (*NewRunRequest) Descriptor() ([]byte, []int) {
 	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *StartRunRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
-func (x *StartRunRequest) GetMarket() *v1.MarketSpec {
+func (x *NewRunRequest) GetMarket() *v1.MarketSpec {
 	if x != nil {
 		return x.Market
 	}
 	return nil
 }
 
-func (x *StartRunRequest) GetInterval() string {
+func (x *NewRunRequest) GetInterval() string {
 	if x != nil {
 		return x.Interval
 	}
 	return ""
 }
 
-func (x *StartRunRequest) GetFrom() *timestamppb.Timestamp {
+func (x *NewRunRequest) GetFrom() *timestamppb.Timestamp {
 	if x != nil {
 		return x.From
 	}
 	return nil
 }
 
-func (x *StartRunRequest) GetTo() *timestamppb.Timestamp {
+func (x *NewRunRequest) GetTo() *timestamppb.Timestamp {
 	if x != nil {
 		return x.To
 	}
 	return nil
 }
 
-func (x *StartRunRequest) GetPriceType() string {
-	if x != nil {
-		return x.PriceType
-	}
-	return ""
-}
-
-func (x *StartRunRequest) GetDetector() *v1.DetectorConfig {
+func (x *NewRunRequest) GetDetector() *v1.DetectorConfig {
 	if x != nil {
 		return x.Detector
 	}
 	return nil
 }
 
-func (x *StartRunRequest) GetFees() *v1.Fees {
+func (x *NewRunRequest) GetFees() *v1.Fees {
 	if x != nil {
 		return x.Fees
 	}
 	return nil
 }
 
-type StartRunResponse struct {
+type Run struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Status        *v1.Status             `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Market        *v1.MarketSpec         `protobuf:"bytes,3,opt,name=market,proto3" json:"market,omitempty"`
+	Interval      string                 `protobuf:"bytes,4,opt,name=interval,proto3" json:"interval,omitempty"`
+	From          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=from,proto3" json:"from,omitempty"`
+	To            *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=to,proto3" json:"to,omitempty"`
+	Detector      *v1.DetectorConfig     `protobuf:"bytes,7,opt,name=detector,proto3" json:"detector,omitempty"`
+	SignalsCount  int64                  `protobuf:"varint,8,opt,name=signals_count,json=signalsCount,proto3" json:"signals_count,omitempty"`
+	AvgProfitPpm  int64                  `protobuf:"varint,9,opt,name=avg_profit_ppm,json=avgProfitPpm,proto3" json:"avg_profit_ppm,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedBy     string                 `protobuf:"bytes,11,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	IsShared      bool                   `protobuf:"varint,12,opt,name=is_shared,json=isShared,proto3" json:"is_shared,omitempty"`
+	SharedAt      *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=shared_at,json=sharedAt,proto3" json:"shared_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartRunResponse) Reset() {
-	*x = StartRunResponse{}
+func (x *Run) Reset() {
+	*x = Run{}
 	mi := &file_analysis_v1_analysis_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartRunResponse) String() string {
+func (x *Run) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartRunResponse) ProtoMessage() {}
+func (*Run) ProtoMessage() {}
 
-func (x *StartRunResponse) ProtoReflect() protoreflect.Message {
+func (x *Run) ProtoReflect() protoreflect.Message {
 	mi := &file_analysis_v1_analysis_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -263,284 +204,124 @@ func (x *StartRunResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartRunResponse.ProtoReflect.Descriptor instead.
-func (*StartRunResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use Run.ProtoReflect.Descriptor instead.
+func (*Run) Descriptor() ([]byte, []int) {
 	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *StartRunResponse) GetRunId() string {
-	if x != nil {
-		return x.RunId
-	}
-	return ""
-}
-
-type GetRunRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetRunRequest) Reset() {
-	*x = GetRunRequest{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetRunRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetRunRequest) ProtoMessage() {}
-
-func (x *GetRunRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetRunRequest.ProtoReflect.Descriptor instead.
-func (*GetRunRequest) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *GetRunRequest) GetRunId() string {
-	if x != nil {
-		return x.RunId
-	}
-	return ""
-}
-
-type Status struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          RunStatusCode          `protobuf:"varint,1,opt,name=code,proto3,enum=pulsoats.analysis.v1.RunStatusCode" json:"code,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Status) Reset() {
-	*x = Status{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Status) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Status) ProtoMessage() {}
-
-func (x *Status) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Status.ProtoReflect.Descriptor instead.
-func (*Status) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *Status) GetCode() RunStatusCode {
-	if x != nil {
-		return x.Code
-	}
-	return RunStatusCode_RUN_STATUS_UNSPECIFIED
-}
-
-func (x *Status) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
-}
-
-type RunMeta struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Status        *Status                `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Market        *v1.MarketSpec         `protobuf:"bytes,3,opt,name=market,proto3" json:"market,omitempty"`
-	PriceType     string                 `protobuf:"bytes,4,opt,name=price_type,json=priceType,proto3" json:"price_type,omitempty"`
-	Interval      string                 `protobuf:"bytes,5,opt,name=interval,proto3" json:"interval,omitempty"`
-	From          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=from,proto3" json:"from,omitempty"`
-	To            *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=to,proto3" json:"to,omitempty"`
-	Detector      *v1.DetectorConfig     `protobuf:"bytes,8,opt,name=detector,proto3" json:"detector,omitempty"`
-	SignalsCount  int64                  `protobuf:"varint,9,opt,name=signals_count,json=signalsCount,proto3" json:"signals_count,omitempty"`
-	AvgProfitPpm  int64                  `protobuf:"varint,10,opt,name=avg_profit_ppm,json=avgProfitPpm,proto3" json:"avg_profit_ppm,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,11,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	IsShared      bool                   `protobuf:"varint,13,opt,name=is_shared,json=isShared,proto3" json:"is_shared,omitempty"`
-	SharedAt      *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=shared_at,json=sharedAt,proto3" json:"shared_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RunMeta) Reset() {
-	*x = RunMeta{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RunMeta) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RunMeta) ProtoMessage() {}
-
-func (x *RunMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RunMeta.ProtoReflect.Descriptor instead.
-func (*RunMeta) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *RunMeta) GetId() string {
+func (x *Run) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *RunMeta) GetStatus() *Status {
+func (x *Run) GetStatus() *v1.Status {
 	if x != nil {
 		return x.Status
 	}
 	return nil
 }
 
-func (x *RunMeta) GetMarket() *v1.MarketSpec {
+func (x *Run) GetMarket() *v1.MarketSpec {
 	if x != nil {
 		return x.Market
 	}
 	return nil
 }
 
-func (x *RunMeta) GetPriceType() string {
-	if x != nil {
-		return x.PriceType
-	}
-	return ""
-}
-
-func (x *RunMeta) GetInterval() string {
+func (x *Run) GetInterval() string {
 	if x != nil {
 		return x.Interval
 	}
 	return ""
 }
 
-func (x *RunMeta) GetFrom() *timestamppb.Timestamp {
+func (x *Run) GetFrom() *timestamppb.Timestamp {
 	if x != nil {
 		return x.From
 	}
 	return nil
 }
 
-func (x *RunMeta) GetTo() *timestamppb.Timestamp {
+func (x *Run) GetTo() *timestamppb.Timestamp {
 	if x != nil {
 		return x.To
 	}
 	return nil
 }
 
-func (x *RunMeta) GetDetector() *v1.DetectorConfig {
+func (x *Run) GetDetector() *v1.DetectorConfig {
 	if x != nil {
 		return x.Detector
 	}
 	return nil
 }
 
-func (x *RunMeta) GetSignalsCount() int64 {
+func (x *Run) GetSignalsCount() int64 {
 	if x != nil {
 		return x.SignalsCount
 	}
 	return 0
 }
 
-func (x *RunMeta) GetAvgProfitPpm() int64 {
+func (x *Run) GetAvgProfitPpm() int64 {
 	if x != nil {
 		return x.AvgProfitPpm
 	}
 	return 0
 }
 
-func (x *RunMeta) GetCreatedBy() string {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return ""
-}
-
-func (x *RunMeta) GetCreatedAt() *timestamppb.Timestamp {
+func (x *Run) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return nil
 }
 
-func (x *RunMeta) GetIsShared() bool {
+func (x *Run) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *Run) GetIsShared() bool {
 	if x != nil {
 		return x.IsShared
 	}
 	return false
 }
 
-func (x *RunMeta) GetSharedAt() *timestamppb.Timestamp {
+func (x *Run) GetSharedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.SharedAt
 	}
 	return nil
 }
 
-type RunResultChunk struct {
+type RunArchiveChunk struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RunResultChunk) Reset() {
-	*x = RunResultChunk{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[5]
+func (x *RunArchiveChunk) Reset() {
+	*x = RunArchiveChunk{}
+	mi := &file_analysis_v1_analysis_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RunResultChunk) String() string {
+func (x *RunArchiveChunk) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RunResultChunk) ProtoMessage() {}
+func (*RunArchiveChunk) ProtoMessage() {}
 
-func (x *RunResultChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[5]
+func (x *RunArchiveChunk) ProtoReflect() protoreflect.Message {
+	mi := &file_analysis_v1_analysis_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,12 +332,12 @@ func (x *RunResultChunk) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RunResultChunk.ProtoReflect.Descriptor instead.
-func (*RunResultChunk) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{5}
+// Deprecated: Use RunArchiveChunk.ProtoReflect.Descriptor instead.
+func (*RunArchiveChunk) Descriptor() ([]byte, []int) {
+	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RunResultChunk) GetData() []byte {
+func (x *RunArchiveChunk) GetData() []byte {
 	if x != nil {
 		return x.Data
 	}
@@ -568,14 +349,13 @@ type ListRunsRequest struct {
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	BeforeId      int64                  `protobuf:"varint,2,opt,name=before_id,json=beforeId,proto3" json:"before_id,omitempty"`
 	Filter        RunFilter              `protobuf:"varint,3,opt,name=filter,proto3,enum=pulsoats.analysis.v1.RunFilter" json:"filter,omitempty"`
-	User_Id       string                 `protobuf:"bytes,4,opt,name=user_Id,json=userId,proto3" json:"user_Id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListRunsRequest) Reset() {
 	*x = ListRunsRequest{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[6]
+	mi := &file_analysis_v1_analysis_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -587,7 +367,7 @@ func (x *ListRunsRequest) String() string {
 func (*ListRunsRequest) ProtoMessage() {}
 
 func (x *ListRunsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[6]
+	mi := &file_analysis_v1_analysis_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -600,7 +380,7 @@ func (x *ListRunsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRunsRequest.ProtoReflect.Descriptor instead.
 func (*ListRunsRequest) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{6}
+	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ListRunsRequest) GetLimit() int32 {
@@ -624,16 +404,9 @@ func (x *ListRunsRequest) GetFilter() RunFilter {
 	return RunFilter_RUN_FILTER_UNSPECIFIED
 }
 
-func (x *ListRunsRequest) GetUser_Id() string {
-	if x != nil {
-		return x.User_Id
-	}
-	return ""
-}
-
 type ListRunsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Items         []*RunMeta             `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Runs          []*Run                 `protobuf:"bytes,1,rep,name=runs,proto3" json:"runs,omitempty"`
 	NextBeforeId  int64                  `protobuf:"varint,2,opt,name=next_before_id,json=nextBeforeId,proto3" json:"next_before_id,omitempty"`
 	HasMore       bool                   `protobuf:"varint,3,opt,name=has_more,json=hasMore,proto3" json:"has_more,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -642,7 +415,7 @@ type ListRunsResponse struct {
 
 func (x *ListRunsResponse) Reset() {
 	*x = ListRunsResponse{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[7]
+	mi := &file_analysis_v1_analysis_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -654,7 +427,7 @@ func (x *ListRunsResponse) String() string {
 func (*ListRunsResponse) ProtoMessage() {}
 
 func (x *ListRunsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[7]
+	mi := &file_analysis_v1_analysis_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,12 +440,12 @@ func (x *ListRunsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRunsResponse.ProtoReflect.Descriptor instead.
 func (*ListRunsResponse) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{7}
+	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *ListRunsResponse) GetItems() []*RunMeta {
+func (x *ListRunsResponse) GetRuns() []*Run {
 	if x != nil {
-		return x.Items
+		return x.Runs
 	}
 	return nil
 }
@@ -691,233 +464,59 @@ func (x *ListRunsResponse) GetHasMore() bool {
 	return false
 }
 
-type ShareRunRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ShareRunRequest) Reset() {
-	*x = ShareRunRequest{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ShareRunRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShareRunRequest) ProtoMessage() {}
-
-func (x *ShareRunRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShareRunRequest.ProtoReflect.Descriptor instead.
-func (*ShareRunRequest) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *ShareRunRequest) GetRunId() string {
-	if x != nil {
-		return x.RunId
-	}
-	return ""
-}
-
-func (x *ShareRunRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
-type ShareRunResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ShareRunResponse) Reset() {
-	*x = ShareRunResponse{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ShareRunResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShareRunResponse) ProtoMessage() {}
-
-func (x *ShareRunResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShareRunResponse.ProtoReflect.Descriptor instead.
-func (*ShareRunResponse) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *ShareRunResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-type DeleteRunRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteRunRequest) Reset() {
-	*x = DeleteRunRequest{}
-	mi := &file_analysis_v1_analysis_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteRunRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteRunRequest) ProtoMessage() {}
-
-func (x *DeleteRunRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_analysis_v1_analysis_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteRunRequest.ProtoReflect.Descriptor instead.
-func (*DeleteRunRequest) Descriptor() ([]byte, []int) {
-	return file_analysis_v1_analysis_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *DeleteRunRequest) GetRunId() string {
-	if x != nil {
-		return x.RunId
-	}
-	return ""
-}
-
-func (x *DeleteRunRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
 var File_analysis_v1_analysis_proto protoreflect.FileDescriptor
 
 const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\n" +
-	"\x1aanalysis/v1/analysis.proto\x12\x14pulsoats.analysis.v1\x1a\x1bcommon/v1/detectorcfg.proto\x1a\x14common/v1/fees.proto\x1a\x1bcommon/v1/market_spec.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xe7\x02\n" +
-	"\x0fStartRunRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x126\n" +
-	"\x06market\x18\x02 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
-	"\binterval\x18\x03 \x01(\tR\binterval\x12.\n" +
-	"\x04from\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
-	"\x02to\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12\x1d\n" +
+	"\x1aanalysis/v1/analysis.proto\x12\x14pulsoats.analysis.v1\x1a\x16common/v1/detect.proto\x1a\x16common/v1/market.proto\x1a\x13common/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xbb\x02\n" +
+	"\rNewRunRequest\x126\n" +
+	"\x06market\x18\x01 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
+	"\binterval\x18\x02 \x01(\tR\binterval\x12.\n" +
+	"\x04from\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
+	"\x02to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12>\n" +
+	"\bdetector\x18\x05 \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x121\n" +
+	"\x04fees\x18\x06 \x01(\v2\x18.pulsoats.common.v1.FeesH\x00R\x04fees\x88\x01\x01B\a\n" +
+	"\x05_fees\"\xb4\x04\n" +
+	"\x03Run\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x122\n" +
+	"\x06status\x18\x02 \x01(\v2\x1a.pulsoats.common.v1.StatusR\x06status\x126\n" +
+	"\x06market\x18\x03 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
+	"\binterval\x18\x04 \x01(\tR\binterval\x12.\n" +
+	"\x04from\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
+	"\x02to\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12>\n" +
+	"\bdetector\x18\a \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x12#\n" +
+	"\rsignals_count\x18\b \x01(\x03R\fsignalsCount\x12$\n" +
+	"\x0eavg_profit_ppm\x18\t \x01(\x03R\favgProfitPpm\x129\n" +
 	"\n" +
-	"price_type\x18\x06 \x01(\tR\tpriceType\x12>\n" +
-	"\bdetector\x18\a \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x12,\n" +
-	"\x04fees\x18\b \x01(\v2\x18.pulsoats.common.v1.FeesR\x04fees\")\n" +
-	"\x10StartRunResponse\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\tR\x05runId\"&\n" +
-	"\rGetRunRequest\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\tR\x05runId\"[\n" +
-	"\x06Status\x127\n" +
-	"\x04code\x18\x01 \x01(\x0e2#.pulsoats.analysis.v1.RunStatusCodeR\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xd9\x04\n" +
-	"\aRunMeta\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x124\n" +
-	"\x06status\x18\x02 \x01(\v2\x1c.pulsoats.analysis.v1.StatusR\x06status\x126\n" +
-	"\x06market\x18\x03 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1d\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"price_type\x18\x04 \x01(\tR\tpriceType\x12\x1a\n" +
-	"\binterval\x18\x05 \x01(\tR\binterval\x12.\n" +
-	"\x04from\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
-	"\x02to\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12>\n" +
-	"\bdetector\x18\b \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x12#\n" +
-	"\rsignals_count\x18\t \x01(\x03R\fsignalsCount\x12$\n" +
-	"\x0eavg_profit_ppm\x18\n" +
-	" \x01(\x03R\favgProfitPpm\x12\x1d\n" +
-	"\n" +
-	"created_by\x18\v \x01(\tR\tcreatedBy\x129\n" +
-	"\n" +
-	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1b\n" +
-	"\tis_shared\x18\r \x01(\bR\bisShared\x127\n" +
-	"\tshared_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\bsharedAt\"$\n" +
-	"\x0eRunResultChunk\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\fR\x04data\"\x96\x01\n" +
+	"created_by\x18\v \x01(\tR\tcreatedBy\x12\x1b\n" +
+	"\tis_shared\x18\f \x01(\bR\bisShared\x127\n" +
+	"\tshared_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\bsharedAt\"%\n" +
+	"\x0fRunArchiveChunk\x12\x12\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\"}\n" +
 	"\x0fListRunsRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x1b\n" +
 	"\tbefore_id\x18\x02 \x01(\x03R\bbeforeId\x127\n" +
-	"\x06filter\x18\x03 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunFilterR\x06filter\x12\x17\n" +
-	"\auser_Id\x18\x04 \x01(\tR\x06userId\"\x88\x01\n" +
-	"\x10ListRunsResponse\x123\n" +
-	"\x05items\x18\x01 \x03(\v2\x1d.pulsoats.analysis.v1.RunMetaR\x05items\x12$\n" +
+	"\x06filter\x18\x03 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunFilterR\x06filter\"\x82\x01\n" +
+	"\x10ListRunsResponse\x12-\n" +
+	"\x04runs\x18\x01 \x03(\v2\x19.pulsoats.analysis.v1.RunR\x04runs\x12$\n" +
 	"\x0enext_before_id\x18\x02 \x01(\x03R\fnextBeforeId\x12\x19\n" +
-	"\bhas_more\x18\x03 \x01(\bR\ahasMore\"A\n" +
-	"\x0fShareRunRequest\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId\",\n" +
-	"\x10ShareRunResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"B\n" +
-	"\x10DeleteRunRequest\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId*\x87\x01\n" +
-	"\rRunStatusCode\x12\x1a\n" +
-	"\x16RUN_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
-	"\x12RUN_STATUS_PENDING\x10\x01\x12\x16\n" +
-	"\x12RUN_STATUS_RUNNING\x10\x02\x12\x13\n" +
-	"\x0fRUN_STATUS_DONE\x10\x03\x12\x15\n" +
-	"\x11RUN_STATUS_FAILED\x10\x04*g\n" +
+	"\bhas_more\x18\x03 \x01(\bR\ahasMore*g\n" +
 	"\tRunFilter\x12\x1a\n" +
 	"\x16RUN_FILTER_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fRUN_FILTER_MINE\x10\x01\x12\x15\n" +
 	"\x11RUN_FILTER_SHARED\x10\x02\x12\x12\n" +
-	"\x0eRUN_FILTER_ALL\x10\x032\x9c\x04\n" +
-	"\bAnalysis\x12Y\n" +
-	"\bStartRun\x12%.pulsoats.analysis.v1.StartRunRequest\x1a&.pulsoats.analysis.v1.StartRunResponse\x12P\n" +
-	"\n" +
-	"GetRunMeta\x12#.pulsoats.analysis.v1.GetRunRequest\x1a\x1d.pulsoats.analysis.v1.RunMeta\x12[\n" +
-	"\fGetRunResult\x12#.pulsoats.analysis.v1.GetRunRequest\x1a$.pulsoats.analysis.v1.RunResultChunk0\x01\x12^\n" +
-	"\rListRunsPaged\x12%.pulsoats.analysis.v1.ListRunsRequest\x1a&.pulsoats.analysis.v1.ListRunsResponse\x12Y\n" +
-	"\bShareRun\x12%.pulsoats.analysis.v1.ShareRunRequest\x1a&.pulsoats.analysis.v1.ShareRunResponse\x12K\n" +
-	"\tDeleteRun\x12&.pulsoats.analysis.v1.DeleteRunRequest\x1a\x16.google.protobuf.EmptyB=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
+	"\x0eRUN_FILTER_ALL\x10\x032\xa6\x04\n" +
+	"\bAnalysis\x12H\n" +
+	"\x06NewRun\x12#.pulsoats.analysis.v1.NewRunRequest\x1a\x19.pulsoats.analysis.v1.Run\x12>\n" +
+	"\x06GetRun\x12\x19.pulsoats.common.v1.RunID\x1a\x19.pulsoats.analysis.v1.Run\x12S\n" +
+	"\rGetRunArchive\x12\x19.pulsoats.common.v1.RunID\x1a%.pulsoats.analysis.v1.RunArchiveChunk0\x01\x12=\n" +
+	"\bShareRun\x12\x19.pulsoats.common.v1.RunID\x1a\x16.google.protobuf.Empty\x12>\n" +
+	"\tDeleteRun\x12\x19.pulsoats.common.v1.RunID\x1a\x16.google.protobuf.Empty\x12^\n" +
+	"\rListRunsPaged\x12%.pulsoats.analysis.v1.ListRunsRequest\x1a&.pulsoats.analysis.v1.ListRunsResponse\x12\\\n" +
+	"\x16ListAvailableDetectors\x12\x16.google.protobuf.Empty\x1a*.pulsoats.common.v1.ListAvailableDetectorsB=Z;github.com/pulsoats/contracts/gen/go/analysis/v1;analysispbb\x06proto3"
 
 var (
 	file_analysis_v1_analysis_proto_rawDescOnce sync.Once
@@ -931,61 +530,58 @@ func file_analysis_v1_analysis_proto_rawDescGZIP() []byte {
 	return file_analysis_v1_analysis_proto_rawDescData
 }
 
-var file_analysis_v1_analysis_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_analysis_v1_analysis_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_analysis_v1_analysis_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_analysis_v1_analysis_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_analysis_v1_analysis_proto_goTypes = []any{
-	(RunStatusCode)(0),            // 0: pulsoats.analysis.v1.RunStatusCode
-	(RunFilter)(0),                // 1: pulsoats.analysis.v1.RunFilter
-	(*StartRunRequest)(nil),       // 2: pulsoats.analysis.v1.StartRunRequest
-	(*StartRunResponse)(nil),      // 3: pulsoats.analysis.v1.StartRunResponse
-	(*GetRunRequest)(nil),         // 4: pulsoats.analysis.v1.GetRunRequest
-	(*Status)(nil),                // 5: pulsoats.analysis.v1.Status
-	(*RunMeta)(nil),               // 6: pulsoats.analysis.v1.RunMeta
-	(*RunResultChunk)(nil),        // 7: pulsoats.analysis.v1.RunResultChunk
-	(*ListRunsRequest)(nil),       // 8: pulsoats.analysis.v1.ListRunsRequest
-	(*ListRunsResponse)(nil),      // 9: pulsoats.analysis.v1.ListRunsResponse
-	(*ShareRunRequest)(nil),       // 10: pulsoats.analysis.v1.ShareRunRequest
-	(*ShareRunResponse)(nil),      // 11: pulsoats.analysis.v1.ShareRunResponse
-	(*DeleteRunRequest)(nil),      // 12: pulsoats.analysis.v1.DeleteRunRequest
-	(*v1.MarketSpec)(nil),         // 13: pulsoats.common.v1.MarketSpec
-	(*timestamppb.Timestamp)(nil), // 14: google.protobuf.Timestamp
-	(*v1.DetectorConfig)(nil),     // 15: pulsoats.common.v1.DetectorConfig
-	(*v1.Fees)(nil),               // 16: pulsoats.common.v1.Fees
-	(*emptypb.Empty)(nil),         // 17: google.protobuf.Empty
+	(RunFilter)(0),                    // 0: pulsoats.analysis.v1.RunFilter
+	(*NewRunRequest)(nil),             // 1: pulsoats.analysis.v1.NewRunRequest
+	(*Run)(nil),                       // 2: pulsoats.analysis.v1.Run
+	(*RunArchiveChunk)(nil),           // 3: pulsoats.analysis.v1.RunArchiveChunk
+	(*ListRunsRequest)(nil),           // 4: pulsoats.analysis.v1.ListRunsRequest
+	(*ListRunsResponse)(nil),          // 5: pulsoats.analysis.v1.ListRunsResponse
+	(*v1.MarketSpec)(nil),             // 6: pulsoats.common.v1.MarketSpec
+	(*timestamppb.Timestamp)(nil),     // 7: google.protobuf.Timestamp
+	(*v1.DetectorConfig)(nil),         // 8: pulsoats.common.v1.DetectorConfig
+	(*v1.Fees)(nil),                   // 9: pulsoats.common.v1.Fees
+	(*v1.Status)(nil),                 // 10: pulsoats.common.v1.Status
+	(*v1.RunID)(nil),                  // 11: pulsoats.common.v1.RunID
+	(*emptypb.Empty)(nil),             // 12: google.protobuf.Empty
+	(*v1.ListAvailableDetectors)(nil), // 13: pulsoats.common.v1.ListAvailableDetectors
 }
 var file_analysis_v1_analysis_proto_depIdxs = []int32{
-	13, // 0: pulsoats.analysis.v1.StartRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
-	14, // 1: pulsoats.analysis.v1.StartRunRequest.from:type_name -> google.protobuf.Timestamp
-	14, // 2: pulsoats.analysis.v1.StartRunRequest.to:type_name -> google.protobuf.Timestamp
-	15, // 3: pulsoats.analysis.v1.StartRunRequest.detector:type_name -> pulsoats.common.v1.DetectorConfig
-	16, // 4: pulsoats.analysis.v1.StartRunRequest.fees:type_name -> pulsoats.common.v1.Fees
-	0,  // 5: pulsoats.analysis.v1.Status.code:type_name -> pulsoats.analysis.v1.RunStatusCode
-	5,  // 6: pulsoats.analysis.v1.RunMeta.status:type_name -> pulsoats.analysis.v1.Status
-	13, // 7: pulsoats.analysis.v1.RunMeta.market:type_name -> pulsoats.common.v1.MarketSpec
-	14, // 8: pulsoats.analysis.v1.RunMeta.from:type_name -> google.protobuf.Timestamp
-	14, // 9: pulsoats.analysis.v1.RunMeta.to:type_name -> google.protobuf.Timestamp
-	15, // 10: pulsoats.analysis.v1.RunMeta.detector:type_name -> pulsoats.common.v1.DetectorConfig
-	14, // 11: pulsoats.analysis.v1.RunMeta.created_at:type_name -> google.protobuf.Timestamp
-	14, // 12: pulsoats.analysis.v1.RunMeta.shared_at:type_name -> google.protobuf.Timestamp
-	1,  // 13: pulsoats.analysis.v1.ListRunsRequest.filter:type_name -> pulsoats.analysis.v1.RunFilter
-	6,  // 14: pulsoats.analysis.v1.ListRunsResponse.items:type_name -> pulsoats.analysis.v1.RunMeta
-	2,  // 15: pulsoats.analysis.v1.Analysis.StartRun:input_type -> pulsoats.analysis.v1.StartRunRequest
-	4,  // 16: pulsoats.analysis.v1.Analysis.GetRunMeta:input_type -> pulsoats.analysis.v1.GetRunRequest
-	4,  // 17: pulsoats.analysis.v1.Analysis.GetRunResult:input_type -> pulsoats.analysis.v1.GetRunRequest
-	8,  // 18: pulsoats.analysis.v1.Analysis.ListRunsPaged:input_type -> pulsoats.analysis.v1.ListRunsRequest
-	10, // 19: pulsoats.analysis.v1.Analysis.ShareRun:input_type -> pulsoats.analysis.v1.ShareRunRequest
-	12, // 20: pulsoats.analysis.v1.Analysis.DeleteRun:input_type -> pulsoats.analysis.v1.DeleteRunRequest
-	3,  // 21: pulsoats.analysis.v1.Analysis.StartRun:output_type -> pulsoats.analysis.v1.StartRunResponse
-	6,  // 22: pulsoats.analysis.v1.Analysis.GetRunMeta:output_type -> pulsoats.analysis.v1.RunMeta
-	7,  // 23: pulsoats.analysis.v1.Analysis.GetRunResult:output_type -> pulsoats.analysis.v1.RunResultChunk
-	9,  // 24: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsResponse
-	11, // 25: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> pulsoats.analysis.v1.ShareRunResponse
-	17, // 26: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
-	21, // [21:27] is the sub-list for method output_type
-	15, // [15:21] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	6,  // 0: pulsoats.analysis.v1.NewRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
+	7,  // 1: pulsoats.analysis.v1.NewRunRequest.from:type_name -> google.protobuf.Timestamp
+	7,  // 2: pulsoats.analysis.v1.NewRunRequest.to:type_name -> google.protobuf.Timestamp
+	8,  // 3: pulsoats.analysis.v1.NewRunRequest.detector:type_name -> pulsoats.common.v1.DetectorConfig
+	9,  // 4: pulsoats.analysis.v1.NewRunRequest.fees:type_name -> pulsoats.common.v1.Fees
+	10, // 5: pulsoats.analysis.v1.Run.status:type_name -> pulsoats.common.v1.Status
+	6,  // 6: pulsoats.analysis.v1.Run.market:type_name -> pulsoats.common.v1.MarketSpec
+	7,  // 7: pulsoats.analysis.v1.Run.from:type_name -> google.protobuf.Timestamp
+	7,  // 8: pulsoats.analysis.v1.Run.to:type_name -> google.protobuf.Timestamp
+	8,  // 9: pulsoats.analysis.v1.Run.detector:type_name -> pulsoats.common.v1.DetectorConfig
+	7,  // 10: pulsoats.analysis.v1.Run.created_at:type_name -> google.protobuf.Timestamp
+	7,  // 11: pulsoats.analysis.v1.Run.shared_at:type_name -> google.protobuf.Timestamp
+	0,  // 12: pulsoats.analysis.v1.ListRunsRequest.filter:type_name -> pulsoats.analysis.v1.RunFilter
+	2,  // 13: pulsoats.analysis.v1.ListRunsResponse.runs:type_name -> pulsoats.analysis.v1.Run
+	1,  // 14: pulsoats.analysis.v1.Analysis.NewRun:input_type -> pulsoats.analysis.v1.NewRunRequest
+	11, // 15: pulsoats.analysis.v1.Analysis.GetRun:input_type -> pulsoats.common.v1.RunID
+	11, // 16: pulsoats.analysis.v1.Analysis.GetRunArchive:input_type -> pulsoats.common.v1.RunID
+	11, // 17: pulsoats.analysis.v1.Analysis.ShareRun:input_type -> pulsoats.common.v1.RunID
+	11, // 18: pulsoats.analysis.v1.Analysis.DeleteRun:input_type -> pulsoats.common.v1.RunID
+	4,  // 19: pulsoats.analysis.v1.Analysis.ListRunsPaged:input_type -> pulsoats.analysis.v1.ListRunsRequest
+	12, // 20: pulsoats.analysis.v1.Analysis.ListAvailableDetectors:input_type -> google.protobuf.Empty
+	2,  // 21: pulsoats.analysis.v1.Analysis.NewRun:output_type -> pulsoats.analysis.v1.Run
+	2,  // 22: pulsoats.analysis.v1.Analysis.GetRun:output_type -> pulsoats.analysis.v1.Run
+	3,  // 23: pulsoats.analysis.v1.Analysis.GetRunArchive:output_type -> pulsoats.analysis.v1.RunArchiveChunk
+	12, // 24: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> google.protobuf.Empty
+	12, // 25: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
+	5,  // 26: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsResponse
+	13, // 27: pulsoats.analysis.v1.Analysis.ListAvailableDetectors:output_type -> pulsoats.common.v1.ListAvailableDetectors
+	21, // [21:28] is the sub-list for method output_type
+	14, // [14:21] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_analysis_v1_analysis_proto_init() }
@@ -993,13 +589,14 @@ func file_analysis_v1_analysis_proto_init() {
 	if File_analysis_v1_analysis_proto != nil {
 		return
 	}
+	file_analysis_v1_analysis_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_analysis_v1_analysis_proto_rawDesc), len(file_analysis_v1_analysis_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   11,
+			NumEnums:      1,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

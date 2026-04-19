@@ -4,6 +4,12 @@ package pulsoats.common.v1;
 
 option go_package = "github.com/pulsoats/contracts/gen/go/common/v1;commonpb";
 
+message MarketSpec {
+  string exchange = 1;
+  string category = 2;
+  string symbol = 3;
+}
+
 message Fees {
   int64 taker_fee = 1;
   int64 maker_fee = 2;

@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package pulsoats.live.v1;
+
+import "common/v1/detect.proto";
+import "common/v1/market.proto";
+import "common/v1/run.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/pulsoats/contracts/gen/go/live/v1;livepb";
+
+// X-Service-Token METADATA IS REQUIRED
+service Live {
+  rpc NewRun(NewRunRequest) returns (Run); // X-User-Id METADATA IS REQUIRED
+  rpc StopRun(common.v1.RunID) returns (google.protobuf.Empty); // X-User-Id METADATA IS REQUIRED
+  rpc RestartRun(common.v1.RunID) returns (Run); // X-User-Id METADATA IS REQUIRED
+  rpc GetRun(common.v1.RunID) returns (Run);
+
+  rpc StreamEvents(google.protobuf.Empty) returns (stream Event);
+
+  rpc ListRunsPaged(ListRunsPagedRequest) returns (ListRunsPagedResponse);
+  rpc ListSignalsPaged(ListSignalsPagedRequest) returns (ListSignalsPagedResponse);
+
+  rpc ListAvailableDetectors(google.protobuf.Empty) returns (common.v1.ListAvailableDetectors);
+}
+
+message NewRunRequest {
+  pulsoats.common.v1.MarketSpec market = 1;
+  string interval = 2;
+  pulsoats.common.v1.DetectorConfig detector = 3;
+}
+
+message Run {
+  string id = 1;
+  pulsoats.common.v1.MarketSpec market = 2;
+  string interval = 3;
+  pulsoats.common.v1.DetectorConfig detector = 4;
+  int64 signals_count = 5;
+  int64 orders_count = 6;
+  int64 sum_profit_ppm = 7;
+  optional google.protobuf.Timestamp first_candle_time = 8;
+  optional google.protobuf.Timestamp last_candle_time = 9;
+  google.protobuf.Timestamp created_at = 10;
+  optional google.protobuf.Timestamp finished_at = 11;
+  string created_by = 12;
+  optional string stopped_by = 13;
+}
+
+message ListRunsFilter {
+  optional int32 status_code = 1;
+  optional string category = 2;
+  optional string symbol = 3;
+  optional string interval = 4;
+  optional string detector_code = 5;
+  optional bool order_dir_asc = 6;
+}
+
+message ListRunsPagedRequest {
+  int32 limit = 1;
+  optional string before_id = 2;
+  ListRunsFilter filter = 3;
+}
+
+message ListRunsPagedResponse {
+  repeated Run runs = 1;
+  bool has_more = 2;
+  optional string next_before_id = 3;
+}
+
+message ListSignalsFilter {
+  optional string run_id = 1;
+  optional string category = 2;
+  optional string symbol = 3;
+  optional google.protobuf.Timestamp from = 4;
+  optional google.protobuf.Timestamp to = 5;
+  optional bool order_dir_asc = 6;
+}
+
+message ListSignalsPagedRequest {
+  int32 limit = 1;
+  optional string before_id = 2;
+  ListRunsFilter filter = 3;
+}
+
+message ListSignalsPagedResponse {
+  repeated Signal signals = 1;
+  bool has_more = 2;
+  optional string next_before_id = 3;
+}
+
+message Signal {
+  string id = 1;
+  string run_id = 2;
+  pulsoats.common.v1.MarketSpec market = 3;
+  string detector_code = 4;
+  string detector_opts_label = 5;
+  google.protobuf.Timestamp time = 6;
+  int64 value = 7;
+  int64 buy_value = 8;
+  int64 take_profit_value = 9;
+  int64 stop_loss_value = 10;
+  int64 expected_return_ppm = 11;
+  string fingerprint = 12;
+  google.protobuf.Timestamp created_at = 13;
+}
+
+message Event {
+  string run_id = 1;
+  oneof payload {
+    Run run = 2;
+    Signal signal = 3;
+  }
+}
