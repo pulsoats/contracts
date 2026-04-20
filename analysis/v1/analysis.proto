@@ -17,14 +17,14 @@ enum RunFilter {
   RUN_FILTER_ALL = 3;
 }
 
-// X-Service-Token METADATA IS REQUIRED
+// x-service-token METADATA IS REQUIRED
 service Analysis {
-  rpc NewRun(NewRunRequest) returns (Run); // X-User-Id METADATA IS REQUIRED
+  rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
   rpc GetRun(common.v1.RunID) returns (Run);
   rpc GetRunArchive(common.v1.RunID) returns (stream RunArchiveChunk);
-  rpc ShareRun(common.v1.RunID) returns (google.protobuf.Empty); // X-User-Id METADATA IS REQUIRED
-  rpc DeleteRun(common.v1.RunID) returns (google.protobuf.Empty); // X-User-Id METADATA IS REQUIRED
-  rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse); // X-User-Id METADATA IS REQUIRED
+  rpc ShareRun(common.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc DeleteRun(common.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse); // x-user-id METADATA IS REQUIRED
 }
 
 message NewRunRequest {

@@ -33,7 +33,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// X-Service-Token METADATA IS REQUIRED
+// x-service-token METADATA IS REQUIRED
 type AnalysisClient interface {
 	NewRun(ctx context.Context, in *NewRunRequest, opts ...grpc.CallOption) (*Run, error)
 	GetRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*Run, error)
@@ -124,7 +124,7 @@ func (c *analysisClient) ListRunsPaged(ctx context.Context, in *ListRunsRequest,
 // All implementations must embed UnimplementedAnalysisServer
 // for forward compatibility.
 //
-// X-Service-Token METADATA IS REQUIRED
+// x-service-token METADATA IS REQUIRED
 type AnalysisServer interface {
 	NewRun(context.Context, *NewRunRequest) (*Run, error)
 	GetRun(context.Context, *v1.RunID) (*Run, error)

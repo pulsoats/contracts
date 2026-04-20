@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Live_NewRun_FullMethodName           = "/pulsoats.live.v1.Live/NewRun"
 	Live_StopRun_FullMethodName          = "/pulsoats.live.v1.Live/StopRun"
+	Live_StopAll_FullMethodName          = "/pulsoats.live.v1.Live/StopAll"
 	Live_RestartRun_FullMethodName       = "/pulsoats.live.v1.Live/RestartRun"
 	Live_GetRun_FullMethodName           = "/pulsoats.live.v1.Live/GetRun"
 	Live_StreamEvents_FullMethodName     = "/pulsoats.live.v1.Live/StreamEvents"
@@ -34,10 +35,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// X-Service-Token METADATA IS REQUIRED
+// x-service-token METADATA IS REQUIRED
 type LiveClient interface {
 	NewRun(ctx context.Context, in *NewRunRequest, opts ...grpc.CallOption) (*Run, error)
 	StopRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	StopAll(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RestartRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*Run, error)
 	GetRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*Run, error)
 	StreamEvents(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Event], error)
@@ -67,6 +69,16 @@ func (c *liveClient) StopRun(ctx context.Context, in *v1.RunID, opts ...grpc.Cal
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Live_StopRun_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *liveClient) StopAll(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Live_StopAll_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -136,10 +148,11 @@ func (c *liveClient) ListSignalsPaged(ctx context.Context, in *ListSignalsPagedR
 // All implementations must embed UnimplementedLiveServer
 // for forward compatibility.
 //
-// X-Service-Token METADATA IS REQUIRED
+// x-service-token METADATA IS REQUIRED
 type LiveServer interface {
 	NewRun(context.Context, *NewRunRequest) (*Run, error)
 	StopRun(context.Context, *v1.RunID) (*emptypb.Empty, error)
+	StopAll(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	RestartRun(context.Context, *v1.RunID) (*Run, error)
 	GetRun(context.Context, *v1.RunID) (*Run, error)
 	StreamEvents(*emptypb.Empty, grpc.ServerStreamingServer[Event]) error
@@ -160,6 +173,9 @@ func (UnimplementedLiveServer) NewRun(context.Context, *NewRunRequest) (*Run, er
 }
 func (UnimplementedLiveServer) StopRun(context.Context, *v1.RunID) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method StopRun not implemented")
+}
+func (UnimplementedLiveServer) StopAll(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopAll not implemented")
 }
 func (UnimplementedLiveServer) RestartRun(context.Context, *v1.RunID) (*Run, error) {
 	return nil, status.Error(codes.Unimplemented, "method RestartRun not implemented")
@@ -229,6 +245,24 @@ func _Live_StopRun_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LiveServer).StopRun(ctx, req.(*v1.RunID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Live_StopAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LiveServer).StopAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Live_StopAll_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LiveServer).StopAll(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -330,6 +364,10 @@ var Live_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopRun",
 			Handler:    _Live_StopRun_Handler,
+		},
+		{
+			MethodName: "StopAll",
+			Handler:    _Live_StopAll_Handler,
 		},
 		{
 			MethodName: "RestartRun",

@@ -10,11 +10,12 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/pulsoats/contracts/gen/go/live/v1;livepb";
 
-// X-Service-Token METADATA IS REQUIRED
+// x-service-token METADATA IS REQUIRED
 service Live {
-  rpc NewRun(NewRunRequest) returns (Run); // X-User-Id METADATA IS REQUIRED
-  rpc StopRun(common.v1.RunID) returns (google.protobuf.Empty); // X-User-Id METADATA IS REQUIRED
-  rpc RestartRun(common.v1.RunID) returns (Run); // X-User-Id METADATA IS REQUIRED
+  rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
+  rpc StopRun(common.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc StopAll(google.protobuf.Empty) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc RestartRun(common.v1.RunID) returns (Run); // x-user-id METADATA IS REQUIRED
   rpc GetRun(common.v1.RunID) returns (Run);
 
   rpc StreamEvents(google.protobuf.Empty) returns (stream Event);

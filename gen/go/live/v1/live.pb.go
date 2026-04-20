@@ -972,10 +972,11 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12)\n" +
 	"\x03run\x18\x02 \x01(\v2\x15.pulsoats.live.v1.RunH\x00R\x03run\x122\n" +
 	"\x06signal\x18\x03 \x01(\v2\x18.pulsoats.live.v1.SignalH\x00R\x06signalB\t\n" +
-	"\apayload2\x92\x04\n" +
+	"\apayload2\xcd\x04\n" +
 	"\x04Live\x12@\n" +
 	"\x06NewRun\x12\x1f.pulsoats.live.v1.NewRunRequest\x1a\x15.pulsoats.live.v1.Run\x12<\n" +
-	"\aStopRun\x12\x19.pulsoats.common.v1.RunID\x1a\x16.google.protobuf.Empty\x12>\n" +
+	"\aStopRun\x12\x19.pulsoats.common.v1.RunID\x1a\x16.google.protobuf.Empty\x129\n" +
+	"\aStopAll\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12>\n" +
 	"\n" +
 	"RestartRun\x12\x19.pulsoats.common.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x12:\n" +
 	"\x06GetRun\x12\x19.pulsoats.common.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x12A\n" +
@@ -1037,20 +1038,22 @@ var file_live_v1_live_proto_depIdxs = []int32{
 	8,  // 19: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
 	0,  // 20: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
 	14, // 21: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.common.v1.RunID
-	14, // 22: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.common.v1.RunID
-	14, // 23: pulsoats.live.v1.Live.GetRun:input_type -> pulsoats.common.v1.RunID
-	15, // 24: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
-	3,  // 25: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
-	6,  // 26: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
-	1,  // 27: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
-	15, // 28: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
-	1,  // 29: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
-	1,  // 30: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
-	9,  // 31: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
-	4,  // 32: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
-	7,  // 33: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
-	27, // [27:34] is the sub-list for method output_type
-	20, // [20:27] is the sub-list for method input_type
+	15, // 22: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
+	14, // 23: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.common.v1.RunID
+	14, // 24: pulsoats.live.v1.Live.GetRun:input_type -> pulsoats.common.v1.RunID
+	15, // 25: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
+	3,  // 26: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
+	6,  // 27: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
+	1,  // 28: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
+	15, // 29: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
+	15, // 30: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
+	1,  // 31: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
+	1,  // 32: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
+	9,  // 33: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
+	4,  // 34: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
+	7,  // 35: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
+	28, // [28:36] is the sub-list for method output_type
+	20, // [20:28] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
 	20, // [20:20] is the sub-list for extension extendee
 	0,  // [0:20] is the sub-list for field type_name
