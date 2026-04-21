@@ -347,7 +347,7 @@ func (x *RunArchiveChunk) GetData() []byte {
 type ListRunsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
-	BeforeId      int64                  `protobuf:"varint,2,opt,name=before_id,json=beforeId,proto3" json:"before_id,omitempty"`
+	BeforeId      string                 `protobuf:"bytes,2,opt,name=before_id,json=beforeId,proto3" json:"before_id,omitempty"`
 	Filter        RunFilter              `protobuf:"varint,3,opt,name=filter,proto3,enum=pulsoats.analysis.v1.RunFilter" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -390,11 +390,11 @@ func (x *ListRunsRequest) GetLimit() int32 {
 	return 0
 }
 
-func (x *ListRunsRequest) GetBeforeId() int64 {
+func (x *ListRunsRequest) GetBeforeId() string {
 	if x != nil {
 		return x.BeforeId
 	}
-	return 0
+	return ""
 }
 
 func (x *ListRunsRequest) GetFilter() RunFilter {
@@ -407,7 +407,7 @@ func (x *ListRunsRequest) GetFilter() RunFilter {
 type ListRunsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Runs          []*Run                 `protobuf:"bytes,1,rep,name=runs,proto3" json:"runs,omitempty"`
-	NextBeforeId  int64                  `protobuf:"varint,2,opt,name=next_before_id,json=nextBeforeId,proto3" json:"next_before_id,omitempty"`
+	NextBeforeId  string                 `protobuf:"bytes,2,opt,name=next_before_id,json=nextBeforeId,proto3" json:"next_before_id,omitempty"`
 	HasMore       bool                   `protobuf:"varint,3,opt,name=has_more,json=hasMore,proto3" json:"has_more,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -450,11 +450,11 @@ func (x *ListRunsResponse) GetRuns() []*Run {
 	return nil
 }
 
-func (x *ListRunsResponse) GetNextBeforeId() int64 {
+func (x *ListRunsResponse) GetNextBeforeId() string {
 	if x != nil {
 		return x.NextBeforeId
 	}
-	return 0
+	return ""
 }
 
 func (x *ListRunsResponse) GetHasMore() bool {
@@ -498,11 +498,11 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x01(\fR\x04data\"}\n" +
 	"\x0fListRunsRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12\x1b\n" +
-	"\tbefore_id\x18\x02 \x01(\x03R\bbeforeId\x127\n" +
+	"\tbefore_id\x18\x02 \x01(\tR\bbeforeId\x127\n" +
 	"\x06filter\x18\x03 \x01(\x0e2\x1f.pulsoats.analysis.v1.RunFilterR\x06filter\"\x82\x01\n" +
 	"\x10ListRunsResponse\x12-\n" +
 	"\x04runs\x18\x01 \x03(\v2\x19.pulsoats.analysis.v1.RunR\x04runs\x12$\n" +
-	"\x0enext_before_id\x18\x02 \x01(\x03R\fnextBeforeId\x12\x19\n" +
+	"\x0enext_before_id\x18\x02 \x01(\tR\fnextBeforeId\x12\x19\n" +
 	"\bhas_more\x18\x03 \x01(\bR\ahasMore*g\n" +
 	"\tRunFilter\x12\x1a\n" +
 	"\x16RUN_FILTER_UNSPECIFIED\x10\x00\x12\x13\n" +

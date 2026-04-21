@@ -58,12 +58,12 @@ message RunArchiveChunk {
 
 message ListRunsRequest {
   int32 limit = 1;
-  int64 before_id = 2;
+  string before_id = 2;
   RunFilter filter = 3;
 }
 
 message ListRunsResponse {
   repeated Run runs = 1;
-  int64 next_before_id = 2;
+  string next_before_id = 2;
   bool has_more = 3;
 }
