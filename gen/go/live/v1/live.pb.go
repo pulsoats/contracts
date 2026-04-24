@@ -85,14 +85,14 @@ func (x *NewRunRequest) GetDetector() *v1.DetectorConfig {
 }
 
 type Run struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	BaseRun        *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
-	OrdersCount    int64                  `protobuf:"varint,2,opt,name=orders_count,json=ordersCount,proto3" json:"orders_count,omitempty"`
-	SumProfitRatio float32                `protobuf:"fixed32,3,opt,name=sum_profit_ratio,json=sumProfitRatio,proto3" json:"sum_profit_ratio,omitempty"`
-	FinishedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=finished_at,json=finishedAt,proto3,oneof" json:"finished_at,omitempty"`
-	FinishedBy     *string                `protobuf:"bytes,5,opt,name=finished_by,json=finishedBy,proto3,oneof" json:"finished_by,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	BaseRun          *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
+	OrdersCount      int64                  `protobuf:"varint,2,opt,name=orders_count,json=ordersCount,proto3" json:"orders_count,omitempty"`
+	SumProfitPercent float64                `protobuf:"fixed64,3,opt,name=sum_profit_percent,json=sumProfitPercent,proto3" json:"sum_profit_percent,omitempty"`
+	FinishedAt       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=finished_at,json=finishedAt,proto3,oneof" json:"finished_at,omitempty"`
+	FinishedBy       *string                `protobuf:"bytes,5,opt,name=finished_by,json=finishedBy,proto3,oneof" json:"finished_by,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Run) Reset() {
@@ -139,9 +139,9 @@ func (x *Run) GetOrdersCount() int64 {
 	return 0
 }
 
-func (x *Run) GetSumProfitRatio() float32 {
+func (x *Run) GetSumProfitPercent() float64 {
 	if x != nil {
-		return x.SumProfitRatio
+		return x.SumProfitPercent
 	}
 	return 0
 }
@@ -806,11 +806,11 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\rNewRunRequest\x124\n" +
 	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x02 \x01(\tR\binterval\x12<\n" +
-	"\bdetector\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\"\x90\x02\n" +
+	"\bdetector\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\"\x94\x02\n" +
 	"\x03Run\x124\n" +
 	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12!\n" +
-	"\forders_count\x18\x02 \x01(\x03R\vordersCount\x12(\n" +
-	"\x10sum_profit_ratio\x18\x03 \x01(\x02R\x0esumProfitRatio\x12@\n" +
+	"\forders_count\x18\x02 \x01(\x03R\vordersCount\x12,\n" +
+	"\x12sum_profit_percent\x18\x03 \x01(\x01R\x10sumProfitPercent\x12@\n" +
 	"\vfinished_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\n" +
 	"finishedAt\x88\x01\x01\x12$\n" +
 	"\vfinished_by\x18\x05 \x01(\tH\x01R\n" +

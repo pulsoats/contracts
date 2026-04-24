@@ -38,7 +38,7 @@ message NewRunRequest {
 
 message Run {
   core.v1.BaseRun base_run = 1;
-  float avg_profit_ratio = 2;
+  float avg_profit_percent = 2;
   bool is_shared = 3;
   google.protobuf.Timestamp shared_at = 4;
 }
