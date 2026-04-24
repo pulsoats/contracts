@@ -163,10 +163,9 @@ func (x *NewRunRequest) GetFees() *v1.Fees {
 type Run struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	BaseRun       *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
-	SignalsCount  int64                  `protobuf:"varint,2,opt,name=signals_count,json=signalsCount,proto3" json:"signals_count,omitempty"`
-	AvgProfit     float32                `protobuf:"fixed32,3,opt,name=avg_profit,json=avgProfit,proto3" json:"avg_profit,omitempty"`
-	IsShared      bool                   `protobuf:"varint,4,opt,name=is_shared,json=isShared,proto3" json:"is_shared,omitempty"`
-	SharedAt      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=shared_at,json=sharedAt,proto3" json:"shared_at,omitempty"`
+	AvgProfit     float32                `protobuf:"fixed32,2,opt,name=avg_profit,json=avgProfit,proto3" json:"avg_profit,omitempty"`
+	IsShared      bool                   `protobuf:"varint,3,opt,name=is_shared,json=isShared,proto3" json:"is_shared,omitempty"`
+	SharedAt      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=shared_at,json=sharedAt,proto3" json:"shared_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -206,13 +205,6 @@ func (x *Run) GetBaseRun() *v1.BaseRun {
 		return x.BaseRun
 	}
 	return nil
-}
-
-func (x *Run) GetSignalsCount() int64 {
-	if x != nil {
-		return x.SignalsCount
-	}
-	return 0
 }
 
 func (x *Run) GetAvgProfit() float32 {
@@ -412,14 +404,13 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x02to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12<\n" +
 	"\bdetector\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x12/\n" +
 	"\x04fees\x18\x06 \x01(\v2\x16.pulsoats.core.v1.FeesH\x00R\x04fees\x88\x01\x01B\a\n" +
-	"\x05_fees\"\xd5\x01\n" +
+	"\x05_fees\"\xb0\x01\n" +
 	"\x03Run\x124\n" +
-	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12#\n" +
-	"\rsignals_count\x18\x02 \x01(\x03R\fsignalsCount\x12\x1d\n" +
+	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12\x1d\n" +
 	"\n" +
-	"avg_profit\x18\x03 \x01(\x02R\tavgProfit\x12\x1b\n" +
-	"\tis_shared\x18\x04 \x01(\bR\bisShared\x127\n" +
-	"\tshared_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bsharedAt\"%\n" +
+	"avg_profit\x18\x02 \x01(\x02R\tavgProfit\x12\x1b\n" +
+	"\tis_shared\x18\x03 \x01(\bR\bisShared\x127\n" +
+	"\tshared_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bsharedAt\"%\n" +
 	"\x0fRunArchiveChunk\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\"\x90\x01\n" +
 	"\x0fListRunsRequest\x12\x14\n" +

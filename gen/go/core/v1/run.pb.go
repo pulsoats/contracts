@@ -180,10 +180,11 @@ type BaseRun struct {
 	Market          *MarketSpec            `protobuf:"bytes,3,opt,name=market,proto3" json:"market,omitempty"`
 	Interval        string                 `protobuf:"bytes,4,opt,name=interval,proto3" json:"interval,omitempty"`
 	Detector        *DetectorConfig        `protobuf:"bytes,5,opt,name=detector,proto3" json:"detector,omitempty"`
-	FirstCandleTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=first_candle_time,json=firstCandleTime,proto3,oneof" json:"first_candle_time,omitempty"`
-	LastCandleTime  *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=last_candle_time,json=lastCandleTime,proto3,oneof" json:"last_candle_time,omitempty"`
-	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CreatedBy       string                 `protobuf:"bytes,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	SignalsCount    int64                  `protobuf:"varint,6,opt,name=signals_count,json=signalsCount,proto3" json:"signals_count,omitempty"`
+	FirstCandleTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=first_candle_time,json=firstCandleTime,proto3,oneof" json:"first_candle_time,omitempty"`
+	LastCandleTime  *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=last_candle_time,json=lastCandleTime,proto3,oneof" json:"last_candle_time,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedBy       string                 `protobuf:"bytes,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -253,6 +254,13 @@ func (x *BaseRun) GetDetector() *DetectorConfig {
 	return nil
 }
 
+func (x *BaseRun) GetSignalsCount() int64 {
+	if x != nil {
+		return x.SignalsCount
+	}
+	return 0
+}
+
 func (x *BaseRun) GetFirstCandleTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.FirstCandleTime
@@ -290,19 +298,21 @@ const file_core_v1_run_proto_rawDesc = "" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\"Z\n" +
 	"\tRunStatus\x123\n" +
 	"\x04code\x18\x01 \x01(\x0e2\x1f.pulsoats.core.v1.RunStatusCodeR\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xfb\x03\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xa0\x04\n" +
 	"\aBaseRun\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x123\n" +
 	"\x06status\x18\x02 \x01(\v2\x1b.pulsoats.core.v1.RunStatusR\x06status\x124\n" +
 	"\x06market\x18\x03 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x04 \x01(\tR\binterval\x12<\n" +
-	"\bdetector\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x12K\n" +
-	"\x11first_candle_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0ffirstCandleTime\x88\x01\x01\x12I\n" +
-	"\x10last_candle_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x0elastCandleTime\x88\x01\x01\x129\n" +
+	"\bdetector\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x12#\n" +
+	"\rsignals_count\x18\x06 \x01(\x03R\fsignalsCount\x12K\n" +
+	"\x11first_candle_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0ffirstCandleTime\x88\x01\x01\x12I\n" +
+	"\x10last_candle_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x0elastCandleTime\x88\x01\x01\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\t \x01(\tR\tcreatedByB\x14\n" +
+	"created_by\x18\n" +
+	" \x01(\tR\tcreatedByB\x14\n" +
 	"\x12_first_candle_timeB\x13\n" +
 	"\x11_last_candle_time*\x87\x01\n" +
 	"\rRunStatusCode\x12\x1a\n" +

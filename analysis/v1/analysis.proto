@@ -38,10 +38,9 @@ message NewRunRequest {
 
 message Run {
   core.v1.BaseRun base_run = 1;
-  int64 signals_count = 2;
-  float avg_profit = 3;
-  bool is_shared = 4;
-  google.protobuf.Timestamp shared_at = 5;
+  float avg_profit = 2;
+  bool is_shared = 3;
+  google.protobuf.Timestamp shared_at = 4;
 }
 
 message RunArchiveChunk {
