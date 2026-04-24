@@ -10,20 +10,6 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/pulsoats/contracts/gen/go/live/v1;livepb";
 
-// x-service-token METADATA IS REQUIRED
-service Live {
-  rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
-  rpc StopRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
-  rpc StopAll(google.protobuf.Empty) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
-  rpc RestartRun(core.v1.RunID) returns (Run); // x-user-id METADATA IS REQUIRED
-  rpc GetRun(core.v1.RunID) returns (Run);
-
-  rpc StreamEvents(google.protobuf.Empty) returns (stream Event);
-
-  rpc ListRunsPaged(ListRunsPagedRequest) returns (ListRunsPagedResponse);
-  rpc ListSignalsPaged(ListSignalsPagedRequest) returns (ListSignalsPagedResponse);
-}
-
 message NewRunRequest {
   pulsoats.core.v1.MarketSpec market = 1;
   string interval = 2;
@@ -102,4 +88,18 @@ message Event {
     Run run = 2;
     Signal signal = 3;
   }
+}
+
+// x-service-token METADATA IS REQUIRED
+service Live {
+  rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
+  rpc StopRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc StopAll(google.protobuf.Empty) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc RestartRun(core.v1.RunID) returns (Run); // x-user-id METADATA IS REQUIRED
+  rpc GetRun(core.v1.RunID) returns (Run);
+
+  rpc StreamEvents(google.protobuf.Empty) returns (stream Event);
+
+  rpc ListRunsPaged(ListRunsPagedRequest) returns (ListRunsPagedResponse);
+  rpc ListSignalsPaged(ListSignalsPagedRequest) returns (ListSignalsPagedResponse);
 }

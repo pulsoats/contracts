@@ -17,16 +17,6 @@ enum RunFilter {
   RUN_FILTER_ALL = 3;
 }
 
-// x-service-token METADATA IS REQUIRED
-service Analysis {
-  rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
-  rpc GetRun(core.v1.RunID) returns (Run);
-  rpc GetRunArchive(core.v1.RunID) returns (stream RunArchiveChunk);
-  rpc ShareRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
-  rpc DeleteRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
-  rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse); // x-user-id METADATA IS REQUIRED
-}
-
 message NewRunRequest {
   pulsoats.core.v1.MarketSpec market = 1;
   string interval = 2;
@@ -38,7 +28,7 @@ message NewRunRequest {
 
 message Run {
   core.v1.BaseRun base_run = 1;
-  float avg_profit_percent = 2;
+  double avg_profit_percent = 2;
   bool is_shared = 3;
   google.protobuf.Timestamp shared_at = 4;
 }
@@ -57,4 +47,14 @@ message ListRunsResponse {
   repeated Run runs = 1;
   bool has_more = 2;
   optional string next_before_id = 3;
+}
+
+// x-service-token METADATA IS REQUIRED
+service Analysis {
+  rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
+  rpc GetRun(core.v1.RunID) returns (Run);
+  rpc GetRunArchive(core.v1.RunID) returns (stream RunArchiveChunk);
+  rpc ShareRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc DeleteRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse); // x-user-id METADATA IS REQUIRED
 }
