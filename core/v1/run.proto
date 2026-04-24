@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package pulsoats.core.v1;
+
+import "core/v1/market.proto";
+import "core/v1/detect.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pulsoats/contracts/gen/go/core/v1;corepb";
+
+enum RunStatusCode {
+  RUN_STATUS_UNSPECIFIED = 0;
+  RUN_STATUS_PENDING = 1;
+  RUN_STATUS_RUNNING = 2;
+  RUN_STATUS_DONE = 3;
+  RUN_STATUS_FAILED = 4;
+}
+
+message RunID {
+  string run_id = 1;
+}
+
+message RunStatus {
+  RunStatusCode code = 1;
+  string message = 2;
+}
+
+message BaseRun {
+  string id = 1;
+  RunStatus status = 2;
+  core.v1.MarketSpec market = 3;
+  string interval = 4;
+  core.v1.DetectorConfig detector = 5;
+  optional google.protobuf.Timestamp first_candle_time = 6;
+  optional google.protobuf.Timestamp last_candle_time = 7;
+  google.protobuf.Timestamp created_at = 8;
+  string created_by = 9;
+}

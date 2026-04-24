@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package pulsoats.common.v1;
+package pulsoats.core.v1;
 
-option go_package = "github.com/pulsoats/contracts/gen/go/common/v1;commonpb";
+option go_package = "github.com/pulsoats/contracts/gen/go/core/v1;corepb";
 
 message MarketSpec {
   string exchange = 1;

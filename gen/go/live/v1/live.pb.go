@@ -7,7 +7,7 @@
 package livepb
 
 import (
-	v1 "github.com/pulsoats/contracts/gen/go/common/v1"
+	v1 "github.com/pulsoats/contracts/gen/go/core/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -85,23 +85,14 @@ func (x *NewRunRequest) GetDetector() *v1.DetectorConfig {
 }
 
 type Run struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Id              string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Status          *v1.RunStatus          `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Market          *v1.MarketSpec         `protobuf:"bytes,3,opt,name=market,proto3" json:"market,omitempty"`
-	Interval        string                 `protobuf:"bytes,4,opt,name=interval,proto3" json:"interval,omitempty"`
-	Detector        *v1.DetectorConfig     `protobuf:"bytes,5,opt,name=detector,proto3" json:"detector,omitempty"`
-	SignalsCount    int64                  `protobuf:"varint,6,opt,name=signals_count,json=signalsCount,proto3" json:"signals_count,omitempty"`
-	OrdersCount     int64                  `protobuf:"varint,7,opt,name=orders_count,json=ordersCount,proto3" json:"orders_count,omitempty"`
-	SumProfitPpm    int64                  `protobuf:"varint,8,opt,name=sum_profit_ppm,json=sumProfitPpm,proto3" json:"sum_profit_ppm,omitempty"`
-	FirstCandleTime *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=first_candle_time,json=firstCandleTime,proto3,oneof" json:"first_candle_time,omitempty"`
-	LastCandleTime  *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=last_candle_time,json=lastCandleTime,proto3,oneof" json:"last_candle_time,omitempty"`
-	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CreatedBy       string                 `protobuf:"bytes,13,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	FinishedAt      *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=finished_at,json=finishedAt,proto3,oneof" json:"finished_at,omitempty"`
-	FinishedBy      *string                `protobuf:"bytes,14,opt,name=finished_by,json=finishedBy,proto3,oneof" json:"finished_by,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BaseRun       *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
+	OrdersCount   int64                  `protobuf:"varint,2,opt,name=orders_count,json=ordersCount,proto3" json:"orders_count,omitempty"`
+	SumProfit     float32                `protobuf:"fixed32,3,opt,name=sum_profit,json=sumProfit,proto3" json:"sum_profit,omitempty"`
+	FinishedAt    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=finished_at,json=finishedAt,proto3,oneof" json:"finished_at,omitempty"`
+	FinishedBy    *string                `protobuf:"bytes,5,opt,name=finished_by,json=finishedBy,proto3,oneof" json:"finished_by,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Run) Reset() {
@@ -134,46 +125,11 @@ func (*Run) Descriptor() ([]byte, []int) {
 	return file_live_v1_live_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Run) GetId() string {
+func (x *Run) GetBaseRun() *v1.BaseRun {
 	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *Run) GetStatus() *v1.RunStatus {
-	if x != nil {
-		return x.Status
+		return x.BaseRun
 	}
 	return nil
-}
-
-func (x *Run) GetMarket() *v1.MarketSpec {
-	if x != nil {
-		return x.Market
-	}
-	return nil
-}
-
-func (x *Run) GetInterval() string {
-	if x != nil {
-		return x.Interval
-	}
-	return ""
-}
-
-func (x *Run) GetDetector() *v1.DetectorConfig {
-	if x != nil {
-		return x.Detector
-	}
-	return nil
-}
-
-func (x *Run) GetSignalsCount() int64 {
-	if x != nil {
-		return x.SignalsCount
-	}
-	return 0
 }
 
 func (x *Run) GetOrdersCount() int64 {
@@ -183,39 +139,11 @@ func (x *Run) GetOrdersCount() int64 {
 	return 0
 }
 
-func (x *Run) GetSumProfitPpm() int64 {
+func (x *Run) GetSumProfit() float32 {
 	if x != nil {
-		return x.SumProfitPpm
+		return x.SumProfit
 	}
 	return 0
-}
-
-func (x *Run) GetFirstCandleTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.FirstCandleTime
-	}
-	return nil
-}
-
-func (x *Run) GetLastCandleTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.LastCandleTime
-	}
-	return nil
-}
-
-func (x *Run) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
-func (x *Run) GetCreatedBy() string {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return ""
 }
 
 func (x *Run) GetFinishedAt() *timestamppb.Timestamp {
@@ -874,33 +802,20 @@ var File_live_v1_live_proto protoreflect.FileDescriptor
 
 const file_live_v1_live_proto_rawDesc = "" +
 	"\n" +
-	"\x12live/v1/live.proto\x12\x10pulsoats.live.v1\x1a\x16common/v1/detect.proto\x1a\x16common/v1/market.proto\x1a\x13common/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xa3\x01\n" +
-	"\rNewRunRequest\x126\n" +
-	"\x06market\x18\x01 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
-	"\binterval\x18\x02 \x01(\tR\binterval\x12>\n" +
-	"\bdetector\x18\x03 \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\"\xf3\x05\n" +
-	"\x03Run\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x125\n" +
-	"\x06status\x18\x02 \x01(\v2\x1d.pulsoats.common.v1.RunStatusR\x06status\x126\n" +
-	"\x06market\x18\x03 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12\x1a\n" +
-	"\binterval\x18\x04 \x01(\tR\binterval\x12>\n" +
-	"\bdetector\x18\x05 \x01(\v2\".pulsoats.common.v1.DetectorConfigR\bdetector\x12#\n" +
-	"\rsignals_count\x18\x06 \x01(\x03R\fsignalsCount\x12!\n" +
-	"\forders_count\x18\a \x01(\x03R\vordersCount\x12$\n" +
-	"\x0esum_profit_ppm\x18\b \x01(\x03R\fsumProfitPpm\x12K\n" +
-	"\x11first_candle_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0ffirstCandleTime\x88\x01\x01\x12I\n" +
-	"\x10last_candle_time\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x0elastCandleTime\x88\x01\x01\x129\n" +
+	"\x12live/v1/live.proto\x12\x10pulsoats.live.v1\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\x1a\x11core/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x9f\x01\n" +
+	"\rNewRunRequest\x124\n" +
+	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
+	"\binterval\x18\x02 \x01(\tR\binterval\x12<\n" +
+	"\bdetector\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\"\x85\x02\n" +
+	"\x03Run\x124\n" +
+	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12!\n" +
+	"\forders_count\x18\x02 \x01(\x03R\vordersCount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"created_by\x18\r \x01(\tR\tcreatedBy\x12@\n" +
-	"\vfinished_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampH\x02R\n" +
+	"sum_profit\x18\x03 \x01(\x02R\tsumProfit\x12@\n" +
+	"\vfinished_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\n" +
 	"finishedAt\x88\x01\x01\x12$\n" +
-	"\vfinished_by\x18\x0e \x01(\tH\x03R\n" +
-	"finishedBy\x88\x01\x01B\x14\n" +
-	"\x12_first_candle_timeB\x13\n" +
-	"\x11_last_candle_timeB\x0e\n" +
+	"\vfinished_by\x18\x05 \x01(\tH\x01R\n" +
+	"finishedBy\x88\x01\x01B\x0e\n" +
 	"\f_finished_atB\x0e\n" +
 	"\f_finished_by\"\xc1\x02\n" +
 	"\x0eListRunsFilter\x12$\n" +
@@ -951,11 +866,11 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\asignals\x18\x01 \x03(\v2\x18.pulsoats.live.v1.SignalR\asignals\x12\x19\n" +
 	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +
 	"\x0enext_before_id\x18\x03 \x01(\tH\x00R\fnextBeforeId\x88\x01\x01B\x11\n" +
-	"\x0f_next_before_id\"\x80\x04\n" +
+	"\x0f_next_before_id\"\xfe\x03\n" +
 	"\x06Signal\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
-	"\x06run_id\x18\x02 \x01(\tR\x05runId\x126\n" +
-	"\x06market\x18\x03 \x01(\v2\x1e.pulsoats.common.v1.MarketSpecR\x06market\x12#\n" +
+	"\x06run_id\x18\x02 \x01(\tR\x05runId\x124\n" +
+	"\x06market\x18\x03 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12#\n" +
 	"\rdetector_code\x18\x04 \x01(\tR\fdetectorCode\x12.\n" +
 	"\x13detector_opts_label\x18\x05 \x01(\tR\x11detectorOptsLabel\x12.\n" +
 	"\x04time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12\x14\n" +
@@ -972,14 +887,14 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12)\n" +
 	"\x03run\x18\x02 \x01(\v2\x15.pulsoats.live.v1.RunH\x00R\x03run\x122\n" +
 	"\x06signal\x18\x03 \x01(\v2\x18.pulsoats.live.v1.SignalH\x00R\x06signalB\t\n" +
-	"\apayload2\xcd\x04\n" +
+	"\apayload2\xc7\x04\n" +
 	"\x04Live\x12@\n" +
-	"\x06NewRun\x12\x1f.pulsoats.live.v1.NewRunRequest\x1a\x15.pulsoats.live.v1.Run\x12<\n" +
-	"\aStopRun\x12\x19.pulsoats.common.v1.RunID\x1a\x16.google.protobuf.Empty\x129\n" +
-	"\aStopAll\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12>\n" +
+	"\x06NewRun\x12\x1f.pulsoats.live.v1.NewRunRequest\x1a\x15.pulsoats.live.v1.Run\x12:\n" +
+	"\aStopRun\x12\x17.pulsoats.core.v1.RunID\x1a\x16.google.protobuf.Empty\x129\n" +
+	"\aStopAll\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12<\n" +
 	"\n" +
-	"RestartRun\x12\x19.pulsoats.common.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x12:\n" +
-	"\x06GetRun\x12\x19.pulsoats.common.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x12A\n" +
+	"RestartRun\x12\x17.pulsoats.core.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x128\n" +
+	"\x06GetRun\x12\x17.pulsoats.core.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x12A\n" +
 	"\fStreamEvents\x12\x16.google.protobuf.Empty\x1a\x17.pulsoats.live.v1.Event0\x01\x12`\n" +
 	"\rListRunsPaged\x12&.pulsoats.live.v1.ListRunsPagedRequest\x1a'.pulsoats.live.v1.ListRunsPagedResponse\x12i\n" +
 	"\x10ListSignalsPaged\x12).pulsoats.live.v1.ListSignalsPagedRequest\x1a*.pulsoats.live.v1.ListSignalsPagedResponseB5Z3github.com/pulsoats/contracts/gen/go/live/v1;livepbb\x06proto3"
@@ -1008,55 +923,50 @@ var file_live_v1_live_proto_goTypes = []any{
 	(*ListSignalsPagedResponse)(nil), // 7: pulsoats.live.v1.ListSignalsPagedResponse
 	(*Signal)(nil),                   // 8: pulsoats.live.v1.Signal
 	(*Event)(nil),                    // 9: pulsoats.live.v1.Event
-	(*v1.MarketSpec)(nil),            // 10: pulsoats.common.v1.MarketSpec
-	(*v1.DetectorConfig)(nil),        // 11: pulsoats.common.v1.DetectorConfig
-	(*v1.RunStatus)(nil),             // 12: pulsoats.common.v1.RunStatus
+	(*v1.MarketSpec)(nil),            // 10: pulsoats.core.v1.MarketSpec
+	(*v1.DetectorConfig)(nil),        // 11: pulsoats.core.v1.DetectorConfig
+	(*v1.BaseRun)(nil),               // 12: pulsoats.core.v1.BaseRun
 	(*timestamppb.Timestamp)(nil),    // 13: google.protobuf.Timestamp
-	(*v1.RunID)(nil),                 // 14: pulsoats.common.v1.RunID
+	(*v1.RunID)(nil),                 // 14: pulsoats.core.v1.RunID
 	(*emptypb.Empty)(nil),            // 15: google.protobuf.Empty
 }
 var file_live_v1_live_proto_depIdxs = []int32{
-	10, // 0: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.common.v1.MarketSpec
-	11, // 1: pulsoats.live.v1.NewRunRequest.detector:type_name -> pulsoats.common.v1.DetectorConfig
-	12, // 2: pulsoats.live.v1.Run.status:type_name -> pulsoats.common.v1.RunStatus
-	10, // 3: pulsoats.live.v1.Run.market:type_name -> pulsoats.common.v1.MarketSpec
-	11, // 4: pulsoats.live.v1.Run.detector:type_name -> pulsoats.common.v1.DetectorConfig
-	13, // 5: pulsoats.live.v1.Run.first_candle_time:type_name -> google.protobuf.Timestamp
-	13, // 6: pulsoats.live.v1.Run.last_candle_time:type_name -> google.protobuf.Timestamp
-	13, // 7: pulsoats.live.v1.Run.created_at:type_name -> google.protobuf.Timestamp
-	13, // 8: pulsoats.live.v1.Run.finished_at:type_name -> google.protobuf.Timestamp
-	2,  // 9: pulsoats.live.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter
-	1,  // 10: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
-	13, // 11: pulsoats.live.v1.ListSignalsFilter.from:type_name -> google.protobuf.Timestamp
-	13, // 12: pulsoats.live.v1.ListSignalsFilter.to:type_name -> google.protobuf.Timestamp
-	5,  // 13: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
-	8,  // 14: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
-	10, // 15: pulsoats.live.v1.Signal.market:type_name -> pulsoats.common.v1.MarketSpec
-	13, // 16: pulsoats.live.v1.Signal.time:type_name -> google.protobuf.Timestamp
-	13, // 17: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
-	1,  // 18: pulsoats.live.v1.Event.run:type_name -> pulsoats.live.v1.Run
-	8,  // 19: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
-	0,  // 20: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
-	14, // 21: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.common.v1.RunID
-	15, // 22: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
-	14, // 23: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.common.v1.RunID
-	14, // 24: pulsoats.live.v1.Live.GetRun:input_type -> pulsoats.common.v1.RunID
-	15, // 25: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
-	3,  // 26: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
-	6,  // 27: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
-	1,  // 28: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
-	15, // 29: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
-	15, // 30: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
-	1,  // 31: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
-	1,  // 32: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
-	9,  // 33: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
-	4,  // 34: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
-	7,  // 35: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
-	28, // [28:36] is the sub-list for method output_type
-	20, // [20:28] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	10, // 0: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.core.v1.MarketSpec
+	11, // 1: pulsoats.live.v1.NewRunRequest.detector:type_name -> pulsoats.core.v1.DetectorConfig
+	12, // 2: pulsoats.live.v1.Run.base_run:type_name -> pulsoats.core.v1.BaseRun
+	13, // 3: pulsoats.live.v1.Run.finished_at:type_name -> google.protobuf.Timestamp
+	2,  // 4: pulsoats.live.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter
+	1,  // 5: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
+	13, // 6: pulsoats.live.v1.ListSignalsFilter.from:type_name -> google.protobuf.Timestamp
+	13, // 7: pulsoats.live.v1.ListSignalsFilter.to:type_name -> google.protobuf.Timestamp
+	5,  // 8: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
+	8,  // 9: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
+	10, // 10: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
+	13, // 11: pulsoats.live.v1.Signal.time:type_name -> google.protobuf.Timestamp
+	13, // 12: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
+	1,  // 13: pulsoats.live.v1.Event.run:type_name -> pulsoats.live.v1.Run
+	8,  // 14: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
+	0,  // 15: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
+	14, // 16: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.core.v1.RunID
+	15, // 17: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
+	14, // 18: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.core.v1.RunID
+	14, // 19: pulsoats.live.v1.Live.GetRun:input_type -> pulsoats.core.v1.RunID
+	15, // 20: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
+	3,  // 21: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
+	6,  // 22: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
+	1,  // 23: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
+	15, // 24: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
+	15, // 25: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
+	1,  // 26: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
+	1,  // 27: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
+	9,  // 28: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
+	4,  // 29: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
+	7,  // 30: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
+	23, // [23:31] is the sub-list for method output_type
+	15, // [15:23] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_live_v1_live_proto_init() }

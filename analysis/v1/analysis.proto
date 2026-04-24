@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package pulsoats.analysis.v1;
 
-import "common/v1/detect.proto";
-import "common/v1/market.proto";
-import "common/v1/run.proto";
+import "core/v1/detect.proto";
+import "core/v1/market.proto";
+import "core/v1/run.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
@@ -20,36 +20,28 @@ enum RunFilter {
 // x-service-token METADATA IS REQUIRED
 service Analysis {
   rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
-  rpc GetRun(common.v1.RunID) returns (Run);
-  rpc GetRunArchive(common.v1.RunID) returns (stream RunArchiveChunk);
-  rpc ShareRun(common.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
-  rpc DeleteRun(common.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc GetRun(core.v1.RunID) returns (Run);
+  rpc GetRunArchive(core.v1.RunID) returns (stream RunArchiveChunk);
+  rpc ShareRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc DeleteRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
   rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse); // x-user-id METADATA IS REQUIRED
 }
 
 message NewRunRequest {
-  pulsoats.common.v1.MarketSpec market = 1;
+  pulsoats.core.v1.MarketSpec market = 1;
   string interval = 2;
   google.protobuf.Timestamp from = 3;
   google.protobuf.Timestamp to = 4;
-  pulsoats.common.v1.DetectorConfig detector = 5;
-  optional pulsoats.common.v1.Fees fees = 6;
+  pulsoats.core.v1.DetectorConfig detector = 5;
+  optional pulsoats.core.v1.Fees fees = 6;
 }
 
 message Run {
-  string id = 1;
-  pulsoats.common.v1.RunStatus status = 2;
-  pulsoats.common.v1.MarketSpec market = 3;
-  string interval = 4;
-  google.protobuf.Timestamp from = 5;
-  google.protobuf.Timestamp to = 6;
-  pulsoats.common.v1.DetectorConfig detector = 7;
-  int64 signals_count = 8;
-  int64 avg_profit_ppm = 9;
-  google.protobuf.Timestamp created_at = 10;
-  string created_by = 11;
-  bool is_shared = 12;
-  google.protobuf.Timestamp shared_at = 13;
+  core.v1.BaseRun base_run = 1;
+  int64 signals_count = 2;
+  float avg_profit = 3;
+  bool is_shared = 4;
+  google.protobuf.Timestamp shared_at = 5;
 }
 
 message RunArchiveChunk {

@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: common/v1/metrics.proto
+// source: core/v1/metrics.proto
 
-package commonpb
+package corepb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -58,11 +58,11 @@ func (x ServiceStatus) String() string {
 }
 
 func (ServiceStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_v1_metrics_proto_enumTypes[0].Descriptor()
+	return file_core_v1_metrics_proto_enumTypes[0].Descriptor()
 }
 
 func (ServiceStatus) Type() protoreflect.EnumType {
-	return &file_common_v1_metrics_proto_enumTypes[0]
+	return &file_core_v1_metrics_proto_enumTypes[0]
 }
 
 func (x ServiceStatus) Number() protoreflect.EnumNumber {
@@ -71,13 +71,13 @@ func (x ServiceStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ServiceStatus.Descriptor instead.
 func (ServiceStatus) EnumDescriptor() ([]byte, []int) {
-	return file_common_v1_metrics_proto_rawDescGZIP(), []int{0}
+	return file_core_v1_metrics_proto_rawDescGZIP(), []int{0}
 }
 
 type ServiceMetrics struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ServiceName   string                 `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
-	Status        ServiceStatus          `protobuf:"varint,2,opt,name=status,proto3,enum=pulsoats.common.v1.ServiceStatus" json:"status,omitempty"`
+	Status        ServiceStatus          `protobuf:"varint,2,opt,name=status,proto3,enum=pulsoats.core.v1.ServiceStatus" json:"status,omitempty"`
 	CpuPercent    float64                `protobuf:"fixed64,3,opt,name=cpu_percent,json=cpuPercent,proto3" json:"cpu_percent,omitempty"`
 	MemoryPercent float64                `protobuf:"fixed64,4,opt,name=memory_percent,json=memoryPercent,proto3" json:"memory_percent,omitempty"`
 	UptimeSeconds int64                  `protobuf:"varint,5,opt,name=uptime_seconds,json=uptimeSeconds,proto3" json:"uptime_seconds,omitempty"`
@@ -88,7 +88,7 @@ type ServiceMetrics struct {
 
 func (x *ServiceMetrics) Reset() {
 	*x = ServiceMetrics{}
-	mi := &file_common_v1_metrics_proto_msgTypes[0]
+	mi := &file_core_v1_metrics_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -100,7 +100,7 @@ func (x *ServiceMetrics) String() string {
 func (*ServiceMetrics) ProtoMessage() {}
 
 func (x *ServiceMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_metrics_proto_msgTypes[0]
+	mi := &file_core_v1_metrics_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -113,7 +113,7 @@ func (x *ServiceMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceMetrics.ProtoReflect.Descriptor instead.
 func (*ServiceMetrics) Descriptor() ([]byte, []int) {
-	return file_common_v1_metrics_proto_rawDescGZIP(), []int{0}
+	return file_core_v1_metrics_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ServiceMetrics) GetServiceName() string {
@@ -158,14 +158,14 @@ func (x *ServiceMetrics) GetReportedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-var File_common_v1_metrics_proto protoreflect.FileDescriptor
+var File_core_v1_metrics_proto protoreflect.FileDescriptor
 
-const file_common_v1_metrics_proto_rawDesc = "" +
+const file_core_v1_metrics_proto_rawDesc = "" +
 	"\n" +
-	"\x17common/v1/metrics.proto\x12\x12pulsoats.common.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9a\x02\n" +
+	"\x15core/v1/metrics.proto\x12\x10pulsoats.core.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x98\x02\n" +
 	"\x0eServiceMetrics\x12!\n" +
-	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x129\n" +
-	"\x06status\x18\x02 \x01(\x0e2!.pulsoats.common.v1.ServiceStatusR\x06status\x12\x1f\n" +
+	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x127\n" +
+	"\x06status\x18\x02 \x01(\x0e2\x1f.pulsoats.core.v1.ServiceStatusR\x06status\x12\x1f\n" +
 	"\vcpu_percent\x18\x03 \x01(\x01R\n" +
 	"cpuPercent\x12%\n" +
 	"\x0ememory_percent\x18\x04 \x01(\x01R\rmemoryPercent\x12%\n" +
@@ -176,30 +176,30 @@ const file_common_v1_metrics_proto_rawDesc = "" +
 	"\x1aSERVICE_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16SERVICE_STATUS_HEALTHY\x10\x01\x12\x1b\n" +
 	"\x17SERVICE_STATUS_DEGRADED\x10\x02\x12\x17\n" +
-	"\x13SERVICE_STATUS_DOWN\x10\x03B9Z7github.com/pulsoats/contracts/gen/go/common/v1;commonpbb\x06proto3"
+	"\x13SERVICE_STATUS_DOWN\x10\x03B5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
 
 var (
-	file_common_v1_metrics_proto_rawDescOnce sync.Once
-	file_common_v1_metrics_proto_rawDescData []byte
+	file_core_v1_metrics_proto_rawDescOnce sync.Once
+	file_core_v1_metrics_proto_rawDescData []byte
 )
 
-func file_common_v1_metrics_proto_rawDescGZIP() []byte {
-	file_common_v1_metrics_proto_rawDescOnce.Do(func() {
-		file_common_v1_metrics_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_common_v1_metrics_proto_rawDesc), len(file_common_v1_metrics_proto_rawDesc)))
+func file_core_v1_metrics_proto_rawDescGZIP() []byte {
+	file_core_v1_metrics_proto_rawDescOnce.Do(func() {
+		file_core_v1_metrics_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_core_v1_metrics_proto_rawDesc), len(file_core_v1_metrics_proto_rawDesc)))
 	})
-	return file_common_v1_metrics_proto_rawDescData
+	return file_core_v1_metrics_proto_rawDescData
 }
 
-var file_common_v1_metrics_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_common_v1_metrics_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_common_v1_metrics_proto_goTypes = []any{
-	(ServiceStatus)(0),            // 0: pulsoats.common.v1.ServiceStatus
-	(*ServiceMetrics)(nil),        // 1: pulsoats.common.v1.ServiceMetrics
+var file_core_v1_metrics_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_core_v1_metrics_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_core_v1_metrics_proto_goTypes = []any{
+	(ServiceStatus)(0),            // 0: pulsoats.core.v1.ServiceStatus
+	(*ServiceMetrics)(nil),        // 1: pulsoats.core.v1.ServiceMetrics
 	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
-var file_common_v1_metrics_proto_depIdxs = []int32{
-	0, // 0: pulsoats.common.v1.ServiceMetrics.status:type_name -> pulsoats.common.v1.ServiceStatus
-	2, // 1: pulsoats.common.v1.ServiceMetrics.reported_at:type_name -> google.protobuf.Timestamp
+var file_core_v1_metrics_proto_depIdxs = []int32{
+	0, // 0: pulsoats.core.v1.ServiceMetrics.status:type_name -> pulsoats.core.v1.ServiceStatus
+	2, // 1: pulsoats.core.v1.ServiceMetrics.reported_at:type_name -> google.protobuf.Timestamp
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -207,27 +207,27 @@ var file_common_v1_metrics_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_common_v1_metrics_proto_init() }
-func file_common_v1_metrics_proto_init() {
-	if File_common_v1_metrics_proto != nil {
+func init() { file_core_v1_metrics_proto_init() }
+func file_core_v1_metrics_proto_init() {
+	if File_core_v1_metrics_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_metrics_proto_rawDesc), len(file_common_v1_metrics_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_core_v1_metrics_proto_rawDesc), len(file_core_v1_metrics_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_common_v1_metrics_proto_goTypes,
-		DependencyIndexes: file_common_v1_metrics_proto_depIdxs,
-		EnumInfos:         file_common_v1_metrics_proto_enumTypes,
-		MessageInfos:      file_common_v1_metrics_proto_msgTypes,
+		GoTypes:           file_core_v1_metrics_proto_goTypes,
+		DependencyIndexes: file_core_v1_metrics_proto_depIdxs,
+		EnumInfos:         file_core_v1_metrics_proto_enumTypes,
+		MessageInfos:      file_core_v1_metrics_proto_msgTypes,
 	}.Build()
-	File_common_v1_metrics_proto = out.File
-	file_common_v1_metrics_proto_goTypes = nil
-	file_common_v1_metrics_proto_depIdxs = nil
+	File_core_v1_metrics_proto = out.File
+	file_core_v1_metrics_proto_goTypes = nil
+	file_core_v1_metrics_proto_depIdxs = nil
 }

@@ -8,7 +8,7 @@ package analysispb
 
 import (
 	context "context"
-	v1 "github.com/pulsoats/contracts/gen/go/common/v1"
+	v1 "github.com/pulsoats/contracts/gen/go/core/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

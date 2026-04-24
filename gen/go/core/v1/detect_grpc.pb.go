@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             (unknown)
-// source: common/v1/detect.proto
+// source: core/v1/detect.proto
 
-package commonpb
+package corepb
 
 import (
 	context "context"
@@ -20,7 +20,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Catalog_ListAvailableDetectors_FullMethodName = "/pulsoats.common.v1.Catalog/ListAvailableDetectors"
+	Catalog_ListAvailableDetectors_FullMethodName = "/pulsoats.core.v1.Catalog/ListAvailableDetectors"
 )
 
 // CatalogClient is the client API for Catalog service.
@@ -109,7 +109,7 @@ func _Catalog_ListAvailableDetectors_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Catalog_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pulsoats.common.v1.Catalog",
+	ServiceName: "pulsoats.core.v1.Catalog",
 	HandlerType: (*CatalogServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -118,5 +118,5 @@ var Catalog_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "common/v1/detect.proto",
+	Metadata: "core/v1/detect.proto",
 }

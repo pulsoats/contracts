@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: common/v1/market.proto
+// source: core/v1/market.proto
 
-package commonpb
+package corepb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -32,7 +32,7 @@ type MarketSpec struct {
 
 func (x *MarketSpec) Reset() {
 	*x = MarketSpec{}
-	mi := &file_common_v1_market_proto_msgTypes[0]
+	mi := &file_core_v1_market_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +44,7 @@ func (x *MarketSpec) String() string {
 func (*MarketSpec) ProtoMessage() {}
 
 func (x *MarketSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_market_proto_msgTypes[0]
+	mi := &file_core_v1_market_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *MarketSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarketSpec.ProtoReflect.Descriptor instead.
 func (*MarketSpec) Descriptor() ([]byte, []int) {
-	return file_common_v1_market_proto_rawDescGZIP(), []int{0}
+	return file_core_v1_market_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *MarketSpec) GetExchange() string {
@@ -91,7 +91,7 @@ type Fees struct {
 
 func (x *Fees) Reset() {
 	*x = Fees{}
-	mi := &file_common_v1_market_proto_msgTypes[1]
+	mi := &file_core_v1_market_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -103,7 +103,7 @@ func (x *Fees) String() string {
 func (*Fees) ProtoMessage() {}
 
 func (x *Fees) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_market_proto_msgTypes[1]
+	mi := &file_core_v1_market_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -116,7 +116,7 @@ func (x *Fees) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Fees.ProtoReflect.Descriptor instead.
 func (*Fees) Descriptor() ([]byte, []int) {
-	return file_common_v1_market_proto_rawDescGZIP(), []int{1}
+	return file_core_v1_market_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Fees) GetTakerFee() int64 {
@@ -133,11 +133,11 @@ func (x *Fees) GetMakerFee() int64 {
 	return 0
 }
 
-var File_common_v1_market_proto protoreflect.FileDescriptor
+var File_core_v1_market_proto protoreflect.FileDescriptor
 
-const file_common_v1_market_proto_rawDesc = "" +
+const file_core_v1_market_proto_rawDesc = "" +
 	"\n" +
-	"\x16common/v1/market.proto\x12\x12pulsoats.common.v1\"\\\n" +
+	"\x14core/v1/market.proto\x12\x10pulsoats.core.v1\"\\\n" +
 	"\n" +
 	"MarketSpec\x12\x1a\n" +
 	"\bexchange\x18\x01 \x01(\tR\bexchange\x12\x1a\n" +
@@ -145,26 +145,26 @@ const file_common_v1_market_proto_rawDesc = "" +
 	"\x06symbol\x18\x03 \x01(\tR\x06symbol\"@\n" +
 	"\x04Fees\x12\x1b\n" +
 	"\ttaker_fee\x18\x01 \x01(\x03R\btakerFee\x12\x1b\n" +
-	"\tmaker_fee\x18\x02 \x01(\x03R\bmakerFeeB9Z7github.com/pulsoats/contracts/gen/go/common/v1;commonpbb\x06proto3"
+	"\tmaker_fee\x18\x02 \x01(\x03R\bmakerFeeB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
 
 var (
-	file_common_v1_market_proto_rawDescOnce sync.Once
-	file_common_v1_market_proto_rawDescData []byte
+	file_core_v1_market_proto_rawDescOnce sync.Once
+	file_core_v1_market_proto_rawDescData []byte
 )
 
-func file_common_v1_market_proto_rawDescGZIP() []byte {
-	file_common_v1_market_proto_rawDescOnce.Do(func() {
-		file_common_v1_market_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_common_v1_market_proto_rawDesc), len(file_common_v1_market_proto_rawDesc)))
+func file_core_v1_market_proto_rawDescGZIP() []byte {
+	file_core_v1_market_proto_rawDescOnce.Do(func() {
+		file_core_v1_market_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_core_v1_market_proto_rawDesc), len(file_core_v1_market_proto_rawDesc)))
 	})
-	return file_common_v1_market_proto_rawDescData
+	return file_core_v1_market_proto_rawDescData
 }
 
-var file_common_v1_market_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_common_v1_market_proto_goTypes = []any{
-	(*MarketSpec)(nil), // 0: pulsoats.common.v1.MarketSpec
-	(*Fees)(nil),       // 1: pulsoats.common.v1.Fees
+var file_core_v1_market_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_core_v1_market_proto_goTypes = []any{
+	(*MarketSpec)(nil), // 0: pulsoats.core.v1.MarketSpec
+	(*Fees)(nil),       // 1: pulsoats.core.v1.Fees
 }
-var file_common_v1_market_proto_depIdxs = []int32{
+var file_core_v1_market_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -172,26 +172,26 @@ var file_common_v1_market_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_common_v1_market_proto_init() }
-func file_common_v1_market_proto_init() {
-	if File_common_v1_market_proto != nil {
+func init() { file_core_v1_market_proto_init() }
+func file_core_v1_market_proto_init() {
+	if File_core_v1_market_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_market_proto_rawDesc), len(file_common_v1_market_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_core_v1_market_proto_rawDesc), len(file_core_v1_market_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_common_v1_market_proto_goTypes,
-		DependencyIndexes: file_common_v1_market_proto_depIdxs,
-		MessageInfos:      file_common_v1_market_proto_msgTypes,
+		GoTypes:           file_core_v1_market_proto_goTypes,
+		DependencyIndexes: file_core_v1_market_proto_depIdxs,
+		MessageInfos:      file_core_v1_market_proto_msgTypes,
 	}.Build()
-	File_common_v1_market_proto = out.File
-	file_common_v1_market_proto_goTypes = nil
-	file_common_v1_market_proto_depIdxs = nil
+	File_core_v1_market_proto = out.File
+	file_core_v1_market_proto_goTypes = nil
+	file_core_v1_market_proto_depIdxs = nil
 }

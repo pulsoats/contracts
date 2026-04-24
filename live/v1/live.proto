@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package pulsoats.live.v1;
 
-import "common/v1/detect.proto";
-import "common/v1/market.proto";
-import "common/v1/run.proto";
+import "core/v1/detect.proto";
+import "core/v1/market.proto";
+import "core/v1/run.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
@@ -13,10 +13,10 @@ option go_package = "github.com/pulsoats/contracts/gen/go/live/v1;livepb";
 // x-service-token METADATA IS REQUIRED
 service Live {
   rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
-  rpc StopRun(common.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
+  rpc StopRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
   rpc StopAll(google.protobuf.Empty) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
-  rpc RestartRun(common.v1.RunID) returns (Run); // x-user-id METADATA IS REQUIRED
-  rpc GetRun(common.v1.RunID) returns (Run);
+  rpc RestartRun(core.v1.RunID) returns (Run); // x-user-id METADATA IS REQUIRED
+  rpc GetRun(core.v1.RunID) returns (Run);
 
   rpc StreamEvents(google.protobuf.Empty) returns (stream Event);
 
@@ -25,26 +25,17 @@ service Live {
 }
 
 message NewRunRequest {
-  pulsoats.common.v1.MarketSpec market = 1;
+  pulsoats.core.v1.MarketSpec market = 1;
   string interval = 2;
-  pulsoats.common.v1.DetectorConfig detector = 3;
+  pulsoats.core.v1.DetectorConfig detector = 3;
 }
 
 message Run {
-  string id = 1;
-  pulsoats.common.v1.RunStatus status = 2;
-  pulsoats.common.v1.MarketSpec market = 3;
-  string interval = 4;
-  pulsoats.common.v1.DetectorConfig detector = 5;
-  int64 signals_count = 6;
-  int64 orders_count = 7;
-  int64 sum_profit_ppm = 8;
-  optional google.protobuf.Timestamp first_candle_time = 9;
-  optional google.protobuf.Timestamp last_candle_time = 10;
-  google.protobuf.Timestamp created_at = 11;
-  string created_by = 13;
-  optional google.protobuf.Timestamp finished_at = 12;
-  optional string finished_by = 14;
+  core.v1.BaseRun base_run = 1;
+  int64 orders_count = 2;
+  float sum_profit = 3;
+  optional google.protobuf.Timestamp finished_at = 4;
+  optional string finished_by = 5;
 }
 
 message ListRunsFilter {
@@ -92,7 +83,7 @@ message ListSignalsPagedResponse {
 message Signal {
   string id = 1;
   string run_id = 2;
-  pulsoats.common.v1.MarketSpec market = 3;
+  pulsoats.core.v1.MarketSpec market = 3;
   string detector_code = 4;
   string detector_opts_label = 5;
   google.protobuf.Timestamp time = 6;
