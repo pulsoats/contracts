@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package pulsoats.health.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pulsoats/contracts/gen/go/health/v1;healthpb";
+
+enum ServiceStatus {
+  SERVICE_STATUS_HEALTHY = 0;
+  SERVICE_STATUS_DEGRADED = 1;
+}
+
+message ServiceInfo {
+  string id = 1;
+  string name = 2;
+  string exchange = 3;
+  string account = 4;
+  string version = 5;
+}
+
+message ServiceMetrics {
+  string service_id = 1;
+  ServiceStatus status = 2;
+  double cpu_percent = 3;
+  double memory_percent = 4;
+  int64 uptime_seconds = 5;
+  google.protobuf.Timestamp reported_at = 6;
+}
+
+service ServiceMonitor {
+  rpc Info(google.protobuf.Empty) returns (ServiceInfo);
+  rpc Metrics(google.protobuf.Empty) returns (ServiceMetrics);
+}
