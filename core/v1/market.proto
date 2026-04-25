@@ -14,3 +14,9 @@ message Fees {
   int64 taker_fee = 1;
   int64 maker_fee = 2;
 }
+
+message ExchangeMeta {
+  string code = 1;
+  repeated string intervals = 2;
+  repeated string categories = 3;
+}

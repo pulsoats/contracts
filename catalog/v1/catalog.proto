@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pulsoats.catalog.v1;
+
+import "google/protobuf/empty.proto";
+import "core/v1/detect.proto";
+import "core/v1/market.proto";
+
+option go_package = "github.com/pulsoats/contracts/gen/go/catalog/v1;catalogpb";
+
+message ListAvailableDetectorsResponse {
+  repeated core.v1.DetectorMeta detectors = 1;
+}
+
+message ListAvailableExchangesResponse {
+  repeated core.v1.ExchangeMeta exchange_metas = 1;
+}
+
+service Catalog {
+  rpc ListAvailableDetectors(google.protobuf.Empty) returns (ListAvailableDetectorsResponse);
+  rpc ListAvailableExchanges(google.protobuf.Empty) returns (ListAvailableExchangesResponse);
+}

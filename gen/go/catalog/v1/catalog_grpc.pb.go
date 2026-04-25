@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             (unknown)
-// source: core/v1/detect.proto
+// source: catalog/v1/catalog.proto
 
-package corepb
+package catalogpb
 
 import (
 	context "context"
@@ -20,7 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Catalog_ListAvailableDetectors_FullMethodName = "/pulsoats.core.v1.Catalog/ListAvailableDetectors"
+	Catalog_ListAvailableDetectors_FullMethodName = "/pulsoats.catalog.v1.Catalog/ListAvailableDetectors"
+	Catalog_ListAvailableExchanges_FullMethodName = "/pulsoats.catalog.v1.Catalog/ListAvailableExchanges"
 )
 
 // CatalogClient is the client API for Catalog service.
@@ -28,6 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CatalogClient interface {
 	ListAvailableDetectors(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListAvailableDetectorsResponse, error)
+	ListAvailableExchanges(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListAvailableExchangesResponse, error)
 }
 
 type catalogClient struct {
@@ -48,11 +50,22 @@ func (c *catalogClient) ListAvailableDetectors(ctx context.Context, in *emptypb.
 	return out, nil
 }
 
+func (c *catalogClient) ListAvailableExchanges(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListAvailableExchangesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAvailableExchangesResponse)
+	err := c.cc.Invoke(ctx, Catalog_ListAvailableExchanges_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CatalogServer is the server API for Catalog service.
 // All implementations must embed UnimplementedCatalogServer
 // for forward compatibility.
 type CatalogServer interface {
 	ListAvailableDetectors(context.Context, *emptypb.Empty) (*ListAvailableDetectorsResponse, error)
+	ListAvailableExchanges(context.Context, *emptypb.Empty) (*ListAvailableExchangesResponse, error)
 	mustEmbedUnimplementedCatalogServer()
 }
 
@@ -65,6 +78,9 @@ type UnimplementedCatalogServer struct{}
 
 func (UnimplementedCatalogServer) ListAvailableDetectors(context.Context, *emptypb.Empty) (*ListAvailableDetectorsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAvailableDetectors not implemented")
+}
+func (UnimplementedCatalogServer) ListAvailableExchanges(context.Context, *emptypb.Empty) (*ListAvailableExchangesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAvailableExchanges not implemented")
 }
 func (UnimplementedCatalogServer) mustEmbedUnimplementedCatalogServer() {}
 func (UnimplementedCatalogServer) testEmbeddedByValue()                 {}
@@ -105,18 +121,40 @@ func _Catalog_ListAvailableDetectors_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Catalog_ListAvailableExchanges_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CatalogServer).ListAvailableExchanges(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Catalog_ListAvailableExchanges_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CatalogServer).ListAvailableExchanges(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Catalog_ServiceDesc is the grpc.ServiceDesc for Catalog service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Catalog_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pulsoats.core.v1.Catalog",
+	ServiceName: "pulsoats.catalog.v1.Catalog",
 	HandlerType: (*CatalogServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListAvailableDetectors",
 			Handler:    _Catalog_ListAvailableDetectors_Handler,
 		},
+		{
+			MethodName: "ListAvailableExchanges",
+			Handler:    _Catalog_ListAvailableExchanges_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "core/v1/detect.proto",
+	Metadata: "catalog/v1/catalog.proto",
 }

@@ -133,6 +133,66 @@ func (x *Fees) GetMakerFee() int64 {
 	return 0
 }
 
+type ExchangeMeta struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Intervals     []string               `protobuf:"bytes,2,rep,name=intervals,proto3" json:"intervals,omitempty"`
+	Categories    []string               `protobuf:"bytes,3,rep,name=categories,proto3" json:"categories,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExchangeMeta) Reset() {
+	*x = ExchangeMeta{}
+	mi := &file_core_v1_market_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExchangeMeta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExchangeMeta) ProtoMessage() {}
+
+func (x *ExchangeMeta) ProtoReflect() protoreflect.Message {
+	mi := &file_core_v1_market_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExchangeMeta.ProtoReflect.Descriptor instead.
+func (*ExchangeMeta) Descriptor() ([]byte, []int) {
+	return file_core_v1_market_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ExchangeMeta) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *ExchangeMeta) GetIntervals() []string {
+	if x != nil {
+		return x.Intervals
+	}
+	return nil
+}
+
+func (x *ExchangeMeta) GetCategories() []string {
+	if x != nil {
+		return x.Categories
+	}
+	return nil
+}
+
 var File_core_v1_market_proto protoreflect.FileDescriptor
 
 const file_core_v1_market_proto_rawDesc = "" +
@@ -145,7 +205,13 @@ const file_core_v1_market_proto_rawDesc = "" +
 	"\x06symbol\x18\x03 \x01(\tR\x06symbol\"@\n" +
 	"\x04Fees\x12\x1b\n" +
 	"\ttaker_fee\x18\x01 \x01(\x03R\btakerFee\x12\x1b\n" +
-	"\tmaker_fee\x18\x02 \x01(\x03R\bmakerFeeB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
+	"\tmaker_fee\x18\x02 \x01(\x03R\bmakerFee\"`\n" +
+	"\fExchangeMeta\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1c\n" +
+	"\tintervals\x18\x02 \x03(\tR\tintervals\x12\x1e\n" +
+	"\n" +
+	"categories\x18\x03 \x03(\tR\n" +
+	"categoriesB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
 
 var (
 	file_core_v1_market_proto_rawDescOnce sync.Once
@@ -159,10 +225,11 @@ func file_core_v1_market_proto_rawDescGZIP() []byte {
 	return file_core_v1_market_proto_rawDescData
 }
 
-var file_core_v1_market_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_core_v1_market_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_core_v1_market_proto_goTypes = []any{
-	(*MarketSpec)(nil), // 0: pulsoats.core.v1.MarketSpec
-	(*Fees)(nil),       // 1: pulsoats.core.v1.Fees
+	(*MarketSpec)(nil),   // 0: pulsoats.core.v1.MarketSpec
+	(*Fees)(nil),         // 1: pulsoats.core.v1.Fees
+	(*ExchangeMeta)(nil), // 2: pulsoats.core.v1.ExchangeMeta
 }
 var file_core_v1_market_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -183,7 +250,7 @@ func file_core_v1_market_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_core_v1_market_proto_rawDesc), len(file_core_v1_market_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

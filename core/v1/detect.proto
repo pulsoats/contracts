@@ -19,11 +19,3 @@ message DetectorMeta {
   bytes opts_schema = 4;
   string version = 5;
 }
-
-service Catalog {
-    rpc ListAvailableDetectors(google.protobuf.Empty) returns (ListAvailableDetectorsResponse);
-}
-
-message ListAvailableDetectorsResponse {
-  repeated DetectorMeta detectors = 1;
-}

@@ -9,7 +9,7 @@ package corepb
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	_ "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -158,50 +158,6 @@ func (x *DetectorMeta) GetVersion() string {
 	return ""
 }
 
-type ListAvailableDetectorsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Detectors     []*DetectorMeta        `protobuf:"bytes,1,rep,name=detectors,proto3" json:"detectors,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListAvailableDetectorsResponse) Reset() {
-	*x = ListAvailableDetectorsResponse{}
-	mi := &file_core_v1_detect_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListAvailableDetectorsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListAvailableDetectorsResponse) ProtoMessage() {}
-
-func (x *ListAvailableDetectorsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_core_v1_detect_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListAvailableDetectorsResponse.ProtoReflect.Descriptor instead.
-func (*ListAvailableDetectorsResponse) Descriptor() ([]byte, []int) {
-	return file_core_v1_detect_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ListAvailableDetectorsResponse) GetDetectors() []*DetectorMeta {
-	if x != nil {
-		return x.Detectors
-	}
-	return nil
-}
-
 var File_core_v1_detect_proto protoreflect.FileDescriptor
 
 const file_core_v1_detect_proto_rawDesc = "" +
@@ -218,11 +174,7 @@ const file_core_v1_detect_proto_rawDesc = "" +
 	"\x04kind\x18\x03 \x01(\tR\x04kind\x12\x1f\n" +
 	"\vopts_schema\x18\x04 \x01(\fR\n" +
 	"optsSchema\x12\x18\n" +
-	"\aversion\x18\x05 \x01(\tR\aversion\"^\n" +
-	"\x1eListAvailableDetectorsResponse\x12<\n" +
-	"\tdetectors\x18\x01 \x03(\v2\x1e.pulsoats.core.v1.DetectorMetaR\tdetectors2m\n" +
-	"\aCatalog\x12b\n" +
-	"\x16ListAvailableDetectors\x12\x16.google.protobuf.Empty\x1a0.pulsoats.core.v1.ListAvailableDetectorsResponseB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
+	"\aversion\x18\x05 \x01(\tR\aversionB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
 
 var (
 	file_core_v1_detect_proto_rawDescOnce sync.Once
@@ -236,22 +188,17 @@ func file_core_v1_detect_proto_rawDescGZIP() []byte {
 	return file_core_v1_detect_proto_rawDescData
 }
 
-var file_core_v1_detect_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_core_v1_detect_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_core_v1_detect_proto_goTypes = []any{
-	(*DetectorConfig)(nil),                 // 0: pulsoats.core.v1.DetectorConfig
-	(*DetectorMeta)(nil),                   // 1: pulsoats.core.v1.DetectorMeta
-	(*ListAvailableDetectorsResponse)(nil), // 2: pulsoats.core.v1.ListAvailableDetectorsResponse
-	(*emptypb.Empty)(nil),                  // 3: google.protobuf.Empty
+	(*DetectorConfig)(nil), // 0: pulsoats.core.v1.DetectorConfig
+	(*DetectorMeta)(nil),   // 1: pulsoats.core.v1.DetectorMeta
 }
 var file_core_v1_detect_proto_depIdxs = []int32{
-	1, // 0: pulsoats.core.v1.ListAvailableDetectorsResponse.detectors:type_name -> pulsoats.core.v1.DetectorMeta
-	3, // 1: pulsoats.core.v1.Catalog.ListAvailableDetectors:input_type -> google.protobuf.Empty
-	2, // 2: pulsoats.core.v1.Catalog.ListAvailableDetectors:output_type -> pulsoats.core.v1.ListAvailableDetectorsResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // [0:0] is the sub-list for method output_type
+	0, // [0:0] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_core_v1_detect_proto_init() }
@@ -265,9 +212,9 @@ func file_core_v1_detect_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_core_v1_detect_proto_rawDesc), len(file_core_v1_detect_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   2,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   0,
 		},
 		GoTypes:           file_core_v1_detect_proto_goTypes,
 		DependencyIndexes: file_core_v1_detect_proto_depIdxs,
