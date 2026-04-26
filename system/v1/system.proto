@@ -7,6 +7,10 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pulsoats/contracts/gen/go/system/v1;systempb";
 
+enum ServiceKind {
+  SERVICE_KIND_ANALYSIS = 0;
+  SERVICE_KIND_LIVE = 1;
+}
 enum ServiceStatus {
   SERVICE_STATUS_HEALTHY = 0;
   SERVICE_STATUS_DEGRADED = 1;
@@ -14,10 +18,11 @@ enum ServiceStatus {
 
 message ServiceInfo {
   string id = 1;
-  string name = 2;
-  string exchange = 3;
-  string account = 4;
-  string version = 5;
+  ServiceKind kind = 2;
+  string name = 3;
+  string exchange = 4;
+  string account = 5;
+  string version = 6;
 }
 
 message ServiceMetrics {

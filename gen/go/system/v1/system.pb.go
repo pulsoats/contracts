@@ -23,6 +23,52 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ServiceKind int32
+
+const (
+	ServiceKind_SERVICE_KIND_ANALYSIS ServiceKind = 0
+	ServiceKind_SERVICE_KIND_LIVE     ServiceKind = 1
+)
+
+// Enum value maps for ServiceKind.
+var (
+	ServiceKind_name = map[int32]string{
+		0: "SERVICE_KIND_ANALYSIS",
+		1: "SERVICE_KIND_LIVE",
+	}
+	ServiceKind_value = map[string]int32{
+		"SERVICE_KIND_ANALYSIS": 0,
+		"SERVICE_KIND_LIVE":     1,
+	}
+)
+
+func (x ServiceKind) Enum() *ServiceKind {
+	p := new(ServiceKind)
+	*p = x
+	return p
+}
+
+func (x ServiceKind) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ServiceKind) Descriptor() protoreflect.EnumDescriptor {
+	return file_system_v1_system_proto_enumTypes[0].Descriptor()
+}
+
+func (ServiceKind) Type() protoreflect.EnumType {
+	return &file_system_v1_system_proto_enumTypes[0]
+}
+
+func (x ServiceKind) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ServiceKind.Descriptor instead.
+func (ServiceKind) EnumDescriptor() ([]byte, []int) {
+	return file_system_v1_system_proto_rawDescGZIP(), []int{0}
+}
+
 type ServiceStatus int32
 
 const (
@@ -53,11 +99,11 @@ func (x ServiceStatus) String() string {
 }
 
 func (ServiceStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_system_v1_system_proto_enumTypes[0].Descriptor()
+	return file_system_v1_system_proto_enumTypes[1].Descriptor()
 }
 
 func (ServiceStatus) Type() protoreflect.EnumType {
-	return &file_system_v1_system_proto_enumTypes[0]
+	return &file_system_v1_system_proto_enumTypes[1]
 }
 
 func (x ServiceStatus) Number() protoreflect.EnumNumber {
@@ -66,16 +112,17 @@ func (x ServiceStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ServiceStatus.Descriptor instead.
 func (ServiceStatus) EnumDescriptor() ([]byte, []int) {
-	return file_system_v1_system_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_system_proto_rawDescGZIP(), []int{1}
 }
 
 type ServiceInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Exchange      string                 `protobuf:"bytes,3,opt,name=exchange,proto3" json:"exchange,omitempty"`
-	Account       string                 `protobuf:"bytes,4,opt,name=account,proto3" json:"account,omitempty"`
-	Version       string                 `protobuf:"bytes,5,opt,name=version,proto3" json:"version,omitempty"`
+	Kind          ServiceKind            `protobuf:"varint,2,opt,name=kind,proto3,enum=pulsoats.system.v1.ServiceKind" json:"kind,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Exchange      string                 `protobuf:"bytes,4,opt,name=exchange,proto3" json:"exchange,omitempty"`
+	Account       string                 `protobuf:"bytes,5,opt,name=account,proto3" json:"account,omitempty"`
+	Version       string                 `protobuf:"bytes,6,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -115,6 +162,13 @@ func (x *ServiceInfo) GetId() string {
 		return x.Id
 	}
 	return ""
+}
+
+func (x *ServiceInfo) GetKind() ServiceKind {
+	if x != nil {
+		return x.Kind
+	}
+	return ServiceKind_SERVICE_KIND_ANALYSIS
 }
 
 func (x *ServiceInfo) GetName() string {
@@ -233,13 +287,14 @@ var File_system_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x16system/v1/system.proto\x12\x12pulsoats.system.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x01\n" +
+	"\x16system/v1/system.proto\x12\x12pulsoats.system.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb6\x01\n" +
 	"\vServiceInfo\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
-	"\bexchange\x18\x03 \x01(\tR\bexchange\x12\x18\n" +
-	"\aaccount\x18\x04 \x01(\tR\aaccount\x12\x18\n" +
-	"\aversion\x18\x05 \x01(\tR\aversion\"\x96\x02\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x123\n" +
+	"\x04kind\x18\x02 \x01(\x0e2\x1f.pulsoats.system.v1.ServiceKindR\x04kind\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1a\n" +
+	"\bexchange\x18\x04 \x01(\tR\bexchange\x12\x18\n" +
+	"\aaccount\x18\x05 \x01(\tR\aaccount\x12\x18\n" +
+	"\aversion\x18\x06 \x01(\tR\aversion\"\x96\x02\n" +
 	"\x0eServiceMetrics\x12\x1d\n" +
 	"\n" +
 	"service_id\x18\x01 \x01(\tR\tserviceId\x129\n" +
@@ -249,7 +304,10 @@ const file_system_v1_system_proto_rawDesc = "" +
 	"\x0ememory_percent\x18\x04 \x01(\x01R\rmemoryPercent\x12%\n" +
 	"\x0euptime_seconds\x18\x05 \x01(\x03R\ruptimeSeconds\x12;\n" +
 	"\vreported_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"reportedAt*H\n" +
+	"reportedAt*?\n" +
+	"\vServiceKind\x12\x19\n" +
+	"\x15SERVICE_KIND_ANALYSIS\x10\x00\x12\x15\n" +
+	"\x11SERVICE_KIND_LIVE\x10\x01*H\n" +
 	"\rServiceStatus\x12\x1a\n" +
 	"\x16SERVICE_STATUS_HEALTHY\x10\x00\x12\x1b\n" +
 	"\x17SERVICE_STATUS_DEGRADED\x10\x012\x98\x01\n" +
@@ -269,27 +327,29 @@ func file_system_v1_system_proto_rawDescGZIP() []byte {
 	return file_system_v1_system_proto_rawDescData
 }
 
-var file_system_v1_system_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_system_v1_system_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_system_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_system_v1_system_proto_goTypes = []any{
-	(ServiceStatus)(0),            // 0: pulsoats.system.v1.ServiceStatus
-	(*ServiceInfo)(nil),           // 1: pulsoats.system.v1.ServiceInfo
-	(*ServiceMetrics)(nil),        // 2: pulsoats.system.v1.ServiceMetrics
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 4: google.protobuf.Empty
+	(ServiceKind)(0),              // 0: pulsoats.system.v1.ServiceKind
+	(ServiceStatus)(0),            // 1: pulsoats.system.v1.ServiceStatus
+	(*ServiceInfo)(nil),           // 2: pulsoats.system.v1.ServiceInfo
+	(*ServiceMetrics)(nil),        // 3: pulsoats.system.v1.ServiceMetrics
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),         // 5: google.protobuf.Empty
 }
 var file_system_v1_system_proto_depIdxs = []int32{
-	0, // 0: pulsoats.system.v1.ServiceMetrics.status:type_name -> pulsoats.system.v1.ServiceStatus
-	3, // 1: pulsoats.system.v1.ServiceMetrics.reported_at:type_name -> google.protobuf.Timestamp
-	4, // 2: pulsoats.system.v1.ServiceMonitor.Info:input_type -> google.protobuf.Empty
-	4, // 3: pulsoats.system.v1.ServiceMonitor.Metrics:input_type -> google.protobuf.Empty
-	1, // 4: pulsoats.system.v1.ServiceMonitor.Info:output_type -> pulsoats.system.v1.ServiceInfo
-	2, // 5: pulsoats.system.v1.ServiceMonitor.Metrics:output_type -> pulsoats.system.v1.ServiceMetrics
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: pulsoats.system.v1.ServiceInfo.kind:type_name -> pulsoats.system.v1.ServiceKind
+	1, // 1: pulsoats.system.v1.ServiceMetrics.status:type_name -> pulsoats.system.v1.ServiceStatus
+	4, // 2: pulsoats.system.v1.ServiceMetrics.reported_at:type_name -> google.protobuf.Timestamp
+	5, // 3: pulsoats.system.v1.ServiceMonitor.Info:input_type -> google.protobuf.Empty
+	5, // 4: pulsoats.system.v1.ServiceMonitor.Metrics:input_type -> google.protobuf.Empty
+	2, // 5: pulsoats.system.v1.ServiceMonitor.Info:output_type -> pulsoats.system.v1.ServiceInfo
+	3, // 6: pulsoats.system.v1.ServiceMonitor.Metrics:output_type -> pulsoats.system.v1.ServiceMetrics
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_system_v1_system_proto_init() }
@@ -302,7 +362,7 @@ func file_system_v1_system_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_v1_system_proto_rawDesc), len(file_system_v1_system_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
