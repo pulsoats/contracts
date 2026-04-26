@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             (unknown)
-// source: health/v1/health.proto
+// source: system/v1/system.proto
 
-package healthpb
+package systempb
 
 import (
 	context "context"
@@ -20,8 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ServiceMonitor_Info_FullMethodName    = "/pulsoats.health.v1.ServiceMonitor/Info"
-	ServiceMonitor_Metrics_FullMethodName = "/pulsoats.health.v1.ServiceMonitor/Metrics"
+	ServiceMonitor_Info_FullMethodName    = "/pulsoats.system.v1.ServiceMonitor/Info"
+	ServiceMonitor_Metrics_FullMethodName = "/pulsoats.system.v1.ServiceMonitor/Metrics"
 )
 
 // ServiceMonitorClient is the client API for ServiceMonitor service.
@@ -143,7 +143,7 @@ func _ServiceMonitor_Metrics_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ServiceMonitor_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pulsoats.health.v1.ServiceMonitor",
+	ServiceName: "pulsoats.system.v1.ServiceMonitor",
 	HandlerType: (*ServiceMonitorServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -156,5 +156,5 @@ var ServiceMonitor_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "health/v1/health.proto",
+	Metadata: "system/v1/system.proto",
 }

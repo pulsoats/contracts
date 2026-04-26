@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: health/v1/health.proto
+// source: system/v1/system.proto
 
-package healthpb
+package systempb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -53,11 +53,11 @@ func (x ServiceStatus) String() string {
 }
 
 func (ServiceStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_health_v1_health_proto_enumTypes[0].Descriptor()
+	return file_system_v1_system_proto_enumTypes[0].Descriptor()
 }
 
 func (ServiceStatus) Type() protoreflect.EnumType {
-	return &file_health_v1_health_proto_enumTypes[0]
+	return &file_system_v1_system_proto_enumTypes[0]
 }
 
 func (x ServiceStatus) Number() protoreflect.EnumNumber {
@@ -66,7 +66,7 @@ func (x ServiceStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ServiceStatus.Descriptor instead.
 func (ServiceStatus) EnumDescriptor() ([]byte, []int) {
-	return file_health_v1_health_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_system_proto_rawDescGZIP(), []int{0}
 }
 
 type ServiceInfo struct {
@@ -82,7 +82,7 @@ type ServiceInfo struct {
 
 func (x *ServiceInfo) Reset() {
 	*x = ServiceInfo{}
-	mi := &file_health_v1_health_proto_msgTypes[0]
+	mi := &file_system_v1_system_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -94,7 +94,7 @@ func (x *ServiceInfo) String() string {
 func (*ServiceInfo) ProtoMessage() {}
 
 func (x *ServiceInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_health_v1_health_proto_msgTypes[0]
+	mi := &file_system_v1_system_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -107,7 +107,7 @@ func (x *ServiceInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceInfo.ProtoReflect.Descriptor instead.
 func (*ServiceInfo) Descriptor() ([]byte, []int) {
-	return file_health_v1_health_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_system_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ServiceInfo) GetId() string {
@@ -148,7 +148,7 @@ func (x *ServiceInfo) GetVersion() string {
 type ServiceMetrics struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ServiceId     string                 `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
-	Status        ServiceStatus          `protobuf:"varint,2,opt,name=status,proto3,enum=pulsoats.health.v1.ServiceStatus" json:"status,omitempty"`
+	Status        ServiceStatus          `protobuf:"varint,2,opt,name=status,proto3,enum=pulsoats.system.v1.ServiceStatus" json:"status,omitempty"`
 	CpuPercent    float64                `protobuf:"fixed64,3,opt,name=cpu_percent,json=cpuPercent,proto3" json:"cpu_percent,omitempty"`
 	MemoryPercent float64                `protobuf:"fixed64,4,opt,name=memory_percent,json=memoryPercent,proto3" json:"memory_percent,omitempty"`
 	UptimeSeconds int64                  `protobuf:"varint,5,opt,name=uptime_seconds,json=uptimeSeconds,proto3" json:"uptime_seconds,omitempty"`
@@ -159,7 +159,7 @@ type ServiceMetrics struct {
 
 func (x *ServiceMetrics) Reset() {
 	*x = ServiceMetrics{}
-	mi := &file_health_v1_health_proto_msgTypes[1]
+	mi := &file_system_v1_system_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -171,7 +171,7 @@ func (x *ServiceMetrics) String() string {
 func (*ServiceMetrics) ProtoMessage() {}
 
 func (x *ServiceMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_health_v1_health_proto_msgTypes[1]
+	mi := &file_system_v1_system_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -184,7 +184,7 @@ func (x *ServiceMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceMetrics.ProtoReflect.Descriptor instead.
 func (*ServiceMetrics) Descriptor() ([]byte, []int) {
-	return file_health_v1_health_proto_rawDescGZIP(), []int{1}
+	return file_system_v1_system_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ServiceMetrics) GetServiceId() string {
@@ -229,11 +229,11 @@ func (x *ServiceMetrics) GetReportedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-var File_health_v1_health_proto protoreflect.FileDescriptor
+var File_system_v1_system_proto protoreflect.FileDescriptor
 
-const file_health_v1_health_proto_rawDesc = "" +
+const file_system_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x16health/v1/health.proto\x12\x12pulsoats.health.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x01\n" +
+	"\x16system/v1/system.proto\x12\x12pulsoats.system.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x01\n" +
 	"\vServiceInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
@@ -243,7 +243,7 @@ const file_health_v1_health_proto_rawDesc = "" +
 	"\x0eServiceMetrics\x12\x1d\n" +
 	"\n" +
 	"service_id\x18\x01 \x01(\tR\tserviceId\x129\n" +
-	"\x06status\x18\x02 \x01(\x0e2!.pulsoats.health.v1.ServiceStatusR\x06status\x12\x1f\n" +
+	"\x06status\x18\x02 \x01(\x0e2!.pulsoats.system.v1.ServiceStatusR\x06status\x12\x1f\n" +
 	"\vcpu_percent\x18\x03 \x01(\x01R\n" +
 	"cpuPercent\x12%\n" +
 	"\x0ememory_percent\x18\x04 \x01(\x01R\rmemoryPercent\x12%\n" +
@@ -254,37 +254,37 @@ const file_health_v1_health_proto_rawDesc = "" +
 	"\x16SERVICE_STATUS_HEALTHY\x10\x00\x12\x1b\n" +
 	"\x17SERVICE_STATUS_DEGRADED\x10\x012\x98\x01\n" +
 	"\x0eServiceMonitor\x12?\n" +
-	"\x04Info\x12\x16.google.protobuf.Empty\x1a\x1f.pulsoats.health.v1.ServiceInfo\x12E\n" +
-	"\aMetrics\x12\x16.google.protobuf.Empty\x1a\".pulsoats.health.v1.ServiceMetricsB9Z7github.com/pulsoats/contracts/gen/go/health/v1;healthpbb\x06proto3"
+	"\x04Info\x12\x16.google.protobuf.Empty\x1a\x1f.pulsoats.system.v1.ServiceInfo\x12E\n" +
+	"\aMetrics\x12\x16.google.protobuf.Empty\x1a\".pulsoats.system.v1.ServiceMetricsB9Z7github.com/pulsoats/contracts/gen/go/system/v1;systempbb\x06proto3"
 
 var (
-	file_health_v1_health_proto_rawDescOnce sync.Once
-	file_health_v1_health_proto_rawDescData []byte
+	file_system_v1_system_proto_rawDescOnce sync.Once
+	file_system_v1_system_proto_rawDescData []byte
 )
 
-func file_health_v1_health_proto_rawDescGZIP() []byte {
-	file_health_v1_health_proto_rawDescOnce.Do(func() {
-		file_health_v1_health_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_health_v1_health_proto_rawDesc), len(file_health_v1_health_proto_rawDesc)))
+func file_system_v1_system_proto_rawDescGZIP() []byte {
+	file_system_v1_system_proto_rawDescOnce.Do(func() {
+		file_system_v1_system_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_system_v1_system_proto_rawDesc), len(file_system_v1_system_proto_rawDesc)))
 	})
-	return file_health_v1_health_proto_rawDescData
+	return file_system_v1_system_proto_rawDescData
 }
 
-var file_health_v1_health_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_health_v1_health_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_health_v1_health_proto_goTypes = []any{
-	(ServiceStatus)(0),            // 0: pulsoats.health.v1.ServiceStatus
-	(*ServiceInfo)(nil),           // 1: pulsoats.health.v1.ServiceInfo
-	(*ServiceMetrics)(nil),        // 2: pulsoats.health.v1.ServiceMetrics
+var file_system_v1_system_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_system_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_system_v1_system_proto_goTypes = []any{
+	(ServiceStatus)(0),            // 0: pulsoats.system.v1.ServiceStatus
+	(*ServiceInfo)(nil),           // 1: pulsoats.system.v1.ServiceInfo
+	(*ServiceMetrics)(nil),        // 2: pulsoats.system.v1.ServiceMetrics
 	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 	(*emptypb.Empty)(nil),         // 4: google.protobuf.Empty
 }
-var file_health_v1_health_proto_depIdxs = []int32{
-	0, // 0: pulsoats.health.v1.ServiceMetrics.status:type_name -> pulsoats.health.v1.ServiceStatus
-	3, // 1: pulsoats.health.v1.ServiceMetrics.reported_at:type_name -> google.protobuf.Timestamp
-	4, // 2: pulsoats.health.v1.ServiceMonitor.Info:input_type -> google.protobuf.Empty
-	4, // 3: pulsoats.health.v1.ServiceMonitor.Metrics:input_type -> google.protobuf.Empty
-	1, // 4: pulsoats.health.v1.ServiceMonitor.Info:output_type -> pulsoats.health.v1.ServiceInfo
-	2, // 5: pulsoats.health.v1.ServiceMonitor.Metrics:output_type -> pulsoats.health.v1.ServiceMetrics
+var file_system_v1_system_proto_depIdxs = []int32{
+	0, // 0: pulsoats.system.v1.ServiceMetrics.status:type_name -> pulsoats.system.v1.ServiceStatus
+	3, // 1: pulsoats.system.v1.ServiceMetrics.reported_at:type_name -> google.protobuf.Timestamp
+	4, // 2: pulsoats.system.v1.ServiceMonitor.Info:input_type -> google.protobuf.Empty
+	4, // 3: pulsoats.system.v1.ServiceMonitor.Metrics:input_type -> google.protobuf.Empty
+	1, // 4: pulsoats.system.v1.ServiceMonitor.Info:output_type -> pulsoats.system.v1.ServiceInfo
+	2, // 5: pulsoats.system.v1.ServiceMonitor.Metrics:output_type -> pulsoats.system.v1.ServiceMetrics
 	4, // [4:6] is the sub-list for method output_type
 	2, // [2:4] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -292,27 +292,27 @@ var file_health_v1_health_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_health_v1_health_proto_init() }
-func file_health_v1_health_proto_init() {
-	if File_health_v1_health_proto != nil {
+func init() { file_system_v1_system_proto_init() }
+func file_system_v1_system_proto_init() {
+	if File_system_v1_system_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_health_v1_health_proto_rawDesc), len(file_health_v1_health_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_v1_system_proto_rawDesc), len(file_system_v1_system_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_health_v1_health_proto_goTypes,
-		DependencyIndexes: file_health_v1_health_proto_depIdxs,
-		EnumInfos:         file_health_v1_health_proto_enumTypes,
-		MessageInfos:      file_health_v1_health_proto_msgTypes,
+		GoTypes:           file_system_v1_system_proto_goTypes,
+		DependencyIndexes: file_system_v1_system_proto_depIdxs,
+		EnumInfos:         file_system_v1_system_proto_enumTypes,
+		MessageInfos:      file_system_v1_system_proto_msgTypes,
 	}.Build()
-	File_health_v1_health_proto = out.File
-	file_health_v1_health_proto_goTypes = nil
-	file_health_v1_health_proto_depIdxs = nil
+	File_system_v1_system_proto = out.File
+	file_system_v1_system_proto_goTypes = nil
+	file_system_v1_system_proto_depIdxs = nil
 }

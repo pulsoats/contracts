@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package pulsoats.health.v1;
+package pulsoats.system.v1;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/pulsoats/contracts/gen/go/health/v1;healthpb";
+option go_package = "github.com/pulsoats/contracts/gen/go/system/v1;systempb";
 
 enum ServiceStatus {
   SERVICE_STATUS_HEALTHY = 0;
