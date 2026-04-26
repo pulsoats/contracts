@@ -25,7 +25,7 @@ message Run {
 }
 
 message ListRunsFilter {
-  optional int32 status_code = 1;
+  optional core.v1.RunStatusCode status_code = 1;
   optional string category = 2;
   optional string symbol = 3;
   optional string interval = 4;
