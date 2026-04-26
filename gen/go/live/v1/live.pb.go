@@ -248,7 +248,7 @@ type ListRunsPagedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	BeforeId      *string                `protobuf:"bytes,2,opt,name=before_id,json=beforeId,proto3,oneof" json:"before_id,omitempty"`
-	Filter        *ListRunsFilter        `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
+	Filter        *ListRunsFilter        `protobuf:"bytes,3,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -452,7 +452,7 @@ type ListSignalsPagedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	BeforeId      *string                `protobuf:"bytes,2,opt,name=before_id,json=beforeId,proto3,oneof" json:"before_id,omitempty"`
-	Filter        *ListSignalsFilter     `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
+	Filter        *ListSignalsFilter     `protobuf:"bytes,3,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -830,13 +830,14 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\a_symbolB\v\n" +
 	"\t_intervalB\x10\n" +
 	"\x0e_detector_codeB\x10\n" +
-	"\x0e_order_dir_asc\"\x96\x01\n" +
+	"\x0e_order_dir_asc\"\xa6\x01\n" +
 	"\x14ListRunsPagedRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12 \n" +
-	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x128\n" +
-	"\x06filter\x18\x03 \x01(\v2 .pulsoats.live.v1.ListRunsFilterR\x06filterB\f\n" +
+	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12=\n" +
+	"\x06filter\x18\x03 \x01(\v2 .pulsoats.live.v1.ListRunsFilterH\x01R\x06filter\x88\x01\x01B\f\n" +
 	"\n" +
-	"_before_id\"\x9b\x01\n" +
+	"_before_idB\t\n" +
+	"\a_filter\"\x9b\x01\n" +
 	"\x15ListRunsPagedResponse\x12)\n" +
 	"\x04runs\x18\x01 \x03(\v2\x15.pulsoats.live.v1.RunR\x04runs\x12\x19\n" +
 	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +
@@ -854,13 +855,14 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\a_symbolB\a\n" +
 	"\x05_fromB\x05\n" +
 	"\x03_toB\x10\n" +
-	"\x0e_order_dir_asc\"\x9c\x01\n" +
+	"\x0e_order_dir_asc\"\xac\x01\n" +
 	"\x17ListSignalsPagedRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12 \n" +
-	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12;\n" +
-	"\x06filter\x18\x03 \x01(\v2#.pulsoats.live.v1.ListSignalsFilterR\x06filterB\f\n" +
+	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12@\n" +
+	"\x06filter\x18\x03 \x01(\v2#.pulsoats.live.v1.ListSignalsFilterH\x01R\x06filter\x88\x01\x01B\f\n" +
 	"\n" +
-	"_before_id\"\xa7\x01\n" +
+	"_before_idB\t\n" +
+	"\a_filter\"\xa7\x01\n" +
 	"\x18ListSignalsPagedResponse\x122\n" +
 	"\asignals\x18\x01 \x03(\v2\x18.pulsoats.live.v1.SignalR\asignals\x12\x19\n" +
 	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +

@@ -36,7 +36,7 @@ message ListRunsFilter {
 message ListRunsPagedRequest {
   int32 limit = 1;
   optional string before_id = 2;
-  ListRunsFilter filter = 3;
+  optional ListRunsFilter filter = 3;
 }
 
 message ListRunsPagedResponse {
@@ -57,7 +57,7 @@ message ListSignalsFilter {
 message ListSignalsPagedRequest {
   int32 limit = 1;
   optional string before_id = 2;
-  ListSignalsFilter filter = 3;
+  optional ListSignalsFilter filter = 3;
 }
 
 message ListSignalsPagedResponse {
