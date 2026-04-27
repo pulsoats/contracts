@@ -49,7 +49,6 @@ message ListRunsResponse {
   optional string next_before_id = 3;
 }
 
-// x-service-token METADATA IS REQUIRED
 service Analysis {
   rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
   rpc GetRun(core.v1.RunID) returns (Run);

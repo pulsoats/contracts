@@ -90,7 +90,6 @@ message Event {
   }
 }
 
-// x-service-token METADATA IS REQUIRED
 service Live {
   rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
   rpc StopRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
