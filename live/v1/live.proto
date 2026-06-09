@@ -90,6 +90,11 @@ message Event {
   }
 }
 
+message WorkerStats {
+  int32 runs_total = 1;
+  int64 signals_total = 2;
+}
+
 service Live {
   rpc NewRun(NewRunRequest) returns (Run); // x-user-id METADATA IS REQUIRED
   rpc StopRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
@@ -97,6 +102,7 @@ service Live {
   rpc RestartRun(core.v1.RunID) returns (Run); // x-user-id METADATA IS REQUIRED
   rpc GetRun(core.v1.RunID) returns (Run);
 
+  rpc StreamWorkerStats(google.protobuf.Empty) returns (stream WorkerStats);
   rpc StreamEvents(google.protobuf.Empty) returns (stream Event);
 
   rpc ListRunsPaged(ListRunsPagedRequest) returns (ListRunsPagedResponse);

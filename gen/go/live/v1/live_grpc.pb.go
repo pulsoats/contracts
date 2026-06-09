@@ -21,27 +21,27 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Live_NewRun_FullMethodName           = "/pulsoats.live.v1.Live/NewRun"
-	Live_StopRun_FullMethodName          = "/pulsoats.live.v1.Live/StopRun"
-	Live_StopAll_FullMethodName          = "/pulsoats.live.v1.Live/StopAll"
-	Live_RestartRun_FullMethodName       = "/pulsoats.live.v1.Live/RestartRun"
-	Live_GetRun_FullMethodName           = "/pulsoats.live.v1.Live/GetRun"
-	Live_StreamEvents_FullMethodName     = "/pulsoats.live.v1.Live/StreamEvents"
-	Live_ListRunsPaged_FullMethodName    = "/pulsoats.live.v1.Live/ListRunsPaged"
-	Live_ListSignalsPaged_FullMethodName = "/pulsoats.live.v1.Live/ListSignalsPaged"
+	Live_NewRun_FullMethodName            = "/pulsoats.live.v1.Live/NewRun"
+	Live_StopRun_FullMethodName           = "/pulsoats.live.v1.Live/StopRun"
+	Live_StopAll_FullMethodName           = "/pulsoats.live.v1.Live/StopAll"
+	Live_RestartRun_FullMethodName        = "/pulsoats.live.v1.Live/RestartRun"
+	Live_GetRun_FullMethodName            = "/pulsoats.live.v1.Live/GetRun"
+	Live_StreamWorkerStats_FullMethodName = "/pulsoats.live.v1.Live/StreamWorkerStats"
+	Live_StreamEvents_FullMethodName      = "/pulsoats.live.v1.Live/StreamEvents"
+	Live_ListRunsPaged_FullMethodName     = "/pulsoats.live.v1.Live/ListRunsPaged"
+	Live_ListSignalsPaged_FullMethodName  = "/pulsoats.live.v1.Live/ListSignalsPaged"
 )
 
 // LiveClient is the client API for Live service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// x-service-token METADATA IS REQUIRED
 type LiveClient interface {
 	NewRun(ctx context.Context, in *NewRunRequest, opts ...grpc.CallOption) (*Run, error)
 	StopRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	StopAll(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RestartRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*Run, error)
 	GetRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*Run, error)
+	StreamWorkerStats(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WorkerStats], error)
 	StreamEvents(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Event], error)
 	ListRunsPaged(ctx context.Context, in *ListRunsPagedRequest, opts ...grpc.CallOption) (*ListRunsPagedResponse, error)
 	ListSignalsPaged(ctx context.Context, in *ListSignalsPagedRequest, opts ...grpc.CallOption) (*ListSignalsPagedResponse, error)
@@ -105,9 +105,28 @@ func (c *liveClient) GetRun(ctx context.Context, in *v1.RunID, opts ...grpc.Call
 	return out, nil
 }
 
+func (c *liveClient) StreamWorkerStats(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WorkerStats], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Live_ServiceDesc.Streams[0], Live_StreamWorkerStats_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[emptypb.Empty, WorkerStats]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Live_StreamWorkerStatsClient = grpc.ServerStreamingClient[WorkerStats]
+
 func (c *liveClient) StreamEvents(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Event], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Live_ServiceDesc.Streams[0], Live_StreamEvents_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Live_ServiceDesc.Streams[1], Live_StreamEvents_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -147,14 +166,13 @@ func (c *liveClient) ListSignalsPaged(ctx context.Context, in *ListSignalsPagedR
 // LiveServer is the server API for Live service.
 // All implementations must embed UnimplementedLiveServer
 // for forward compatibility.
-//
-// x-service-token METADATA IS REQUIRED
 type LiveServer interface {
 	NewRun(context.Context, *NewRunRequest) (*Run, error)
 	StopRun(context.Context, *v1.RunID) (*emptypb.Empty, error)
 	StopAll(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	RestartRun(context.Context, *v1.RunID) (*Run, error)
 	GetRun(context.Context, *v1.RunID) (*Run, error)
+	StreamWorkerStats(*emptypb.Empty, grpc.ServerStreamingServer[WorkerStats]) error
 	StreamEvents(*emptypb.Empty, grpc.ServerStreamingServer[Event]) error
 	ListRunsPaged(context.Context, *ListRunsPagedRequest) (*ListRunsPagedResponse, error)
 	ListSignalsPaged(context.Context, *ListSignalsPagedRequest) (*ListSignalsPagedResponse, error)
@@ -182,6 +200,9 @@ func (UnimplementedLiveServer) RestartRun(context.Context, *v1.RunID) (*Run, err
 }
 func (UnimplementedLiveServer) GetRun(context.Context, *v1.RunID) (*Run, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetRun not implemented")
+}
+func (UnimplementedLiveServer) StreamWorkerStats(*emptypb.Empty, grpc.ServerStreamingServer[WorkerStats]) error {
+	return status.Error(codes.Unimplemented, "method StreamWorkerStats not implemented")
 }
 func (UnimplementedLiveServer) StreamEvents(*emptypb.Empty, grpc.ServerStreamingServer[Event]) error {
 	return status.Error(codes.Unimplemented, "method StreamEvents not implemented")
@@ -303,6 +324,17 @@ func _Live_GetRun_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Live_StreamWorkerStats_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(emptypb.Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(LiveServer).StreamWorkerStats(m, &grpc.GenericServerStream[emptypb.Empty, WorkerStats]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Live_StreamWorkerStatsServer = grpc.ServerStreamingServer[WorkerStats]
+
 func _Live_StreamEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(emptypb.Empty)
 	if err := stream.RecvMsg(m); err != nil {
@@ -387,6 +419,11 @@ var Live_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamWorkerStats",
+			Handler:       _Live_StreamWorkerStats_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "StreamEvents",
 			Handler:       _Live_StreamEvents_Handler,
