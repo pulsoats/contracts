@@ -8,14 +8,15 @@ option go_package = "github.com/pulsoats/contracts/gen/go/core/v1;corepb";
 
 message DetectorConfig {
   string code = 1;
-  string opts_label = 2;
+  string version = 2;
+  string opts_label = 3;
   bytes opts = 4;
 }
 
 message DetectorMeta {
   string code = 1;
-  string description = 2;
+  string version = 2;
   string kind = 3;
-  bytes opts_schema = 4;
-  string version = 5;
+  string description = 4;
+  bytes opts_schema = 5;
 }

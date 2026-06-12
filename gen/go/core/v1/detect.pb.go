@@ -25,7 +25,8 @@ const (
 type DetectorConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	OptsLabel     string                 `protobuf:"bytes,2,opt,name=opts_label,json=optsLabel,proto3" json:"opts_label,omitempty"`
+	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
+	OptsLabel     string                 `protobuf:"bytes,3,opt,name=opts_label,json=optsLabel,proto3" json:"opts_label,omitempty"`
 	Opts          []byte                 `protobuf:"bytes,4,opt,name=opts,proto3" json:"opts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -68,6 +69,13 @@ func (x *DetectorConfig) GetCode() string {
 	return ""
 }
 
+func (x *DetectorConfig) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
 func (x *DetectorConfig) GetOptsLabel() string {
 	if x != nil {
 		return x.OptsLabel
@@ -85,10 +93,10 @@ func (x *DetectorConfig) GetOpts() []byte {
 type DetectorMeta struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	Kind          string                 `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
-	OptsSchema    []byte                 `protobuf:"bytes,4,opt,name=opts_schema,json=optsSchema,proto3" json:"opts_schema,omitempty"`
-	Version       string                 `protobuf:"bytes,5,opt,name=version,proto3" json:"version,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	OptsSchema    []byte                 `protobuf:"bytes,5,opt,name=opts_schema,json=optsSchema,proto3" json:"opts_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -130,9 +138,9 @@ func (x *DetectorMeta) GetCode() string {
 	return ""
 }
 
-func (x *DetectorMeta) GetDescription() string {
+func (x *DetectorMeta) GetVersion() string {
 	if x != nil {
-		return x.Description
+		return x.Version
 	}
 	return ""
 }
@@ -144,6 +152,13 @@ func (x *DetectorMeta) GetKind() string {
 	return ""
 }
 
+func (x *DetectorMeta) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 func (x *DetectorMeta) GetOptsSchema() []byte {
 	if x != nil {
 		return x.OptsSchema
@@ -151,30 +166,24 @@ func (x *DetectorMeta) GetOptsSchema() []byte {
 	return nil
 }
 
-func (x *DetectorMeta) GetVersion() string {
-	if x != nil {
-		return x.Version
-	}
-	return ""
-}
-
 var File_core_v1_detect_proto protoreflect.FileDescriptor
 
 const file_core_v1_detect_proto_rawDesc = "" +
 	"\n" +
-	"\x14core/v1/detect.proto\x12\x10pulsoats.core.v1\x1a\x1bgoogle/protobuf/empty.proto\"W\n" +
+	"\x14core/v1/detect.proto\x12\x10pulsoats.core.v1\x1a\x1bgoogle/protobuf/empty.proto\"q\n" +
 	"\x0eDetectorConfig\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1d\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\tR\aversion\x12\x1d\n" +
 	"\n" +
-	"opts_label\x18\x02 \x01(\tR\toptsLabel\x12\x12\n" +
+	"opts_label\x18\x03 \x01(\tR\toptsLabel\x12\x12\n" +
 	"\x04opts\x18\x04 \x01(\fR\x04opts\"\x93\x01\n" +
 	"\fDetectorMeta\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\tR\x04code\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04kind\x18\x03 \x01(\tR\x04kind\x12\x1f\n" +
-	"\vopts_schema\x18\x04 \x01(\fR\n" +
-	"optsSchema\x12\x18\n" +
-	"\aversion\x18\x05 \x01(\tR\aversionB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\tR\aversion\x12\x12\n" +
+	"\x04kind\x18\x03 \x01(\tR\x04kind\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1f\n" +
+	"\vopts_schema\x18\x05 \x01(\fR\n" +
+	"optsSchemaB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
 
 var (
 	file_core_v1_detect_proto_rawDescOnce sync.Once

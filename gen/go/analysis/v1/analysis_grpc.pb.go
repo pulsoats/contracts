@@ -38,7 +38,7 @@ type AnalysisClient interface {
 	GetRunArchive(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunArchiveChunk], error)
 	ShareRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteRun(ctx context.Context, in *v1.RunID, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	ListRunsPaged(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error)
+	ListRunsPaged(ctx context.Context, in *ListRunsPagedRequest, opts ...grpc.CallOption) (*ListRunsPagedResponse, error)
 }
 
 type analysisClient struct {
@@ -108,9 +108,9 @@ func (c *analysisClient) DeleteRun(ctx context.Context, in *v1.RunID, opts ...gr
 	return out, nil
 }
 
-func (c *analysisClient) ListRunsPaged(ctx context.Context, in *ListRunsRequest, opts ...grpc.CallOption) (*ListRunsResponse, error) {
+func (c *analysisClient) ListRunsPaged(ctx context.Context, in *ListRunsPagedRequest, opts ...grpc.CallOption) (*ListRunsPagedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListRunsResponse)
+	out := new(ListRunsPagedResponse)
 	err := c.cc.Invoke(ctx, Analysis_ListRunsPaged_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ type AnalysisServer interface {
 	GetRunArchive(*v1.RunID, grpc.ServerStreamingServer[RunArchiveChunk]) error
 	ShareRun(context.Context, *v1.RunID) (*emptypb.Empty, error)
 	DeleteRun(context.Context, *v1.RunID) (*emptypb.Empty, error)
-	ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error)
+	ListRunsPaged(context.Context, *ListRunsPagedRequest) (*ListRunsPagedResponse, error)
 	mustEmbedUnimplementedAnalysisServer()
 }
 
@@ -153,7 +153,7 @@ func (UnimplementedAnalysisServer) ShareRun(context.Context, *v1.RunID) (*emptyp
 func (UnimplementedAnalysisServer) DeleteRun(context.Context, *v1.RunID) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteRun not implemented")
 }
-func (UnimplementedAnalysisServer) ListRunsPaged(context.Context, *ListRunsRequest) (*ListRunsResponse, error) {
+func (UnimplementedAnalysisServer) ListRunsPaged(context.Context, *ListRunsPagedRequest) (*ListRunsPagedResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListRunsPaged not implemented")
 }
 func (UnimplementedAnalysisServer) mustEmbedUnimplementedAnalysisServer() {}
@@ -261,7 +261,7 @@ func _Analysis_DeleteRun_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _Analysis_ListRunsPaged_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRunsRequest)
+	in := new(ListRunsPagedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -273,7 +273,7 @@ func _Analysis_ListRunsPaged_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: Analysis_ListRunsPaged_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalysisServer).ListRunsPaged(ctx, req.(*ListRunsRequest))
+		return srv.(AnalysisServer).ListRunsPaged(ctx, req.(*ListRunsPagedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

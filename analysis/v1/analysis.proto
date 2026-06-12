@@ -10,11 +10,31 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/pulsoats/contracts/gen/go/analysis/v1;analysispb";
 
-enum RunFilter {
-  RUN_FILTER_UNSPECIFIED = 0;
-  RUN_FILTER_MINE = 1;
-  RUN_FILTER_SHARED = 2;
-  RUN_FILTER_ALL = 3;
+enum RunScope {
+  RUN_SCOPE_UNSPECIFIED = 0;
+  RUN_SCOPE_MINE = 1;
+  RUN_SCOPE_SHARED = 2;
+  RUN_SCOPE_ALL = 3;
+}
+
+message ListRunsFilter {
+  repeated string exchanges = 1;
+  repeated string categories = 2;
+  repeated string symbols = 3;
+  repeated string intervals = 4;
+  repeated string detector_codes = 5;
+  repeated int32 statuses = 6;
+
+  optional int64 min_signals = 7;
+  optional int64 max_signals = 8;
+  optional double min_avg_profit = 9;
+  optional double max_avg_profit = 10;
+
+  optional google.protobuf.Timestamp first_candle_from = 11;
+  optional google.protobuf.Timestamp last_candle_to = 12;
+
+  optional google.protobuf.Timestamp created_from = 13;
+  optional google.protobuf.Timestamp created_to = 14;
 }
 
 message NewRunRequest {
@@ -22,7 +42,7 @@ message NewRunRequest {
   string interval = 2;
   google.protobuf.Timestamp from = 3;
   google.protobuf.Timestamp to = 4;
-  pulsoats.core.v1.DetectorConfig detector = 5;
+  pulsoats.core.v1.DetectorConfig detector_config = 5;
   optional pulsoats.core.v1.Fees fees = 6;
 }
 
@@ -37,13 +57,15 @@ message RunArchiveChunk {
   bytes data = 1;
 }
 
-message ListRunsRequest {
+message ListRunsPagedRequest {
   int32 limit = 1;
   optional string before_id = 2;
-  RunFilter filter = 3;
+  bool order_dir_asc = 3;
+  RunScope  scope = 4;
+  optional ListRunsFilter filter = 5;
 }
 
-message ListRunsResponse {
+message ListRunsPagedResponse {
   repeated Run runs = 1;
   bool has_more = 2;
   optional string next_before_id = 3;
@@ -55,5 +77,5 @@ service Analysis {
   rpc GetRunArchive(core.v1.RunID) returns (stream RunArchiveChunk);
   rpc ShareRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
   rpc DeleteRun(core.v1.RunID) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
-  rpc ListRunsPaged(ListRunsRequest) returns (ListRunsResponse); // x-user-id METADATA IS REQUIRED
+  rpc ListRunsPaged(ListRunsPagedRequest) returns (ListRunsPagedResponse); // x-user-id METADATA IS REQUIRED
 }

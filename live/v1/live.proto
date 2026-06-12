@@ -13,7 +13,7 @@ option go_package = "github.com/pulsoats/contracts/gen/go/live/v1;livepb";
 message NewRunRequest {
   pulsoats.core.v1.MarketSpec market = 1;
   string interval = 2;
-  pulsoats.core.v1.DetectorConfig detector = 3;
+  pulsoats.core.v1.DetectorConfig detector_config = 3;
 }
 
 message Run {
@@ -25,12 +25,20 @@ message Run {
 }
 
 message ListRunsFilter {
-  optional core.v1.RunStatusCode status_code = 1;
-  optional string category = 2;
-  optional string symbol = 3;
-  optional string interval = 4;
-  optional string detector_code = 5;
-  optional bool order_dir_asc = 6;
+  repeated string categories = 1;
+  repeated string symbols = 2;
+  repeated string intervals = 3;
+  repeated string detector_codes = 4;
+  repeated int32 statuses = 5;
+
+  optional int64 min_signals = 6;
+  optional int64 max_signals = 7;
+
+  optional google.protobuf.Timestamp first_candle_from = 8;
+  optional google.protobuf.Timestamp last_candle_to = 9;
+
+  optional google.protobuf.Timestamp created_from = 10;
+  optional google.protobuf.Timestamp created_to = 11;
 }
 
 message ListRunsPagedRequest {
@@ -70,16 +78,17 @@ message Signal {
   string id = 1;
   string run_id = 2;
   pulsoats.core.v1.MarketSpec market = 3;
-  string detector_code = 4;
-  string detector_opts_label = 5;
-  google.protobuf.Timestamp time = 6;
-  int64 value = 7;
-  int64 buy_value = 8;
-  int64 take_profit_value = 9;
-  int64 stop_loss_value = 10;
-  int64 expected_return_ppm = 11;
-  string fingerprint = 12;
-  google.protobuf.Timestamp created_at = 13;
+  string interval = 4;
+  string detector_code = 5;
+  string detector_version = 6;
+  string detector_opts_label = 7;
+  google.protobuf.Timestamp candle_time = 8;
+  int64 candle_value = 9;
+  int64 buy_value = 10;
+  int64 take_profit_value = 11;
+  int64 stop_loss_value = 12;
+  int64 expected_return_ppm = 13;
+  google.protobuf.Timestamp created_at = 14;
 }
 
 message Event {
