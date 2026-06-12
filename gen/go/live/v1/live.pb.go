@@ -288,7 +288,8 @@ type ListRunsPagedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	BeforeId      *string                `protobuf:"bytes,2,opt,name=before_id,json=beforeId,proto3,oneof" json:"before_id,omitempty"`
-	Filter        *ListRunsFilter        `protobuf:"bytes,3,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
+	OrderDirAsc   bool                   `protobuf:"varint,3,opt,name=orderDirAsc,proto3" json:"orderDirAsc,omitempty"`
+	Filter        *ListRunsFilter        `protobuf:"bytes,4,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -335,6 +336,13 @@ func (x *ListRunsPagedRequest) GetBeforeId() string {
 		return *x.BeforeId
 	}
 	return ""
+}
+
+func (x *ListRunsPagedRequest) GetOrderDirAsc() bool {
+	if x != nil {
+		return x.OrderDirAsc
+	}
+	return false
 }
 
 func (x *ListRunsPagedRequest) GetFilter() *ListRunsFilter {
@@ -404,210 +412,6 @@ func (x *ListRunsPagedResponse) GetNextBeforeId() string {
 	return ""
 }
 
-type ListSignalsFilter struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunId         *string                `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3,oneof" json:"run_id,omitempty"`
-	Category      *string                `protobuf:"bytes,2,opt,name=category,proto3,oneof" json:"category,omitempty"`
-	Symbol        *string                `protobuf:"bytes,3,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
-	From          *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from,proto3,oneof" json:"from,omitempty"`
-	To            *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to,proto3,oneof" json:"to,omitempty"`
-	OrderDirAsc   *bool                  `protobuf:"varint,6,opt,name=order_dir_asc,json=orderDirAsc,proto3,oneof" json:"order_dir_asc,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListSignalsFilter) Reset() {
-	*x = ListSignalsFilter{}
-	mi := &file_live_v1_live_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListSignalsFilter) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListSignalsFilter) ProtoMessage() {}
-
-func (x *ListSignalsFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_live_v1_live_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListSignalsFilter.ProtoReflect.Descriptor instead.
-func (*ListSignalsFilter) Descriptor() ([]byte, []int) {
-	return file_live_v1_live_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *ListSignalsFilter) GetRunId() string {
-	if x != nil && x.RunId != nil {
-		return *x.RunId
-	}
-	return ""
-}
-
-func (x *ListSignalsFilter) GetCategory() string {
-	if x != nil && x.Category != nil {
-		return *x.Category
-	}
-	return ""
-}
-
-func (x *ListSignalsFilter) GetSymbol() string {
-	if x != nil && x.Symbol != nil {
-		return *x.Symbol
-	}
-	return ""
-}
-
-func (x *ListSignalsFilter) GetFrom() *timestamppb.Timestamp {
-	if x != nil {
-		return x.From
-	}
-	return nil
-}
-
-func (x *ListSignalsFilter) GetTo() *timestamppb.Timestamp {
-	if x != nil {
-		return x.To
-	}
-	return nil
-}
-
-func (x *ListSignalsFilter) GetOrderDirAsc() bool {
-	if x != nil && x.OrderDirAsc != nil {
-		return *x.OrderDirAsc
-	}
-	return false
-}
-
-type ListSignalsPagedRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
-	BeforeId      *string                `protobuf:"bytes,2,opt,name=before_id,json=beforeId,proto3,oneof" json:"before_id,omitempty"`
-	Filter        *ListSignalsFilter     `protobuf:"bytes,3,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListSignalsPagedRequest) Reset() {
-	*x = ListSignalsPagedRequest{}
-	mi := &file_live_v1_live_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListSignalsPagedRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListSignalsPagedRequest) ProtoMessage() {}
-
-func (x *ListSignalsPagedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_live_v1_live_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListSignalsPagedRequest.ProtoReflect.Descriptor instead.
-func (*ListSignalsPagedRequest) Descriptor() ([]byte, []int) {
-	return file_live_v1_live_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *ListSignalsPagedRequest) GetLimit() int32 {
-	if x != nil {
-		return x.Limit
-	}
-	return 0
-}
-
-func (x *ListSignalsPagedRequest) GetBeforeId() string {
-	if x != nil && x.BeforeId != nil {
-		return *x.BeforeId
-	}
-	return ""
-}
-
-func (x *ListSignalsPagedRequest) GetFilter() *ListSignalsFilter {
-	if x != nil {
-		return x.Filter
-	}
-	return nil
-}
-
-type ListSignalsPagedResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Signals       []*Signal              `protobuf:"bytes,1,rep,name=signals,proto3" json:"signals,omitempty"`
-	HasMore       bool                   `protobuf:"varint,2,opt,name=has_more,json=hasMore,proto3" json:"has_more,omitempty"`
-	NextBeforeId  *string                `protobuf:"bytes,3,opt,name=next_before_id,json=nextBeforeId,proto3,oneof" json:"next_before_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListSignalsPagedResponse) Reset() {
-	*x = ListSignalsPagedResponse{}
-	mi := &file_live_v1_live_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListSignalsPagedResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListSignalsPagedResponse) ProtoMessage() {}
-
-func (x *ListSignalsPagedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_live_v1_live_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListSignalsPagedResponse.ProtoReflect.Descriptor instead.
-func (*ListSignalsPagedResponse) Descriptor() ([]byte, []int) {
-	return file_live_v1_live_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *ListSignalsPagedResponse) GetSignals() []*Signal {
-	if x != nil {
-		return x.Signals
-	}
-	return nil
-}
-
-func (x *ListSignalsPagedResponse) GetHasMore() bool {
-	if x != nil {
-		return x.HasMore
-	}
-	return false
-}
-
-func (x *ListSignalsPagedResponse) GetNextBeforeId() string {
-	if x != nil && x.NextBeforeId != nil {
-		return *x.NextBeforeId
-	}
-	return ""
-}
-
 type Signal struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -630,7 +434,7 @@ type Signal struct {
 
 func (x *Signal) Reset() {
 	*x = Signal{}
-	mi := &file_live_v1_live_proto_msgTypes[8]
+	mi := &file_live_v1_live_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -642,7 +446,7 @@ func (x *Signal) String() string {
 func (*Signal) ProtoMessage() {}
 
 func (x *Signal) ProtoReflect() protoreflect.Message {
-	mi := &file_live_v1_live_proto_msgTypes[8]
+	mi := &file_live_v1_live_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -655,7 +459,7 @@ func (x *Signal) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Signal.ProtoReflect.Descriptor instead.
 func (*Signal) Descriptor() ([]byte, []int) {
-	return file_live_v1_live_proto_rawDescGZIP(), []int{8}
+	return file_live_v1_live_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Signal) GetId() string {
@@ -754,6 +558,226 @@ func (x *Signal) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
+}
+
+type ListSignalsFilter struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RunId         *string                `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3,oneof" json:"run_id,omitempty"`
+	Categories    []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
+	Symbols       []string               `protobuf:"bytes,3,rep,name=symbols,proto3" json:"symbols,omitempty"`
+	Intervals     []string               `protobuf:"bytes,4,rep,name=intervals,proto3" json:"intervals,omitempty"`
+	DetectorCodes []string               `protobuf:"bytes,5,rep,name=detector_codes,json=detectorCodes,proto3" json:"detector_codes,omitempty"`
+	CreatedFrom   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_from,json=createdFrom,proto3,oneof" json:"created_from,omitempty"`
+	CreatedTo     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_to,json=createdTo,proto3,oneof" json:"created_to,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSignalsFilter) Reset() {
+	*x = ListSignalsFilter{}
+	mi := &file_live_v1_live_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSignalsFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSignalsFilter) ProtoMessage() {}
+
+func (x *ListSignalsFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_live_v1_live_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSignalsFilter.ProtoReflect.Descriptor instead.
+func (*ListSignalsFilter) Descriptor() ([]byte, []int) {
+	return file_live_v1_live_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListSignalsFilter) GetRunId() string {
+	if x != nil && x.RunId != nil {
+		return *x.RunId
+	}
+	return ""
+}
+
+func (x *ListSignalsFilter) GetCategories() []string {
+	if x != nil {
+		return x.Categories
+	}
+	return nil
+}
+
+func (x *ListSignalsFilter) GetSymbols() []string {
+	if x != nil {
+		return x.Symbols
+	}
+	return nil
+}
+
+func (x *ListSignalsFilter) GetIntervals() []string {
+	if x != nil {
+		return x.Intervals
+	}
+	return nil
+}
+
+func (x *ListSignalsFilter) GetDetectorCodes() []string {
+	if x != nil {
+		return x.DetectorCodes
+	}
+	return nil
+}
+
+func (x *ListSignalsFilter) GetCreatedFrom() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedFrom
+	}
+	return nil
+}
+
+func (x *ListSignalsFilter) GetCreatedTo() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedTo
+	}
+	return nil
+}
+
+type ListSignalsPagedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
+	BeforeId      *string                `protobuf:"bytes,2,opt,name=before_id,json=beforeId,proto3,oneof" json:"before_id,omitempty"`
+	OrderDirAsc   bool                   `protobuf:"varint,3,opt,name=order_dir_asc,json=orderDirAsc,proto3" json:"order_dir_asc,omitempty"`
+	Filter        *ListSignalsFilter     `protobuf:"bytes,4,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSignalsPagedRequest) Reset() {
+	*x = ListSignalsPagedRequest{}
+	mi := &file_live_v1_live_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSignalsPagedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSignalsPagedRequest) ProtoMessage() {}
+
+func (x *ListSignalsPagedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_live_v1_live_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSignalsPagedRequest.ProtoReflect.Descriptor instead.
+func (*ListSignalsPagedRequest) Descriptor() ([]byte, []int) {
+	return file_live_v1_live_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListSignalsPagedRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *ListSignalsPagedRequest) GetBeforeId() string {
+	if x != nil && x.BeforeId != nil {
+		return *x.BeforeId
+	}
+	return ""
+}
+
+func (x *ListSignalsPagedRequest) GetOrderDirAsc() bool {
+	if x != nil {
+		return x.OrderDirAsc
+	}
+	return false
+}
+
+func (x *ListSignalsPagedRequest) GetFilter() *ListSignalsFilter {
+	if x != nil {
+		return x.Filter
+	}
+	return nil
+}
+
+type ListSignalsPagedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Signals       []*Signal              `protobuf:"bytes,1,rep,name=signals,proto3" json:"signals,omitempty"`
+	HasMore       bool                   `protobuf:"varint,2,opt,name=has_more,json=hasMore,proto3" json:"has_more,omitempty"`
+	NextBeforeId  *string                `protobuf:"bytes,3,opt,name=next_before_id,json=nextBeforeId,proto3,oneof" json:"next_before_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSignalsPagedResponse) Reset() {
+	*x = ListSignalsPagedResponse{}
+	mi := &file_live_v1_live_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSignalsPagedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSignalsPagedResponse) ProtoMessage() {}
+
+func (x *ListSignalsPagedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_live_v1_live_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSignalsPagedResponse.ProtoReflect.Descriptor instead.
+func (*ListSignalsPagedResponse) Descriptor() ([]byte, []int) {
+	return file_live_v1_live_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListSignalsPagedResponse) GetSignals() []*Signal {
+	if x != nil {
+		return x.Signals
+	}
+	return nil
+}
+
+func (x *ListSignalsPagedResponse) GetHasMore() bool {
+	if x != nil {
+		return x.HasMore
+	}
+	return false
+}
+
+func (x *ListSignalsPagedResponse) GetNextBeforeId() string {
+	if x != nil && x.NextBeforeId != nil {
+		return *x.NextBeforeId
+	}
+	return ""
 }
 
 type Event struct {
@@ -940,41 +964,17 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x12_first_candle_fromB\x11\n" +
 	"\x0f_last_candle_toB\x0f\n" +
 	"\r_created_fromB\r\n" +
-	"\v_created_to\"\xa6\x01\n" +
+	"\v_created_to\"\xc8\x01\n" +
 	"\x14ListRunsPagedRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12 \n" +
-	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12=\n" +
-	"\x06filter\x18\x03 \x01(\v2 .pulsoats.live.v1.ListRunsFilterH\x01R\x06filter\x88\x01\x01B\f\n" +
+	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12 \n" +
+	"\vorderDirAsc\x18\x03 \x01(\bR\vorderDirAsc\x12=\n" +
+	"\x06filter\x18\x04 \x01(\v2 .pulsoats.live.v1.ListRunsFilterH\x01R\x06filter\x88\x01\x01B\f\n" +
 	"\n" +
 	"_before_idB\t\n" +
 	"\a_filter\"\x9b\x01\n" +
 	"\x15ListRunsPagedResponse\x12)\n" +
 	"\x04runs\x18\x01 \x03(\v2\x15.pulsoats.live.v1.RunR\x04runs\x12\x19\n" +
-	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +
-	"\x0enext_before_id\x18\x03 \x01(\tH\x00R\fnextBeforeId\x88\x01\x01B\x11\n" +
-	"\x0f_next_before_id\"\xc1\x02\n" +
-	"\x11ListSignalsFilter\x12\x1a\n" +
-	"\x06run_id\x18\x01 \x01(\tH\x00R\x05runId\x88\x01\x01\x12\x1f\n" +
-	"\bcategory\x18\x02 \x01(\tH\x01R\bcategory\x88\x01\x01\x12\x1b\n" +
-	"\x06symbol\x18\x03 \x01(\tH\x02R\x06symbol\x88\x01\x01\x123\n" +
-	"\x04from\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x04from\x88\x01\x01\x12/\n" +
-	"\x02to\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\x02to\x88\x01\x01\x12'\n" +
-	"\rorder_dir_asc\x18\x06 \x01(\bH\x05R\vorderDirAsc\x88\x01\x01B\t\n" +
-	"\a_run_idB\v\n" +
-	"\t_categoryB\t\n" +
-	"\a_symbolB\a\n" +
-	"\x05_fromB\x05\n" +
-	"\x03_toB\x10\n" +
-	"\x0e_order_dir_asc\"\xac\x01\n" +
-	"\x17ListSignalsPagedRequest\x12\x14\n" +
-	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12 \n" +
-	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12@\n" +
-	"\x06filter\x18\x03 \x01(\v2#.pulsoats.live.v1.ListSignalsFilterH\x01R\x06filter\x88\x01\x01B\f\n" +
-	"\n" +
-	"_before_idB\t\n" +
-	"\a_filter\"\xa7\x01\n" +
-	"\x18ListSignalsPagedResponse\x122\n" +
-	"\asignals\x18\x01 \x03(\v2\x18.pulsoats.live.v1.SignalR\asignals\x12\x19\n" +
 	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +
 	"\x0enext_before_id\x18\x03 \x01(\tH\x00R\fnextBeforeId\x88\x01\x01B\x11\n" +
 	"\x0f_next_before_id\"\xbd\x04\n" +
@@ -995,7 +995,34 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x0fstop_loss_value\x18\f \x01(\x03R\rstopLossValue\x12.\n" +
 	"\x13expected_return_ppm\x18\r \x01(\x03R\x11expectedReturnPpm\x129\n" +
 	"\n" +
-	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x88\x01\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xdd\x02\n" +
+	"\x11ListSignalsFilter\x12\x1a\n" +
+	"\x06run_id\x18\x01 \x01(\tH\x00R\x05runId\x88\x01\x01\x12\x1e\n" +
+	"\n" +
+	"categories\x18\x02 \x03(\tR\n" +
+	"categories\x12\x18\n" +
+	"\asymbols\x18\x03 \x03(\tR\asymbols\x12\x1c\n" +
+	"\tintervals\x18\x04 \x03(\tR\tintervals\x12%\n" +
+	"\x0edetector_codes\x18\x05 \x03(\tR\rdetectorCodes\x12B\n" +
+	"\fcreated_from\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\vcreatedFrom\x88\x01\x01\x12>\n" +
+	"\n" +
+	"created_to\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tcreatedTo\x88\x01\x01B\t\n" +
+	"\a_run_idB\x0f\n" +
+	"\r_created_fromB\r\n" +
+	"\v_created_to\"\xd0\x01\n" +
+	"\x17ListSignalsPagedRequest\x12\x14\n" +
+	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12 \n" +
+	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12\"\n" +
+	"\rorder_dir_asc\x18\x03 \x01(\bR\vorderDirAsc\x12@\n" +
+	"\x06filter\x18\x04 \x01(\v2#.pulsoats.live.v1.ListSignalsFilterH\x01R\x06filter\x88\x01\x01B\f\n" +
+	"\n" +
+	"_before_idB\t\n" +
+	"\a_filter\"\xa7\x01\n" +
+	"\x18ListSignalsPagedResponse\x122\n" +
+	"\asignals\x18\x01 \x03(\v2\x18.pulsoats.live.v1.SignalR\asignals\x12\x19\n" +
+	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +
+	"\x0enext_before_id\x18\x03 \x01(\tH\x00R\fnextBeforeId\x88\x01\x01B\x11\n" +
+	"\x0f_next_before_id\"\x88\x01\n" +
 	"\x05Event\x12\x15\n" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12)\n" +
 	"\x03run\x18\x02 \x01(\v2\x15.pulsoats.live.v1.RunH\x00R\x03run\x122\n" +
@@ -1036,10 +1063,10 @@ var file_live_v1_live_proto_goTypes = []any{
 	(*ListRunsFilter)(nil),           // 2: pulsoats.live.v1.ListRunsFilter
 	(*ListRunsPagedRequest)(nil),     // 3: pulsoats.live.v1.ListRunsPagedRequest
 	(*ListRunsPagedResponse)(nil),    // 4: pulsoats.live.v1.ListRunsPagedResponse
-	(*ListSignalsFilter)(nil),        // 5: pulsoats.live.v1.ListSignalsFilter
-	(*ListSignalsPagedRequest)(nil),  // 6: pulsoats.live.v1.ListSignalsPagedRequest
-	(*ListSignalsPagedResponse)(nil), // 7: pulsoats.live.v1.ListSignalsPagedResponse
-	(*Signal)(nil),                   // 8: pulsoats.live.v1.Signal
+	(*Signal)(nil),                   // 5: pulsoats.live.v1.Signal
+	(*ListSignalsFilter)(nil),        // 6: pulsoats.live.v1.ListSignalsFilter
+	(*ListSignalsPagedRequest)(nil),  // 7: pulsoats.live.v1.ListSignalsPagedRequest
+	(*ListSignalsPagedResponse)(nil), // 8: pulsoats.live.v1.ListSignalsPagedResponse
 	(*Event)(nil),                    // 9: pulsoats.live.v1.Event
 	(*WorkerStats)(nil),              // 10: pulsoats.live.v1.WorkerStats
 	(*v1.MarketSpec)(nil),            // 11: pulsoats.core.v1.MarketSpec
@@ -1060,15 +1087,15 @@ var file_live_v1_live_proto_depIdxs = []int32{
 	14, // 7: pulsoats.live.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
 	2,  // 8: pulsoats.live.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter
 	1,  // 9: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
-	14, // 10: pulsoats.live.v1.ListSignalsFilter.from:type_name -> google.protobuf.Timestamp
-	14, // 11: pulsoats.live.v1.ListSignalsFilter.to:type_name -> google.protobuf.Timestamp
-	5,  // 12: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
-	8,  // 13: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
-	11, // 14: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
-	14, // 15: pulsoats.live.v1.Signal.candle_time:type_name -> google.protobuf.Timestamp
-	14, // 16: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
+	11, // 10: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
+	14, // 11: pulsoats.live.v1.Signal.candle_time:type_name -> google.protobuf.Timestamp
+	14, // 12: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
+	14, // 13: pulsoats.live.v1.ListSignalsFilter.created_from:type_name -> google.protobuf.Timestamp
+	14, // 14: pulsoats.live.v1.ListSignalsFilter.created_to:type_name -> google.protobuf.Timestamp
+	6,  // 15: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
+	5,  // 16: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
 	1,  // 17: pulsoats.live.v1.Event.run:type_name -> pulsoats.live.v1.Run
-	8,  // 18: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
+	5,  // 18: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
 	0,  // 19: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
 	15, // 20: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.core.v1.RunID
 	16, // 21: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
@@ -1077,7 +1104,7 @@ var file_live_v1_live_proto_depIdxs = []int32{
 	16, // 24: pulsoats.live.v1.Live.StreamWorkerStats:input_type -> google.protobuf.Empty
 	16, // 25: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
 	3,  // 26: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
-	6,  // 27: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
+	7,  // 27: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
 	1,  // 28: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
 	16, // 29: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
 	16, // 30: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
@@ -1086,7 +1113,7 @@ var file_live_v1_live_proto_depIdxs = []int32{
 	10, // 33: pulsoats.live.v1.Live.StreamWorkerStats:output_type -> pulsoats.live.v1.WorkerStats
 	9,  // 34: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
 	4,  // 35: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
-	7,  // 36: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
+	8,  // 36: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
 	28, // [28:37] is the sub-list for method output_type
 	19, // [19:28] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name
@@ -1103,9 +1130,9 @@ func file_live_v1_live_proto_init() {
 	file_live_v1_live_proto_msgTypes[2].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[3].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[4].OneofWrappers = []any{}
-	file_live_v1_live_proto_msgTypes[5].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[6].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[7].OneofWrappers = []any{}
+	file_live_v1_live_proto_msgTypes[8].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[9].OneofWrappers = []any{
 		(*Event_Run)(nil),
 		(*Event_Signal)(nil),

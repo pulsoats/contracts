@@ -44,32 +44,12 @@ message ListRunsFilter {
 message ListRunsPagedRequest {
   int32 limit = 1;
   optional string before_id = 2;
-  optional ListRunsFilter filter = 3;
+  bool orderDirAsc = 3;
+  optional ListRunsFilter filter = 4;
 }
 
 message ListRunsPagedResponse {
   repeated Run runs = 1;
-  bool has_more = 2;
-  optional string next_before_id = 3;
-}
-
-message ListSignalsFilter {
-  optional string run_id = 1;
-  optional string category = 2;
-  optional string symbol = 3;
-  optional google.protobuf.Timestamp from = 4;
-  optional google.protobuf.Timestamp to = 5;
-  optional bool order_dir_asc = 6;
-}
-
-message ListSignalsPagedRequest {
-  int32 limit = 1;
-  optional string before_id = 2;
-  optional ListSignalsFilter filter = 3;
-}
-
-message ListSignalsPagedResponse {
-  repeated Signal signals = 1;
   bool has_more = 2;
   optional string next_before_id = 3;
 }
@@ -89,6 +69,29 @@ message Signal {
   int64 stop_loss_value = 12;
   int64 expected_return_ppm = 13;
   google.protobuf.Timestamp created_at = 14;
+}
+
+message ListSignalsFilter {
+  optional string run_id = 1;
+  repeated string categories = 2;
+  repeated string symbols = 3;
+  repeated string intervals = 4;
+  repeated string detector_codes = 5;
+  optional google.protobuf.Timestamp created_from = 6;
+  optional google.protobuf.Timestamp created_to = 7;
+}
+
+message ListSignalsPagedRequest {
+  int32 limit = 1;
+  optional string before_id = 2;
+  bool order_dir_asc = 3;
+  optional ListSignalsFilter filter = 4;
+}
+
+message ListSignalsPagedResponse {
+  repeated Signal signals = 1;
+  bool has_more = 2;
+  optional string next_before_id = 3;
 }
 
 message Event {
