@@ -313,7 +313,7 @@ type Run struct {
 	BaseRun          *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
 	AvgProfitPercent float64                `protobuf:"fixed64,2,opt,name=avg_profit_percent,json=avgProfitPercent,proto3" json:"avg_profit_percent,omitempty"`
 	IsShared         bool                   `protobuf:"varint,3,opt,name=is_shared,json=isShared,proto3" json:"is_shared,omitempty"`
-	SharedAt         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=shared_at,json=sharedAt,proto3" json:"shared_at,omitempty"`
+	SharedAt         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=shared_at,json=sharedAt,proto3,oneof" json:"shared_at,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -597,12 +597,14 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x02to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12I\n" +
 	"\x0fdetector_config\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\x0edetectorConfig\x12/\n" +
 	"\x04fees\x18\x06 \x01(\v2\x16.pulsoats.core.v1.FeesH\x00R\x04fees\x88\x01\x01B\a\n" +
-	"\x05_fees\"\xbf\x01\n" +
+	"\x05_fees\"\xd2\x01\n" +
 	"\x03Run\x124\n" +
 	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12,\n" +
 	"\x12avg_profit_percent\x18\x02 \x01(\x01R\x10avgProfitPercent\x12\x1b\n" +
-	"\tis_shared\x18\x03 \x01(\bR\bisShared\x127\n" +
-	"\tshared_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bsharedAt\"%\n" +
+	"\tis_shared\x18\x03 \x01(\bR\bisShared\x12<\n" +
+	"\tshared_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\bsharedAt\x88\x01\x01B\f\n" +
+	"\n" +
+	"_shared_at\"%\n" +
 	"\x0fRunArchiveChunk\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\"\x84\x02\n" +
 	"\x14ListRunsPagedRequest\x12\x14\n" +
@@ -703,6 +705,7 @@ func file_analysis_v1_analysis_proto_init() {
 	}
 	file_analysis_v1_analysis_proto_msgTypes[0].OneofWrappers = []any{}
 	file_analysis_v1_analysis_proto_msgTypes[1].OneofWrappers = []any{}
+	file_analysis_v1_analysis_proto_msgTypes[2].OneofWrappers = []any{}
 	file_analysis_v1_analysis_proto_msgTypes[4].OneofWrappers = []any{}
 	file_analysis_v1_analysis_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
