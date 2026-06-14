@@ -24,6 +24,82 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Run struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BaseRun       *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
+	SumProfitPpm  int64                  `protobuf:"varint,2,opt,name=sum_profit_ppm,json=sumProfitPpm,proto3" json:"sum_profit_ppm,omitempty"`
+	AvgProfitPpm  int64                  `protobuf:"varint,3,opt,name=avg_profit_ppm,json=avgProfitPpm,proto3" json:"avg_profit_ppm,omitempty"`
+	FinishedAt    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=finished_at,json=finishedAt,proto3,oneof" json:"finished_at,omitempty"`
+	FinishedBy    *string                `protobuf:"bytes,5,opt,name=finished_by,json=finishedBy,proto3,oneof" json:"finished_by,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Run) Reset() {
+	*x = Run{}
+	mi := &file_live_v1_live_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Run) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Run) ProtoMessage() {}
+
+func (x *Run) ProtoReflect() protoreflect.Message {
+	mi := &file_live_v1_live_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Run.ProtoReflect.Descriptor instead.
+func (*Run) Descriptor() ([]byte, []int) {
+	return file_live_v1_live_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Run) GetBaseRun() *v1.BaseRun {
+	if x != nil {
+		return x.BaseRun
+	}
+	return nil
+}
+
+func (x *Run) GetSumProfitPpm() int64 {
+	if x != nil {
+		return x.SumProfitPpm
+	}
+	return 0
+}
+
+func (x *Run) GetAvgProfitPpm() int64 {
+	if x != nil {
+		return x.AvgProfitPpm
+	}
+	return 0
+}
+
+func (x *Run) GetFinishedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.FinishedAt
+	}
+	return nil
+}
+
+func (x *Run) GetFinishedBy() string {
+	if x != nil && x.FinishedBy != nil {
+		return *x.FinishedBy
+	}
+	return ""
+}
+
 type NewRunRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Market         *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
@@ -35,7 +111,7 @@ type NewRunRequest struct {
 
 func (x *NewRunRequest) Reset() {
 	*x = NewRunRequest{}
-	mi := &file_live_v1_live_proto_msgTypes[0]
+	mi := &file_live_v1_live_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +123,7 @@ func (x *NewRunRequest) String() string {
 func (*NewRunRequest) ProtoMessage() {}
 
 func (x *NewRunRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_live_v1_live_proto_msgTypes[0]
+	mi := &file_live_v1_live_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +136,7 @@ func (x *NewRunRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewRunRequest.ProtoReflect.Descriptor instead.
 func (*NewRunRequest) Descriptor() ([]byte, []int) {
-	return file_live_v1_live_proto_rawDescGZIP(), []int{0}
+	return file_live_v1_live_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *NewRunRequest) GetMarket() *v1.MarketSpec {
@@ -82,74 +158,6 @@ func (x *NewRunRequest) GetDetectorConfig() *v1.DetectorConfig {
 		return x.DetectorConfig
 	}
 	return nil
-}
-
-type Run struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	BaseRun          *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
-	SumProfitPercent float64                `protobuf:"fixed64,3,opt,name=sum_profit_percent,json=sumProfitPercent,proto3" json:"sum_profit_percent,omitempty"`
-	FinishedAt       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=finished_at,json=finishedAt,proto3,oneof" json:"finished_at,omitempty"`
-	FinishedBy       *string                `protobuf:"bytes,5,opt,name=finished_by,json=finishedBy,proto3,oneof" json:"finished_by,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *Run) Reset() {
-	*x = Run{}
-	mi := &file_live_v1_live_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Run) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Run) ProtoMessage() {}
-
-func (x *Run) ProtoReflect() protoreflect.Message {
-	mi := &file_live_v1_live_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Run.ProtoReflect.Descriptor instead.
-func (*Run) Descriptor() ([]byte, []int) {
-	return file_live_v1_live_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *Run) GetBaseRun() *v1.BaseRun {
-	if x != nil {
-		return x.BaseRun
-	}
-	return nil
-}
-
-func (x *Run) GetSumProfitPercent() float64 {
-	if x != nil {
-		return x.SumProfitPercent
-	}
-	return 0
-}
-
-func (x *Run) GetFinishedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.FinishedAt
-	}
-	return nil
-}
-
-func (x *Run) GetFinishedBy() string {
-	if x != nil && x.FinishedBy != nil {
-		return *x.FinishedBy
-	}
-	return ""
 }
 
 type ListRunsFilter struct {
@@ -264,7 +272,7 @@ type ListRunsPagedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Limit         int32                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	BeforeId      *string                `protobuf:"bytes,2,opt,name=before_id,json=beforeId,proto3,oneof" json:"before_id,omitempty"`
-	OrderDirAsc   bool                   `protobuf:"varint,3,opt,name=orderDirAsc,proto3" json:"orderDirAsc,omitempty"`
+	OrderDirAsc   bool                   `protobuf:"varint,3,opt,name=order_dir_asc,json=orderDirAsc,proto3" json:"order_dir_asc,omitempty"`
 	Filter        *ListRunsFilter        `protobuf:"bytes,4,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -902,20 +910,21 @@ var File_live_v1_live_proto protoreflect.FileDescriptor
 
 const file_live_v1_live_proto_rawDesc = "" +
 	"\n" +
-	"\x12live/v1/live.proto\x12\x10pulsoats.live.v1\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\x1a\x11core/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xac\x01\n" +
-	"\rNewRunRequest\x124\n" +
-	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
-	"\binterval\x18\x02 \x01(\tR\binterval\x12I\n" +
-	"\x0fdetector_config\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\x0edetectorConfig\"\xf1\x01\n" +
+	"\x12live/v1/live.proto\x12\x10pulsoats.live.v1\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\x1a\x11core/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x8f\x02\n" +
 	"\x03Run\x124\n" +
-	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12,\n" +
-	"\x12sum_profit_percent\x18\x03 \x01(\x01R\x10sumProfitPercent\x12@\n" +
+	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12$\n" +
+	"\x0esum_profit_ppm\x18\x02 \x01(\x03R\fsumProfitPpm\x12$\n" +
+	"\x0eavg_profit_ppm\x18\x03 \x01(\x03R\favgProfitPpm\x12@\n" +
 	"\vfinished_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\n" +
 	"finishedAt\x88\x01\x01\x12$\n" +
 	"\vfinished_by\x18\x05 \x01(\tH\x01R\n" +
 	"finishedBy\x88\x01\x01B\x0e\n" +
 	"\f_finished_atB\x0e\n" +
-	"\f_finished_by\"\xbb\x03\n" +
+	"\f_finished_by\"\xac\x01\n" +
+	"\rNewRunRequest\x124\n" +
+	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
+	"\binterval\x18\x02 \x01(\tR\binterval\x12I\n" +
+	"\x0fdetector_config\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\x0edetectorConfig\"\xbb\x03\n" +
 	"\x0eListRunsFilter\x12\x1e\n" +
 	"\n" +
 	"categories\x18\x01 \x03(\tR\n" +
@@ -934,11 +943,11 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\f_min_signalsB\x0e\n" +
 	"\f_max_signalsB\x0f\n" +
 	"\r_created_fromB\r\n" +
-	"\v_created_to\"\xc8\x01\n" +
+	"\v_created_to\"\xca\x01\n" +
 	"\x14ListRunsPagedRequest\x12\x14\n" +
 	"\x05limit\x18\x01 \x01(\x05R\x05limit\x12 \n" +
-	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12 \n" +
-	"\vorderDirAsc\x18\x03 \x01(\bR\vorderDirAsc\x12=\n" +
+	"\tbefore_id\x18\x02 \x01(\tH\x00R\bbeforeId\x88\x01\x01\x12\"\n" +
+	"\rorder_dir_asc\x18\x03 \x01(\bR\vorderDirAsc\x12=\n" +
 	"\x06filter\x18\x04 \x01(\v2 .pulsoats.live.v1.ListRunsFilterH\x01R\x06filter\x88\x01\x01B\f\n" +
 	"\n" +
 	"_before_idB\t\n" +
@@ -1028,8 +1037,8 @@ func file_live_v1_live_proto_rawDescGZIP() []byte {
 
 var file_live_v1_live_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_live_v1_live_proto_goTypes = []any{
-	(*NewRunRequest)(nil),            // 0: pulsoats.live.v1.NewRunRequest
-	(*Run)(nil),                      // 1: pulsoats.live.v1.Run
+	(*Run)(nil),                      // 0: pulsoats.live.v1.Run
+	(*NewRunRequest)(nil),            // 1: pulsoats.live.v1.NewRunRequest
 	(*ListRunsFilter)(nil),           // 2: pulsoats.live.v1.ListRunsFilter
 	(*ListRunsPagedRequest)(nil),     // 3: pulsoats.live.v1.ListRunsPagedRequest
 	(*ListRunsPagedResponse)(nil),    // 4: pulsoats.live.v1.ListRunsPagedResponse
@@ -1039,32 +1048,32 @@ var file_live_v1_live_proto_goTypes = []any{
 	(*ListSignalsPagedResponse)(nil), // 8: pulsoats.live.v1.ListSignalsPagedResponse
 	(*Event)(nil),                    // 9: pulsoats.live.v1.Event
 	(*WorkerStats)(nil),              // 10: pulsoats.live.v1.WorkerStats
-	(*v1.MarketSpec)(nil),            // 11: pulsoats.core.v1.MarketSpec
-	(*v1.DetectorConfig)(nil),        // 12: pulsoats.core.v1.DetectorConfig
-	(*v1.BaseRun)(nil),               // 13: pulsoats.core.v1.BaseRun
-	(*timestamppb.Timestamp)(nil),    // 14: google.protobuf.Timestamp
+	(*v1.BaseRun)(nil),               // 11: pulsoats.core.v1.BaseRun
+	(*timestamppb.Timestamp)(nil),    // 12: google.protobuf.Timestamp
+	(*v1.MarketSpec)(nil),            // 13: pulsoats.core.v1.MarketSpec
+	(*v1.DetectorConfig)(nil),        // 14: pulsoats.core.v1.DetectorConfig
 	(*v1.RunID)(nil),                 // 15: pulsoats.core.v1.RunID
 	(*emptypb.Empty)(nil),            // 16: google.protobuf.Empty
 }
 var file_live_v1_live_proto_depIdxs = []int32{
-	11, // 0: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.core.v1.MarketSpec
-	12, // 1: pulsoats.live.v1.NewRunRequest.detector_config:type_name -> pulsoats.core.v1.DetectorConfig
-	13, // 2: pulsoats.live.v1.Run.base_run:type_name -> pulsoats.core.v1.BaseRun
-	14, // 3: pulsoats.live.v1.Run.finished_at:type_name -> google.protobuf.Timestamp
-	14, // 4: pulsoats.live.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
-	14, // 5: pulsoats.live.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
+	11, // 0: pulsoats.live.v1.Run.base_run:type_name -> pulsoats.core.v1.BaseRun
+	12, // 1: pulsoats.live.v1.Run.finished_at:type_name -> google.protobuf.Timestamp
+	13, // 2: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.core.v1.MarketSpec
+	14, // 3: pulsoats.live.v1.NewRunRequest.detector_config:type_name -> pulsoats.core.v1.DetectorConfig
+	12, // 4: pulsoats.live.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
+	12, // 5: pulsoats.live.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
 	2,  // 6: pulsoats.live.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter
-	1,  // 7: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
-	11, // 8: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
-	14, // 9: pulsoats.live.v1.Signal.candle_time:type_name -> google.protobuf.Timestamp
-	14, // 10: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
-	14, // 11: pulsoats.live.v1.ListSignalsFilter.created_from:type_name -> google.protobuf.Timestamp
-	14, // 12: pulsoats.live.v1.ListSignalsFilter.created_to:type_name -> google.protobuf.Timestamp
+	0,  // 7: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
+	13, // 8: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
+	12, // 9: pulsoats.live.v1.Signal.candle_time:type_name -> google.protobuf.Timestamp
+	12, // 10: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
+	12, // 11: pulsoats.live.v1.ListSignalsFilter.created_from:type_name -> google.protobuf.Timestamp
+	12, // 12: pulsoats.live.v1.ListSignalsFilter.created_to:type_name -> google.protobuf.Timestamp
 	6,  // 13: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
 	5,  // 14: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
-	1,  // 15: pulsoats.live.v1.Event.run:type_name -> pulsoats.live.v1.Run
+	0,  // 15: pulsoats.live.v1.Event.run:type_name -> pulsoats.live.v1.Run
 	5,  // 16: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
-	0,  // 17: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
+	1,  // 17: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
 	15, // 18: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.core.v1.RunID
 	16, // 19: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
 	15, // 20: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.core.v1.RunID
@@ -1073,11 +1082,11 @@ var file_live_v1_live_proto_depIdxs = []int32{
 	16, // 23: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
 	3,  // 24: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
 	7,  // 25: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
-	1,  // 26: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
+	0,  // 26: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
 	16, // 27: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
 	16, // 28: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
-	1,  // 29: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
-	1,  // 30: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
+	0,  // 29: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
+	0,  // 30: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
 	10, // 31: pulsoats.live.v1.Live.StreamWorkerStats:output_type -> pulsoats.live.v1.WorkerStats
 	9,  // 32: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
 	4,  // 33: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
@@ -1094,7 +1103,7 @@ func file_live_v1_live_proto_init() {
 	if File_live_v1_live_proto != nil {
 		return
 	}
-	file_live_v1_live_proto_msgTypes[1].OneofWrappers = []any{}
+	file_live_v1_live_proto_msgTypes[0].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[2].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[3].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[4].OneofWrappers = []any{}

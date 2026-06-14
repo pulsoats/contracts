@@ -17,24 +17,13 @@ enum RunScope {
   RUN_SCOPE_ALL = 3;
 }
 
-message ListRunsFilter {
-  repeated string exchanges = 1;
-  repeated string categories = 2;
-  repeated string symbols = 3;
-  repeated string intervals = 4;
-  repeated string detector_codes = 5;
-  repeated int32 statuses = 6;
-
-  optional int64 min_signals = 7;
-  optional int64 max_signals = 8;
-  optional double min_avg_profit = 9;
-  optional double max_avg_profit = 10;
-
-  optional google.protobuf.Timestamp first_candle_from = 11;
-  optional google.protobuf.Timestamp last_candle_to = 12;
-
-  optional google.protobuf.Timestamp created_from = 13;
-  optional google.protobuf.Timestamp created_to = 14;
+message Run {
+  core.v1.BaseRun base_run = 1;
+  int64 sum_profit_ppm = 2;
+  int64 avg_profit_ppm = 3;
+  pulsoats.core.v1.Fees fees = 4;
+  bool is_shared = 5;
+  optional google.protobuf.Timestamp shared_at = 6;
 }
 
 message NewRunRequest {
@@ -46,15 +35,28 @@ message NewRunRequest {
   optional pulsoats.core.v1.Fees fees = 6;
 }
 
-message Run {
-  core.v1.BaseRun base_run = 1;
-  double avg_profit_percent = 2;
-  bool is_shared = 3;
-  optional google.protobuf.Timestamp shared_at = 4;
-}
-
 message RunArchiveChunk {
   bytes data = 1;
+}
+
+message ListRunsFilter {
+  repeated string exchanges = 1;
+  repeated string categories = 2;
+  repeated string symbols = 3;
+  repeated string intervals = 4;
+  repeated string detector_codes = 5;
+  repeated int32 statuses = 6;
+
+  optional int64 min_signals = 7;
+  optional int64 max_signals = 8;
+  optional int64 min_avg_profit_ppm = 9;
+  optional int64 max_avg_profit_ppm = 10;
+
+  optional google.protobuf.Timestamp first_candle_from = 11;
+  optional google.protobuf.Timestamp last_candle_to = 12;
+
+  optional google.protobuf.Timestamp created_from = 13;
+  optional google.protobuf.Timestamp created_to = 14;
 }
 
 message ListRunsPagedRequest {

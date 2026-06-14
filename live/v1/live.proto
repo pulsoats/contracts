@@ -10,17 +10,18 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/pulsoats/contracts/gen/go/live/v1;livepb";
 
+message Run {
+  core.v1.BaseRun base_run = 1;
+  int64 sum_profit_ppm = 2;
+  int64 avg_profit_ppm = 3;
+  optional google.protobuf.Timestamp finished_at = 4;
+  optional string finished_by = 5;
+}
+
 message NewRunRequest {
   pulsoats.core.v1.MarketSpec market = 1;
   string interval = 2;
   pulsoats.core.v1.DetectorConfig detector_config = 3;
-}
-
-message Run {
-  core.v1.BaseRun base_run = 1;
-  double sum_profit_percent = 3;
-  optional google.protobuf.Timestamp finished_at = 4;
-  optional string finished_by = 5;
 }
 
 message ListRunsFilter {
@@ -40,7 +41,7 @@ message ListRunsFilter {
 message ListRunsPagedRequest {
   int32 limit = 1;
   optional string before_id = 2;
-  bool orderDirAsc = 3;
+  bool order_dir_asc = 3;
   optional ListRunsFilter filter = 4;
 }
 

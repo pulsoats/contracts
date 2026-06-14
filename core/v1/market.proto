@@ -11,12 +11,12 @@ message MarketSpec {
 }
 
 message Fees {
-  int64 taker_fee = 1;
-  int64 maker_fee = 2;
+  int64 taker_fee_ppm = 1;
+  int64 maker_fee_ppm = 2;
 }
 
 message ExchangeMeta {
   string code = 1;
-  repeated string intervals = 2;
-  repeated string categories = 3;
+  repeated string categories = 2;
+  repeated string intervals = 3;
 }

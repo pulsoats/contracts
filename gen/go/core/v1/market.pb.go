@@ -83,8 +83,8 @@ func (x *MarketSpec) GetSymbol() string {
 
 type Fees struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TakerFee      int64                  `protobuf:"varint,1,opt,name=taker_fee,json=takerFee,proto3" json:"taker_fee,omitempty"`
-	MakerFee      int64                  `protobuf:"varint,2,opt,name=maker_fee,json=makerFee,proto3" json:"maker_fee,omitempty"`
+	TakerFeePpm   int64                  `protobuf:"varint,1,opt,name=taker_fee_ppm,json=takerFeePpm,proto3" json:"taker_fee_ppm,omitempty"`
+	MakerFeePpm   int64                  `protobuf:"varint,2,opt,name=maker_fee_ppm,json=makerFeePpm,proto3" json:"maker_fee_ppm,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -119,16 +119,16 @@ func (*Fees) Descriptor() ([]byte, []int) {
 	return file_core_v1_market_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Fees) GetTakerFee() int64 {
+func (x *Fees) GetTakerFeePpm() int64 {
 	if x != nil {
-		return x.TakerFee
+		return x.TakerFeePpm
 	}
 	return 0
 }
 
-func (x *Fees) GetMakerFee() int64 {
+func (x *Fees) GetMakerFeePpm() int64 {
 	if x != nil {
-		return x.MakerFee
+		return x.MakerFeePpm
 	}
 	return 0
 }
@@ -136,8 +136,8 @@ func (x *Fees) GetMakerFee() int64 {
 type ExchangeMeta struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	Intervals     []string               `protobuf:"bytes,2,rep,name=intervals,proto3" json:"intervals,omitempty"`
-	Categories    []string               `protobuf:"bytes,3,rep,name=categories,proto3" json:"categories,omitempty"`
+	Categories    []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
+	Intervals     []string               `protobuf:"bytes,3,rep,name=intervals,proto3" json:"intervals,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -179,16 +179,16 @@ func (x *ExchangeMeta) GetCode() string {
 	return ""
 }
 
-func (x *ExchangeMeta) GetIntervals() []string {
+func (x *ExchangeMeta) GetCategories() []string {
 	if x != nil {
-		return x.Intervals
+		return x.Categories
 	}
 	return nil
 }
 
-func (x *ExchangeMeta) GetCategories() []string {
+func (x *ExchangeMeta) GetIntervals() []string {
 	if x != nil {
-		return x.Categories
+		return x.Intervals
 	}
 	return nil
 }
@@ -202,16 +202,16 @@ const file_core_v1_market_proto_rawDesc = "" +
 	"MarketSpec\x12\x1a\n" +
 	"\bexchange\x18\x01 \x01(\tR\bexchange\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12\x16\n" +
-	"\x06symbol\x18\x03 \x01(\tR\x06symbol\"@\n" +
-	"\x04Fees\x12\x1b\n" +
-	"\ttaker_fee\x18\x01 \x01(\x03R\btakerFee\x12\x1b\n" +
-	"\tmaker_fee\x18\x02 \x01(\x03R\bmakerFee\"`\n" +
+	"\x06symbol\x18\x03 \x01(\tR\x06symbol\"N\n" +
+	"\x04Fees\x12\"\n" +
+	"\rtaker_fee_ppm\x18\x01 \x01(\x03R\vtakerFeePpm\x12\"\n" +
+	"\rmaker_fee_ppm\x18\x02 \x01(\x03R\vmakerFeePpm\"`\n" +
 	"\fExchangeMeta\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1c\n" +
-	"\tintervals\x18\x02 \x03(\tR\tintervals\x12\x1e\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1e\n" +
 	"\n" +
-	"categories\x18\x03 \x03(\tR\n" +
-	"categoriesB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
+	"categories\x18\x02 \x03(\tR\n" +
+	"categories\x12\x1c\n" +
+	"\tintervals\x18\x03 \x03(\tR\tintervalsB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
 
 var (
 	file_core_v1_market_proto_rawDescOnce sync.Once
