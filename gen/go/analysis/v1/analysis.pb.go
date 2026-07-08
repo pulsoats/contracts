@@ -77,15 +77,17 @@ func (RunScope) EnumDescriptor() ([]byte, []int) {
 }
 
 type Run struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BaseRun       *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
-	SumProfitPpm  int64                  `protobuf:"varint,2,opt,name=sum_profit_ppm,json=sumProfitPpm,proto3" json:"sum_profit_ppm,omitempty"`
-	AvgProfitPpm  int64                  `protobuf:"varint,3,opt,name=avg_profit_ppm,json=avgProfitPpm,proto3" json:"avg_profit_ppm,omitempty"`
-	Fees          *v1.Fees               `protobuf:"bytes,4,opt,name=fees,proto3" json:"fees,omitempty"`
-	IsShared      bool                   `protobuf:"varint,5,opt,name=is_shared,json=isShared,proto3" json:"is_shared,omitempty"`
-	SharedAt      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=shared_at,json=sharedAt,proto3,oneof" json:"shared_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	BaseRun         *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
+	SumProfitPpm    int64                  `protobuf:"varint,2,opt,name=sum_profit_ppm,json=sumProfitPpm,proto3" json:"sum_profit_ppm,omitempty"`
+	AvgProfitPpm    int64                  `protobuf:"varint,3,opt,name=avg_profit_ppm,json=avgProfitPpm,proto3" json:"avg_profit_ppm,omitempty"`
+	Fees            *v1.Fees               `protobuf:"bytes,4,opt,name=fees,proto3" json:"fees,omitempty"`
+	DisableStopLoss bool                   `protobuf:"varint,5,opt,name=disable_stop_loss,json=disableStopLoss,proto3" json:"disable_stop_loss,omitempty"`
+	DisableRepeats  bool                   `protobuf:"varint,6,opt,name=disable_repeats,json=disableRepeats,proto3" json:"disable_repeats,omitempty"`
+	IsShared        bool                   `protobuf:"varint,7,opt,name=is_shared,json=isShared,proto3" json:"is_shared,omitempty"`
+	SharedAt        *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=shared_at,json=sharedAt,proto3,oneof" json:"shared_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Run) Reset() {
@@ -146,6 +148,20 @@ func (x *Run) GetFees() *v1.Fees {
 	return nil
 }
 
+func (x *Run) GetDisableStopLoss() bool {
+	if x != nil {
+		return x.DisableStopLoss
+	}
+	return false
+}
+
+func (x *Run) GetDisableRepeats() bool {
+	if x != nil {
+		return x.DisableRepeats
+	}
+	return false
+}
+
 func (x *Run) GetIsShared() bool {
 	if x != nil {
 		return x.IsShared
@@ -161,15 +177,17 @@ func (x *Run) GetSharedAt() *timestamppb.Timestamp {
 }
 
 type NewRunRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Market         *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
-	Interval       string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
-	From           *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
-	To             *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`
-	DetectorConfig *v1.DetectorConfig     `protobuf:"bytes,5,opt,name=detector_config,json=detectorConfig,proto3" json:"detector_config,omitempty"`
-	Fees           *v1.Fees               `protobuf:"bytes,6,opt,name=fees,proto3,oneof" json:"fees,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Market          *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
+	Interval        string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
+	From            *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
+	To              *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`
+	DetectorConfig  *v1.DetectorConfig     `protobuf:"bytes,5,opt,name=detector_config,json=detectorConfig,proto3" json:"detector_config,omitempty"`
+	Fees            *v1.Fees               `protobuf:"bytes,6,opt,name=fees,proto3,oneof" json:"fees,omitempty"`
+	DisableRepeats  bool                   `protobuf:"varint,7,opt,name=disable_repeats,json=disableRepeats,proto3" json:"disable_repeats,omitempty"`
+	DisableStopLoss bool                   `protobuf:"varint,8,opt,name=disable_stop_loss,json=disableStopLoss,proto3" json:"disable_stop_loss,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *NewRunRequest) Reset() {
@@ -244,6 +262,20 @@ func (x *NewRunRequest) GetFees() *v1.Fees {
 	return nil
 }
 
+func (x *NewRunRequest) GetDisableRepeats() bool {
+	if x != nil {
+		return x.DisableRepeats
+	}
+	return false
+}
+
+func (x *NewRunRequest) GetDisableStopLoss() bool {
+	if x != nil {
+		return x.DisableStopLoss
+	}
+	return false
+}
+
 type RunArchiveChunk struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
@@ -298,12 +330,14 @@ type ListRunsFilter struct {
 	Statuses        []int32                `protobuf:"varint,6,rep,packed,name=statuses,proto3" json:"statuses,omitempty"`
 	MinSignals      *int64                 `protobuf:"varint,7,opt,name=min_signals,json=minSignals,proto3,oneof" json:"min_signals,omitempty"`
 	MaxSignals      *int64                 `protobuf:"varint,8,opt,name=max_signals,json=maxSignals,proto3,oneof" json:"max_signals,omitempty"`
-	MinAvgProfitPpm *int64                 `protobuf:"varint,9,opt,name=min_avg_profit_ppm,json=minAvgProfitPpm,proto3,oneof" json:"min_avg_profit_ppm,omitempty"`
-	MaxAvgProfitPpm *int64                 `protobuf:"varint,10,opt,name=max_avg_profit_ppm,json=maxAvgProfitPpm,proto3,oneof" json:"max_avg_profit_ppm,omitempty"`
-	FirstCandleFrom *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=first_candle_from,json=firstCandleFrom,proto3,oneof" json:"first_candle_from,omitempty"`
-	LastCandleTo    *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=last_candle_to,json=lastCandleTo,proto3,oneof" json:"last_candle_to,omitempty"`
-	CreatedFrom     *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_from,json=createdFrom,proto3,oneof" json:"created_from,omitempty"`
-	CreatedTo       *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_to,json=createdTo,proto3,oneof" json:"created_to,omitempty"`
+	DisableStopLoss *bool                  `protobuf:"varint,9,opt,name=disable_stop_loss,json=disableStopLoss,proto3,oneof" json:"disable_stop_loss,omitempty"`
+	DisableRepeats  *bool                  `protobuf:"varint,10,opt,name=disable_repeats,json=disableRepeats,proto3,oneof" json:"disable_repeats,omitempty"`
+	MinAvgProfitPpm *int64                 `protobuf:"varint,11,opt,name=min_avg_profit_ppm,json=minAvgProfitPpm,proto3,oneof" json:"min_avg_profit_ppm,omitempty"`
+	MaxAvgProfitPpm *int64                 `protobuf:"varint,12,opt,name=max_avg_profit_ppm,json=maxAvgProfitPpm,proto3,oneof" json:"max_avg_profit_ppm,omitempty"`
+	FirstCandleFrom *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=first_candle_from,json=firstCandleFrom,proto3,oneof" json:"first_candle_from,omitempty"`
+	LastCandleTo    *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=last_candle_to,json=lastCandleTo,proto3,oneof" json:"last_candle_to,omitempty"`
+	CreatedFrom     *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=created_from,json=createdFrom,proto3,oneof" json:"created_from,omitempty"`
+	CreatedTo       *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=created_to,json=createdTo,proto3,oneof" json:"created_to,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -392,6 +426,20 @@ func (x *ListRunsFilter) GetMaxSignals() int64 {
 		return *x.MaxSignals
 	}
 	return 0
+}
+
+func (x *ListRunsFilter) GetDisableStopLoss() bool {
+	if x != nil && x.DisableStopLoss != nil {
+		return *x.DisableStopLoss
+	}
+	return false
+}
+
+func (x *ListRunsFilter) GetDisableRepeats() bool {
+	if x != nil && x.DisableRepeats != nil {
+		return *x.DisableRepeats
+	}
+	return false
 }
 
 func (x *ListRunsFilter) GetMinAvgProfitPpm() int64 {
@@ -576,26 +624,30 @@ var File_analysis_v1_analysis_proto protoreflect.FileDescriptor
 
 const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\n" +
-	"\x1aanalysis/v1/analysis.proto\x12\x14pulsoats.analysis.v1\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\x1a\x11core/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x9c\x02\n" +
+	"\x1aanalysis/v1/analysis.proto\x12\x14pulsoats.analysis.v1\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\x1a\x11core/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xf1\x02\n" +
 	"\x03Run\x124\n" +
 	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12$\n" +
 	"\x0esum_profit_ppm\x18\x02 \x01(\x03R\fsumProfitPpm\x12$\n" +
 	"\x0eavg_profit_ppm\x18\x03 \x01(\x03R\favgProfitPpm\x12*\n" +
-	"\x04fees\x18\x04 \x01(\v2\x16.pulsoats.core.v1.FeesR\x04fees\x12\x1b\n" +
-	"\tis_shared\x18\x05 \x01(\bR\bisShared\x12<\n" +
-	"\tshared_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\bsharedAt\x88\x01\x01B\f\n" +
+	"\x04fees\x18\x04 \x01(\v2\x16.pulsoats.core.v1.FeesR\x04fees\x12*\n" +
+	"\x11disable_stop_loss\x18\x05 \x01(\bR\x0fdisableStopLoss\x12'\n" +
+	"\x0fdisable_repeats\x18\x06 \x01(\bR\x0edisableRepeats\x12\x1b\n" +
+	"\tis_shared\x18\a \x01(\bR\bisShared\x12<\n" +
+	"\tshared_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x00R\bsharedAt\x88\x01\x01B\f\n" +
 	"\n" +
-	"_shared_at\"\xc2\x02\n" +
+	"_shared_at\"\x97\x03\n" +
 	"\rNewRunRequest\x124\n" +
 	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x02 \x01(\tR\binterval\x12.\n" +
 	"\x04from\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
 	"\x02to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12I\n" +
 	"\x0fdetector_config\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\x0edetectorConfig\x12/\n" +
-	"\x04fees\x18\x06 \x01(\v2\x16.pulsoats.core.v1.FeesH\x00R\x04fees\x88\x01\x01B\a\n" +
+	"\x04fees\x18\x06 \x01(\v2\x16.pulsoats.core.v1.FeesH\x00R\x04fees\x88\x01\x01\x12'\n" +
+	"\x0fdisable_repeats\x18\a \x01(\bR\x0edisableRepeats\x12*\n" +
+	"\x11disable_stop_loss\x18\b \x01(\bR\x0fdisableStopLossB\a\n" +
 	"\x05_fees\"%\n" +
 	"\x0fRunArchiveChunk\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\fR\x04data\"\xa8\x06\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\"\xb1\a\n" +
 	"\x0eListRunsFilter\x12\x1c\n" +
 	"\texchanges\x18\x01 \x03(\tR\texchanges\x12\x1e\n" +
 	"\n" +
@@ -608,17 +660,21 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\vmin_signals\x18\a \x01(\x03H\x00R\n" +
 	"minSignals\x88\x01\x01\x12$\n" +
 	"\vmax_signals\x18\b \x01(\x03H\x01R\n" +
-	"maxSignals\x88\x01\x01\x120\n" +
-	"\x12min_avg_profit_ppm\x18\t \x01(\x03H\x02R\x0fminAvgProfitPpm\x88\x01\x01\x120\n" +
-	"\x12max_avg_profit_ppm\x18\n" +
-	" \x01(\x03H\x03R\x0fmaxAvgProfitPpm\x88\x01\x01\x12K\n" +
-	"\x11first_candle_from\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x04R\x0ffirstCandleFrom\x88\x01\x01\x12E\n" +
-	"\x0elast_candle_to\x18\f \x01(\v2\x1a.google.protobuf.TimestampH\x05R\flastCandleTo\x88\x01\x01\x12B\n" +
-	"\fcreated_from\x18\r \x01(\v2\x1a.google.protobuf.TimestampH\x06R\vcreatedFrom\x88\x01\x01\x12>\n" +
+	"maxSignals\x88\x01\x01\x12/\n" +
+	"\x11disable_stop_loss\x18\t \x01(\bH\x02R\x0fdisableStopLoss\x88\x01\x01\x12,\n" +
+	"\x0fdisable_repeats\x18\n" +
+	" \x01(\bH\x03R\x0edisableRepeats\x88\x01\x01\x120\n" +
+	"\x12min_avg_profit_ppm\x18\v \x01(\x03H\x04R\x0fminAvgProfitPpm\x88\x01\x01\x120\n" +
+	"\x12max_avg_profit_ppm\x18\f \x01(\x03H\x05R\x0fmaxAvgProfitPpm\x88\x01\x01\x12K\n" +
+	"\x11first_candle_from\x18\r \x01(\v2\x1a.google.protobuf.TimestampH\x06R\x0ffirstCandleFrom\x88\x01\x01\x12E\n" +
+	"\x0elast_candle_to\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampH\aR\flastCandleTo\x88\x01\x01\x12B\n" +
+	"\fcreated_from\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampH\bR\vcreatedFrom\x88\x01\x01\x12>\n" +
 	"\n" +
-	"created_to\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampH\aR\tcreatedTo\x88\x01\x01B\x0e\n" +
+	"created_to\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampH\tR\tcreatedTo\x88\x01\x01B\x0e\n" +
 	"\f_min_signalsB\x0e\n" +
-	"\f_max_signalsB\x15\n" +
+	"\f_max_signalsB\x14\n" +
+	"\x12_disable_stop_lossB\x12\n" +
+	"\x10_disable_repeatsB\x15\n" +
 	"\x13_min_avg_profit_ppmB\x15\n" +
 	"\x13_max_avg_profit_ppmB\x14\n" +
 	"\x12_first_candle_fromB\x11\n" +

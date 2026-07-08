@@ -22,8 +22,10 @@ message Run {
   int64 sum_profit_ppm = 2;
   int64 avg_profit_ppm = 3;
   pulsoats.core.v1.Fees fees = 4;
-  bool is_shared = 5;
-  optional google.protobuf.Timestamp shared_at = 6;
+  bool disable_stop_loss = 5;
+  bool disable_repeats = 6;
+  bool is_shared = 7;
+  optional google.protobuf.Timestamp shared_at = 8;
 }
 
 message NewRunRequest {
@@ -33,6 +35,8 @@ message NewRunRequest {
   google.protobuf.Timestamp to = 4;
   pulsoats.core.v1.DetectorConfig detector_config = 5;
   optional pulsoats.core.v1.Fees fees = 6;
+  bool disable_repeats = 7;
+  bool disable_stop_loss = 8;
 }
 
 message RunArchiveChunk {
@@ -49,14 +53,18 @@ message ListRunsFilter {
 
   optional int64 min_signals = 7;
   optional int64 max_signals = 8;
-  optional int64 min_avg_profit_ppm = 9;
-  optional int64 max_avg_profit_ppm = 10;
 
-  optional google.protobuf.Timestamp first_candle_from = 11;
-  optional google.protobuf.Timestamp last_candle_to = 12;
+  optional bool disable_stop_loss = 9;
+  optional bool disable_repeats = 10;
 
-  optional google.protobuf.Timestamp created_from = 13;
-  optional google.protobuf.Timestamp created_to = 14;
+  optional int64 min_avg_profit_ppm = 11;
+  optional int64 max_avg_profit_ppm = 12;
+
+  optional google.protobuf.Timestamp first_candle_from = 13;
+  optional google.protobuf.Timestamp last_candle_to = 14;
+
+  optional google.protobuf.Timestamp created_from = 15;
+  optional google.protobuf.Timestamp created_to = 16;
 }
 
 message ListRunsPagedRequest {
