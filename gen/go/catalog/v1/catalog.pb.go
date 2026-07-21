@@ -25,7 +25,7 @@ const (
 
 type ListAvailableDetectorsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Detectors     []*v1.DetectorMeta     `protobuf:"bytes,1,rep,name=detectors,proto3" json:"detectors,omitempty"`
+	Metas         []*v1.DetectorMeta     `protobuf:"bytes,1,rep,name=metas,proto3" json:"metas,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -60,23 +60,67 @@ func (*ListAvailableDetectorsResponse) Descriptor() ([]byte, []int) {
 	return file_catalog_v1_catalog_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ListAvailableDetectorsResponse) GetDetectors() []*v1.DetectorMeta {
+func (x *ListAvailableDetectorsResponse) GetMetas() []*v1.DetectorMeta {
 	if x != nil {
-		return x.Detectors
+		return x.Metas
+	}
+	return nil
+}
+
+type ListAvailableFiltersResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metas         []*v1.FilterMeta       `protobuf:"bytes,1,rep,name=metas,proto3" json:"metas,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAvailableFiltersResponse) Reset() {
+	*x = ListAvailableFiltersResponse{}
+	mi := &file_catalog_v1_catalog_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAvailableFiltersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAvailableFiltersResponse) ProtoMessage() {}
+
+func (x *ListAvailableFiltersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_catalog_v1_catalog_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAvailableFiltersResponse.ProtoReflect.Descriptor instead.
+func (*ListAvailableFiltersResponse) Descriptor() ([]byte, []int) {
+	return file_catalog_v1_catalog_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ListAvailableFiltersResponse) GetMetas() []*v1.FilterMeta {
+	if x != nil {
+		return x.Metas
 	}
 	return nil
 }
 
 type ListAvailableExchangesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ExchangeMetas []*v1.ExchangeMeta     `protobuf:"bytes,1,rep,name=exchange_metas,json=exchangeMetas,proto3" json:"exchange_metas,omitempty"`
+	Metas         []*v1.ExchangeMeta     `protobuf:"bytes,1,rep,name=metas,proto3" json:"metas,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAvailableExchangesResponse) Reset() {
 	*x = ListAvailableExchangesResponse{}
-	mi := &file_catalog_v1_catalog_proto_msgTypes[1]
+	mi := &file_catalog_v1_catalog_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +132,7 @@ func (x *ListAvailableExchangesResponse) String() string {
 func (*ListAvailableExchangesResponse) ProtoMessage() {}
 
 func (x *ListAvailableExchangesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_catalog_v1_catalog_proto_msgTypes[1]
+	mi := &file_catalog_v1_catalog_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,12 +145,12 @@ func (x *ListAvailableExchangesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAvailableExchangesResponse.ProtoReflect.Descriptor instead.
 func (*ListAvailableExchangesResponse) Descriptor() ([]byte, []int) {
-	return file_catalog_v1_catalog_proto_rawDescGZIP(), []int{1}
+	return file_catalog_v1_catalog_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListAvailableExchangesResponse) GetExchangeMetas() []*v1.ExchangeMeta {
+func (x *ListAvailableExchangesResponse) GetMetas() []*v1.ExchangeMeta {
 	if x != nil {
-		return x.ExchangeMetas
+		return x.Metas
 	}
 	return nil
 }
@@ -115,13 +159,16 @@ var File_catalog_v1_catalog_proto protoreflect.FileDescriptor
 
 const file_catalog_v1_catalog_proto_rawDesc = "" +
 	"\n" +
-	"\x18catalog/v1/catalog.proto\x12\x13pulsoats.catalog.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\"^\n" +
-	"\x1eListAvailableDetectorsResponse\x12<\n" +
-	"\tdetectors\x18\x01 \x03(\v2\x1e.pulsoats.core.v1.DetectorMetaR\tdetectors\"g\n" +
-	"\x1eListAvailableExchangesResponse\x12E\n" +
-	"\x0eexchange_metas\x18\x01 \x03(\v2\x1e.pulsoats.core.v1.ExchangeMetaR\rexchangeMetas2\xd7\x01\n" +
+	"\x18catalog/v1/catalog.proto\x12\x13pulsoats.catalog.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\"V\n" +
+	"\x1eListAvailableDetectorsResponse\x124\n" +
+	"\x05metas\x18\x01 \x03(\v2\x1e.pulsoats.core.v1.DetectorMetaR\x05metas\"R\n" +
+	"\x1cListAvailableFiltersResponse\x122\n" +
+	"\x05metas\x18\x01 \x03(\v2\x1c.pulsoats.core.v1.FilterMetaR\x05metas\"V\n" +
+	"\x1eListAvailableExchangesResponse\x124\n" +
+	"\x05metas\x18\x01 \x03(\v2\x1e.pulsoats.core.v1.ExchangeMetaR\x05metas2\xba\x02\n" +
 	"\aCatalog\x12e\n" +
-	"\x16ListAvailableDetectors\x12\x16.google.protobuf.Empty\x1a3.pulsoats.catalog.v1.ListAvailableDetectorsResponse\x12e\n" +
+	"\x16ListAvailableDetectors\x12\x16.google.protobuf.Empty\x1a3.pulsoats.catalog.v1.ListAvailableDetectorsResponse\x12a\n" +
+	"\x14ListAvailableFilters\x12\x16.google.protobuf.Empty\x1a1.pulsoats.catalog.v1.ListAvailableFiltersResponse\x12e\n" +
 	"\x16ListAvailableExchanges\x12\x16.google.protobuf.Empty\x1a3.pulsoats.catalog.v1.ListAvailableExchangesResponseB;Z9github.com/pulsoats/contracts/gen/go/catalog/v1;catalogpbb\x06proto3"
 
 var (
@@ -136,26 +183,31 @@ func file_catalog_v1_catalog_proto_rawDescGZIP() []byte {
 	return file_catalog_v1_catalog_proto_rawDescData
 }
 
-var file_catalog_v1_catalog_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_catalog_v1_catalog_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_catalog_v1_catalog_proto_goTypes = []any{
 	(*ListAvailableDetectorsResponse)(nil), // 0: pulsoats.catalog.v1.ListAvailableDetectorsResponse
-	(*ListAvailableExchangesResponse)(nil), // 1: pulsoats.catalog.v1.ListAvailableExchangesResponse
-	(*v1.DetectorMeta)(nil),                // 2: pulsoats.core.v1.DetectorMeta
-	(*v1.ExchangeMeta)(nil),                // 3: pulsoats.core.v1.ExchangeMeta
-	(*emptypb.Empty)(nil),                  // 4: google.protobuf.Empty
+	(*ListAvailableFiltersResponse)(nil),   // 1: pulsoats.catalog.v1.ListAvailableFiltersResponse
+	(*ListAvailableExchangesResponse)(nil), // 2: pulsoats.catalog.v1.ListAvailableExchangesResponse
+	(*v1.DetectorMeta)(nil),                // 3: pulsoats.core.v1.DetectorMeta
+	(*v1.FilterMeta)(nil),                  // 4: pulsoats.core.v1.FilterMeta
+	(*v1.ExchangeMeta)(nil),                // 5: pulsoats.core.v1.ExchangeMeta
+	(*emptypb.Empty)(nil),                  // 6: google.protobuf.Empty
 }
 var file_catalog_v1_catalog_proto_depIdxs = []int32{
-	2, // 0: pulsoats.catalog.v1.ListAvailableDetectorsResponse.detectors:type_name -> pulsoats.core.v1.DetectorMeta
-	3, // 1: pulsoats.catalog.v1.ListAvailableExchangesResponse.exchange_metas:type_name -> pulsoats.core.v1.ExchangeMeta
-	4, // 2: pulsoats.catalog.v1.Catalog.ListAvailableDetectors:input_type -> google.protobuf.Empty
-	4, // 3: pulsoats.catalog.v1.Catalog.ListAvailableExchanges:input_type -> google.protobuf.Empty
-	0, // 4: pulsoats.catalog.v1.Catalog.ListAvailableDetectors:output_type -> pulsoats.catalog.v1.ListAvailableDetectorsResponse
-	1, // 5: pulsoats.catalog.v1.Catalog.ListAvailableExchanges:output_type -> pulsoats.catalog.v1.ListAvailableExchangesResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 0: pulsoats.catalog.v1.ListAvailableDetectorsResponse.metas:type_name -> pulsoats.core.v1.DetectorMeta
+	4, // 1: pulsoats.catalog.v1.ListAvailableFiltersResponse.metas:type_name -> pulsoats.core.v1.FilterMeta
+	5, // 2: pulsoats.catalog.v1.ListAvailableExchangesResponse.metas:type_name -> pulsoats.core.v1.ExchangeMeta
+	6, // 3: pulsoats.catalog.v1.Catalog.ListAvailableDetectors:input_type -> google.protobuf.Empty
+	6, // 4: pulsoats.catalog.v1.Catalog.ListAvailableFilters:input_type -> google.protobuf.Empty
+	6, // 5: pulsoats.catalog.v1.Catalog.ListAvailableExchanges:input_type -> google.protobuf.Empty
+	0, // 6: pulsoats.catalog.v1.Catalog.ListAvailableDetectors:output_type -> pulsoats.catalog.v1.ListAvailableDetectorsResponse
+	1, // 7: pulsoats.catalog.v1.Catalog.ListAvailableFilters:output_type -> pulsoats.catalog.v1.ListAvailableFiltersResponse
+	2, // 8: pulsoats.catalog.v1.Catalog.ListAvailableExchanges:output_type -> pulsoats.catalog.v1.ListAvailableExchangesResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_catalog_v1_catalog_proto_init() }
@@ -169,7 +221,7 @@ func file_catalog_v1_catalog_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_catalog_v1_catalog_proto_rawDesc), len(file_catalog_v1_catalog_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

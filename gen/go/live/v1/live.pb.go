@@ -101,12 +101,13 @@ func (x *Run) GetFinishedBy() string {
 }
 
 type NewRunRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Market         *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
-	Interval       string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
-	DetectorConfig *v1.DetectorConfig     `protobuf:"bytes,3,opt,name=detector_config,json=detectorConfig,proto3" json:"detector_config,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Market        *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
+	Interval      string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
+	Detector      *v1.DetectorConfig     `protobuf:"bytes,3,opt,name=detector,proto3" json:"detector,omitempty"`
+	Filters       []*v1.FilterConfig     `protobuf:"bytes,4,rep,name=filters,proto3" json:"filters,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NewRunRequest) Reset() {
@@ -153,9 +154,16 @@ func (x *NewRunRequest) GetInterval() string {
 	return ""
 }
 
-func (x *NewRunRequest) GetDetectorConfig() *v1.DetectorConfig {
+func (x *NewRunRequest) GetDetector() *v1.DetectorConfig {
 	if x != nil {
-		return x.DetectorConfig
+		return x.Detector
+	}
+	return nil
+}
+
+func (x *NewRunRequest) GetFilters() []*v1.FilterConfig {
+	if x != nil {
+		return x.Filters
 	}
 	return nil
 }
@@ -920,11 +928,12 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\vfinished_by\x18\x05 \x01(\tH\x01R\n" +
 	"finishedBy\x88\x01\x01B\x0e\n" +
 	"\f_finished_atB\x0e\n" +
-	"\f_finished_by\"\xac\x01\n" +
+	"\f_finished_by\"\xd9\x01\n" +
 	"\rNewRunRequest\x124\n" +
 	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
-	"\binterval\x18\x02 \x01(\tR\binterval\x12I\n" +
-	"\x0fdetector_config\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\x0edetectorConfig\"\xbb\x03\n" +
+	"\binterval\x18\x02 \x01(\tR\binterval\x12<\n" +
+	"\bdetector\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x128\n" +
+	"\afilters\x18\x04 \x03(\v2\x1e.pulsoats.core.v1.FilterConfigR\afilters\"\xbb\x03\n" +
 	"\x0eListRunsFilter\x12\x1e\n" +
 	"\n" +
 	"categories\x18\x01 \x03(\tR\n" +
@@ -1052,50 +1061,52 @@ var file_live_v1_live_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),    // 12: google.protobuf.Timestamp
 	(*v1.MarketSpec)(nil),            // 13: pulsoats.core.v1.MarketSpec
 	(*v1.DetectorConfig)(nil),        // 14: pulsoats.core.v1.DetectorConfig
-	(*v1.RunID)(nil),                 // 15: pulsoats.core.v1.RunID
-	(*emptypb.Empty)(nil),            // 16: google.protobuf.Empty
+	(*v1.FilterConfig)(nil),          // 15: pulsoats.core.v1.FilterConfig
+	(*v1.RunID)(nil),                 // 16: pulsoats.core.v1.RunID
+	(*emptypb.Empty)(nil),            // 17: google.protobuf.Empty
 }
 var file_live_v1_live_proto_depIdxs = []int32{
 	11, // 0: pulsoats.live.v1.Run.base_run:type_name -> pulsoats.core.v1.BaseRun
 	12, // 1: pulsoats.live.v1.Run.finished_at:type_name -> google.protobuf.Timestamp
 	13, // 2: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.core.v1.MarketSpec
-	14, // 3: pulsoats.live.v1.NewRunRequest.detector_config:type_name -> pulsoats.core.v1.DetectorConfig
-	12, // 4: pulsoats.live.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
-	12, // 5: pulsoats.live.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
-	2,  // 6: pulsoats.live.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter
-	0,  // 7: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
-	13, // 8: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
-	12, // 9: pulsoats.live.v1.Signal.candle_time:type_name -> google.protobuf.Timestamp
-	12, // 10: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
-	12, // 11: pulsoats.live.v1.ListSignalsFilter.created_from:type_name -> google.protobuf.Timestamp
-	12, // 12: pulsoats.live.v1.ListSignalsFilter.created_to:type_name -> google.protobuf.Timestamp
-	6,  // 13: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
-	5,  // 14: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
-	0,  // 15: pulsoats.live.v1.Event.run:type_name -> pulsoats.live.v1.Run
-	5,  // 16: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
-	1,  // 17: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
-	15, // 18: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.core.v1.RunID
-	16, // 19: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
-	15, // 20: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.core.v1.RunID
-	15, // 21: pulsoats.live.v1.Live.GetRun:input_type -> pulsoats.core.v1.RunID
-	16, // 22: pulsoats.live.v1.Live.StreamWorkerStats:input_type -> google.protobuf.Empty
-	16, // 23: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
-	3,  // 24: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
-	7,  // 25: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
-	0,  // 26: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
-	16, // 27: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
-	16, // 28: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
-	0,  // 29: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
-	0,  // 30: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
-	10, // 31: pulsoats.live.v1.Live.StreamWorkerStats:output_type -> pulsoats.live.v1.WorkerStats
-	9,  // 32: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
-	4,  // 33: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
-	8,  // 34: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
-	26, // [26:35] is the sub-list for method output_type
-	17, // [17:26] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	14, // 3: pulsoats.live.v1.NewRunRequest.detector:type_name -> pulsoats.core.v1.DetectorConfig
+	15, // 4: pulsoats.live.v1.NewRunRequest.filters:type_name -> pulsoats.core.v1.FilterConfig
+	12, // 5: pulsoats.live.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
+	12, // 6: pulsoats.live.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
+	2,  // 7: pulsoats.live.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter
+	0,  // 8: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
+	13, // 9: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
+	12, // 10: pulsoats.live.v1.Signal.candle_time:type_name -> google.protobuf.Timestamp
+	12, // 11: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
+	12, // 12: pulsoats.live.v1.ListSignalsFilter.created_from:type_name -> google.protobuf.Timestamp
+	12, // 13: pulsoats.live.v1.ListSignalsFilter.created_to:type_name -> google.protobuf.Timestamp
+	6,  // 14: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
+	5,  // 15: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
+	0,  // 16: pulsoats.live.v1.Event.run:type_name -> pulsoats.live.v1.Run
+	5,  // 17: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
+	1,  // 18: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
+	16, // 19: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.core.v1.RunID
+	17, // 20: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
+	16, // 21: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.core.v1.RunID
+	16, // 22: pulsoats.live.v1.Live.GetRun:input_type -> pulsoats.core.v1.RunID
+	17, // 23: pulsoats.live.v1.Live.StreamWorkerStats:input_type -> google.protobuf.Empty
+	17, // 24: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
+	3,  // 25: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
+	7,  // 26: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
+	0,  // 27: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
+	17, // 28: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
+	17, // 29: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
+	0,  // 30: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
+	0,  // 31: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
+	10, // 32: pulsoats.live.v1.Live.StreamWorkerStats:output_type -> pulsoats.live.v1.WorkerStats
+	9,  // 33: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
+	4,  // 34: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
+	8,  // 35: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
+	27, // [27:36] is the sub-list for method output_type
+	18, // [18:27] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_live_v1_live_proto_init() }

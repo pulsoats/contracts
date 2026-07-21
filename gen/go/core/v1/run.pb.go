@@ -180,11 +180,12 @@ type BaseRun struct {
 	Market          *MarketSpec            `protobuf:"bytes,3,opt,name=market,proto3" json:"market,omitempty"`
 	Interval        string                 `protobuf:"bytes,4,opt,name=interval,proto3" json:"interval,omitempty"`
 	Detector        *DetectorConfig        `protobuf:"bytes,5,opt,name=detector,proto3" json:"detector,omitempty"`
-	SignalsCount    int64                  `protobuf:"varint,6,opt,name=signals_count,json=signalsCount,proto3" json:"signals_count,omitempty"`
-	FirstCandleTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=first_candle_time,json=firstCandleTime,proto3,oneof" json:"first_candle_time,omitempty"`
-	LastCandleTime  *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=last_candle_time,json=lastCandleTime,proto3,oneof" json:"last_candle_time,omitempty"`
-	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CreatedBy       string                 `protobuf:"bytes,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Filters         []*FilterConfig        `protobuf:"bytes,6,rep,name=filters,proto3" json:"filters,omitempty"`
+	SignalsCount    int64                  `protobuf:"varint,7,opt,name=signals_count,json=signalsCount,proto3" json:"signals_count,omitempty"`
+	FirstCandleTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=first_candle_time,json=firstCandleTime,proto3,oneof" json:"first_candle_time,omitempty"`
+	LastCandleTime  *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_candle_time,json=lastCandleTime,proto3,oneof" json:"last_candle_time,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedBy       string                 `protobuf:"bytes,11,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -254,6 +255,13 @@ func (x *BaseRun) GetDetector() *DetectorConfig {
 	return nil
 }
 
+func (x *BaseRun) GetFilters() []*FilterConfig {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
 func (x *BaseRun) GetSignalsCount() int64 {
 	if x != nil {
 		return x.SignalsCount
@@ -298,21 +306,22 @@ const file_core_v1_run_proto_rawDesc = "" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\"Z\n" +
 	"\tRunStatus\x123\n" +
 	"\x04code\x18\x01 \x01(\x0e2\x1f.pulsoats.core.v1.RunStatusCodeR\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xa0\x04\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xda\x04\n" +
 	"\aBaseRun\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x123\n" +
 	"\x06status\x18\x02 \x01(\v2\x1b.pulsoats.core.v1.RunStatusR\x06status\x124\n" +
 	"\x06market\x18\x03 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x04 \x01(\tR\binterval\x12<\n" +
-	"\bdetector\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x12#\n" +
-	"\rsignals_count\x18\x06 \x01(\x03R\fsignalsCount\x12K\n" +
-	"\x11first_candle_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0ffirstCandleTime\x88\x01\x01\x12I\n" +
-	"\x10last_candle_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x0elastCandleTime\x88\x01\x01\x129\n" +
+	"\bdetector\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x128\n" +
+	"\afilters\x18\x06 \x03(\v2\x1e.pulsoats.core.v1.FilterConfigR\afilters\x12#\n" +
+	"\rsignals_count\x18\a \x01(\x03R\fsignalsCount\x12K\n" +
+	"\x11first_candle_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0ffirstCandleTime\x88\x01\x01\x12I\n" +
+	"\x10last_candle_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x0elastCandleTime\x88\x01\x01\x129\n" +
 	"\n" +
-	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\n" +
-	" \x01(\tR\tcreatedByB\x14\n" +
+	"created_by\x18\v \x01(\tR\tcreatedByB\x14\n" +
 	"\x12_first_candle_timeB\x13\n" +
 	"\x11_last_candle_time*\x87\x01\n" +
 	"\rRunStatusCode\x12\x1a\n" +
@@ -343,21 +352,23 @@ var file_core_v1_run_proto_goTypes = []any{
 	(*BaseRun)(nil),               // 3: pulsoats.core.v1.BaseRun
 	(*MarketSpec)(nil),            // 4: pulsoats.core.v1.MarketSpec
 	(*DetectorConfig)(nil),        // 5: pulsoats.core.v1.DetectorConfig
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*FilterConfig)(nil),          // 6: pulsoats.core.v1.FilterConfig
+	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
 }
 var file_core_v1_run_proto_depIdxs = []int32{
 	0, // 0: pulsoats.core.v1.RunStatus.code:type_name -> pulsoats.core.v1.RunStatusCode
 	2, // 1: pulsoats.core.v1.BaseRun.status:type_name -> pulsoats.core.v1.RunStatus
 	4, // 2: pulsoats.core.v1.BaseRun.market:type_name -> pulsoats.core.v1.MarketSpec
 	5, // 3: pulsoats.core.v1.BaseRun.detector:type_name -> pulsoats.core.v1.DetectorConfig
-	6, // 4: pulsoats.core.v1.BaseRun.first_candle_time:type_name -> google.protobuf.Timestamp
-	6, // 5: pulsoats.core.v1.BaseRun.last_candle_time:type_name -> google.protobuf.Timestamp
-	6, // 6: pulsoats.core.v1.BaseRun.created_at:type_name -> google.protobuf.Timestamp
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	6, // 4: pulsoats.core.v1.BaseRun.filters:type_name -> pulsoats.core.v1.FilterConfig
+	7, // 5: pulsoats.core.v1.BaseRun.first_candle_time:type_name -> google.protobuf.Timestamp
+	7, // 6: pulsoats.core.v1.BaseRun.last_candle_time:type_name -> google.protobuf.Timestamp
+	7, // 7: pulsoats.core.v1.BaseRun.created_at:type_name -> google.protobuf.Timestamp
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_core_v1_run_proto_init() }

@@ -16,7 +16,16 @@ message DetectorConfig {
 message DetectorMeta {
   string code = 1;
   string version = 2;
-  string kind = 3;
-  string description = 4;
-  bytes opts_schema = 5;
+  string description = 3;
+  bytes opts_schema = 4;
+}
+
+message FilterConfig {
+  string code = 1;
+  int32 period = 2;
+}
+
+message FilterMeta {
+  string code = 1;
+  string description = 2;
 }

@@ -21,7 +21,8 @@ message Run {
 message NewRunRequest {
   pulsoats.core.v1.MarketSpec market = 1;
   string interval = 2;
-  pulsoats.core.v1.DetectorConfig detector_config = 3;
+  pulsoats.core.v1.DetectorConfig detector = 3;
+  repeated pulsoats.core.v1.FilterConfig filters = 4;
 }
 
 message ListRunsFilter {

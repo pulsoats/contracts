@@ -94,9 +94,8 @@ type DetectorMeta struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
-	Kind          string                 `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
-	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	OptsSchema    []byte                 `protobuf:"bytes,5,opt,name=opts_schema,json=optsSchema,proto3" json:"opts_schema,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	OptsSchema    []byte                 `protobuf:"bytes,4,opt,name=opts_schema,json=optsSchema,proto3" json:"opts_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -145,13 +144,6 @@ func (x *DetectorMeta) GetVersion() string {
 	return ""
 }
 
-func (x *DetectorMeta) GetKind() string {
-	if x != nil {
-		return x.Kind
-	}
-	return ""
-}
-
 func (x *DetectorMeta) GetDescription() string {
 	if x != nil {
 		return x.Description
@@ -166,6 +158,110 @@ func (x *DetectorMeta) GetOptsSchema() []byte {
 	return nil
 }
 
+type FilterConfig struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Period        int32                  `protobuf:"varint,2,opt,name=period,proto3" json:"period,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FilterConfig) Reset() {
+	*x = FilterConfig{}
+	mi := &file_core_v1_detect_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FilterConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FilterConfig) ProtoMessage() {}
+
+func (x *FilterConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_core_v1_detect_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FilterConfig.ProtoReflect.Descriptor instead.
+func (*FilterConfig) Descriptor() ([]byte, []int) {
+	return file_core_v1_detect_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *FilterConfig) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *FilterConfig) GetPeriod() int32 {
+	if x != nil {
+		return x.Period
+	}
+	return 0
+}
+
+type FilterMeta struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FilterMeta) Reset() {
+	*x = FilterMeta{}
+	mi := &file_core_v1_detect_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FilterMeta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FilterMeta) ProtoMessage() {}
+
+func (x *FilterMeta) ProtoReflect() protoreflect.Message {
+	mi := &file_core_v1_detect_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FilterMeta.ProtoReflect.Descriptor instead.
+func (*FilterMeta) Descriptor() ([]byte, []int) {
+	return file_core_v1_detect_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *FilterMeta) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *FilterMeta) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 var File_core_v1_detect_proto protoreflect.FileDescriptor
 
 const file_core_v1_detect_proto_rawDesc = "" +
@@ -176,14 +272,20 @@ const file_core_v1_detect_proto_rawDesc = "" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12\x1d\n" +
 	"\n" +
 	"opts_label\x18\x03 \x01(\tR\toptsLabel\x12\x12\n" +
-	"\x04opts\x18\x04 \x01(\fR\x04opts\"\x93\x01\n" +
+	"\x04opts\x18\x04 \x01(\fR\x04opts\"\x7f\n" +
 	"\fDetectorMeta\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
-	"\aversion\x18\x02 \x01(\tR\aversion\x12\x12\n" +
-	"\x04kind\x18\x03 \x01(\tR\x04kind\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1f\n" +
-	"\vopts_schema\x18\x05 \x01(\fR\n" +
-	"optsSchemaB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
+	"\aversion\x18\x02 \x01(\tR\aversion\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1f\n" +
+	"\vopts_schema\x18\x04 \x01(\fR\n" +
+	"optsSchema\":\n" +
+	"\fFilterConfig\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x16\n" +
+	"\x06period\x18\x02 \x01(\x05R\x06period\"B\n" +
+	"\n" +
+	"FilterMeta\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescriptionB5Z3github.com/pulsoats/contracts/gen/go/core/v1;corepbb\x06proto3"
 
 var (
 	file_core_v1_detect_proto_rawDescOnce sync.Once
@@ -197,10 +299,12 @@ func file_core_v1_detect_proto_rawDescGZIP() []byte {
 	return file_core_v1_detect_proto_rawDescData
 }
 
-var file_core_v1_detect_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_core_v1_detect_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_core_v1_detect_proto_goTypes = []any{
 	(*DetectorConfig)(nil), // 0: pulsoats.core.v1.DetectorConfig
 	(*DetectorMeta)(nil),   // 1: pulsoats.core.v1.DetectorMeta
+	(*FilterConfig)(nil),   // 2: pulsoats.core.v1.FilterConfig
+	(*FilterMeta)(nil),     // 3: pulsoats.core.v1.FilterMeta
 }
 var file_core_v1_detect_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -221,7 +325,7 @@ func file_core_v1_detect_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_core_v1_detect_proto_rawDesc), len(file_core_v1_detect_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

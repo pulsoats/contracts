@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Catalog_ListAvailableDetectors_FullMethodName = "/pulsoats.catalog.v1.Catalog/ListAvailableDetectors"
+	Catalog_ListAvailableFilters_FullMethodName   = "/pulsoats.catalog.v1.Catalog/ListAvailableFilters"
 	Catalog_ListAvailableExchanges_FullMethodName = "/pulsoats.catalog.v1.Catalog/ListAvailableExchanges"
 )
 
@@ -29,6 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CatalogClient interface {
 	ListAvailableDetectors(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListAvailableDetectorsResponse, error)
+	ListAvailableFilters(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListAvailableFiltersResponse, error)
 	ListAvailableExchanges(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListAvailableExchangesResponse, error)
 }
 
@@ -50,6 +52,16 @@ func (c *catalogClient) ListAvailableDetectors(ctx context.Context, in *emptypb.
 	return out, nil
 }
 
+func (c *catalogClient) ListAvailableFilters(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListAvailableFiltersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAvailableFiltersResponse)
+	err := c.cc.Invoke(ctx, Catalog_ListAvailableFilters_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *catalogClient) ListAvailableExchanges(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListAvailableExchangesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAvailableExchangesResponse)
@@ -65,6 +77,7 @@ func (c *catalogClient) ListAvailableExchanges(ctx context.Context, in *emptypb.
 // for forward compatibility.
 type CatalogServer interface {
 	ListAvailableDetectors(context.Context, *emptypb.Empty) (*ListAvailableDetectorsResponse, error)
+	ListAvailableFilters(context.Context, *emptypb.Empty) (*ListAvailableFiltersResponse, error)
 	ListAvailableExchanges(context.Context, *emptypb.Empty) (*ListAvailableExchangesResponse, error)
 	mustEmbedUnimplementedCatalogServer()
 }
@@ -78,6 +91,9 @@ type UnimplementedCatalogServer struct{}
 
 func (UnimplementedCatalogServer) ListAvailableDetectors(context.Context, *emptypb.Empty) (*ListAvailableDetectorsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAvailableDetectors not implemented")
+}
+func (UnimplementedCatalogServer) ListAvailableFilters(context.Context, *emptypb.Empty) (*ListAvailableFiltersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAvailableFilters not implemented")
 }
 func (UnimplementedCatalogServer) ListAvailableExchanges(context.Context, *emptypb.Empty) (*ListAvailableExchangesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAvailableExchanges not implemented")
@@ -121,6 +137,24 @@ func _Catalog_ListAvailableDetectors_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Catalog_ListAvailableFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CatalogServer).ListAvailableFilters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Catalog_ListAvailableFilters_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CatalogServer).ListAvailableFilters(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Catalog_ListAvailableExchanges_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
@@ -149,6 +183,10 @@ var Catalog_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAvailableDetectors",
 			Handler:    _Catalog_ListAvailableDetectors_Handler,
+		},
+		{
+			MethodName: "ListAvailableFilters",
+			Handler:    _Catalog_ListAvailableFilters_Handler,
 		},
 		{
 			MethodName: "ListAvailableExchanges",
