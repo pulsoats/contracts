@@ -182,10 +182,11 @@ type NewRunRequest struct {
 	Interval        string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
 	From            *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
 	To              *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`
-	DetectorConfig  *v1.DetectorConfig     `protobuf:"bytes,5,opt,name=detector_config,json=detectorConfig,proto3" json:"detector_config,omitempty"`
-	Fees            *v1.Fees               `protobuf:"bytes,6,opt,name=fees,proto3,oneof" json:"fees,omitempty"`
-	DisableRepeats  bool                   `protobuf:"varint,7,opt,name=disable_repeats,json=disableRepeats,proto3" json:"disable_repeats,omitempty"`
-	DisableStopLoss bool                   `protobuf:"varint,8,opt,name=disable_stop_loss,json=disableStopLoss,proto3" json:"disable_stop_loss,omitempty"`
+	Detector        *v1.DetectorConfig     `protobuf:"bytes,5,opt,name=detector,proto3" json:"detector,omitempty"`
+	Filters         []*v1.FilterConfig     `protobuf:"bytes,6,rep,name=filters,proto3" json:"filters,omitempty"`
+	Fees            *v1.Fees               `protobuf:"bytes,7,opt,name=fees,proto3,oneof" json:"fees,omitempty"`
+	DisableRepeats  bool                   `protobuf:"varint,8,opt,name=disable_repeats,json=disableRepeats,proto3" json:"disable_repeats,omitempty"`
+	DisableStopLoss bool                   `protobuf:"varint,9,opt,name=disable_stop_loss,json=disableStopLoss,proto3" json:"disable_stop_loss,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -248,9 +249,16 @@ func (x *NewRunRequest) GetTo() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *NewRunRequest) GetDetectorConfig() *v1.DetectorConfig {
+func (x *NewRunRequest) GetDetector() *v1.DetectorConfig {
 	if x != nil {
-		return x.DetectorConfig
+		return x.Detector
+	}
+	return nil
+}
+
+func (x *NewRunRequest) GetFilters() []*v1.FilterConfig {
+	if x != nil {
+		return x.Filters
 	}
 	return nil
 }
@@ -635,16 +643,17 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\tis_shared\x18\a \x01(\bR\bisShared\x12<\n" +
 	"\tshared_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x00R\bsharedAt\x88\x01\x01B\f\n" +
 	"\n" +
-	"_shared_at\"\x97\x03\n" +
+	"_shared_at\"\xc4\x03\n" +
 	"\rNewRunRequest\x124\n" +
 	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x02 \x01(\tR\binterval\x12.\n" +
 	"\x04from\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
-	"\x02to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12I\n" +
-	"\x0fdetector_config\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\x0edetectorConfig\x12/\n" +
-	"\x04fees\x18\x06 \x01(\v2\x16.pulsoats.core.v1.FeesH\x00R\x04fees\x88\x01\x01\x12'\n" +
-	"\x0fdisable_repeats\x18\a \x01(\bR\x0edisableRepeats\x12*\n" +
-	"\x11disable_stop_loss\x18\b \x01(\bR\x0fdisableStopLossB\a\n" +
+	"\x02to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\x12<\n" +
+	"\bdetector\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x128\n" +
+	"\afilters\x18\x06 \x03(\v2\x1e.pulsoats.core.v1.FilterConfigR\afilters\x12/\n" +
+	"\x04fees\x18\a \x01(\v2\x16.pulsoats.core.v1.FeesH\x00R\x04fees\x88\x01\x01\x12'\n" +
+	"\x0fdisable_repeats\x18\b \x01(\bR\x0edisableRepeats\x12*\n" +
+	"\x11disable_stop_loss\x18\t \x01(\bR\x0fdisableStopLossB\a\n" +
 	"\x05_fees\"%\n" +
 	"\x0fRunArchiveChunk\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\"\xb1\a\n" +
@@ -735,8 +744,9 @@ var file_analysis_v1_analysis_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
 	(*v1.MarketSpec)(nil),         // 10: pulsoats.core.v1.MarketSpec
 	(*v1.DetectorConfig)(nil),     // 11: pulsoats.core.v1.DetectorConfig
-	(*v1.RunID)(nil),              // 12: pulsoats.core.v1.RunID
-	(*emptypb.Empty)(nil),         // 13: google.protobuf.Empty
+	(*v1.FilterConfig)(nil),       // 12: pulsoats.core.v1.FilterConfig
+	(*v1.RunID)(nil),              // 13: pulsoats.core.v1.RunID
+	(*emptypb.Empty)(nil),         // 14: google.protobuf.Empty
 }
 var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	7,  // 0: pulsoats.analysis.v1.Run.base_run:type_name -> pulsoats.core.v1.BaseRun
@@ -745,32 +755,33 @@ var file_analysis_v1_analysis_proto_depIdxs = []int32{
 	10, // 3: pulsoats.analysis.v1.NewRunRequest.market:type_name -> pulsoats.core.v1.MarketSpec
 	9,  // 4: pulsoats.analysis.v1.NewRunRequest.from:type_name -> google.protobuf.Timestamp
 	9,  // 5: pulsoats.analysis.v1.NewRunRequest.to:type_name -> google.protobuf.Timestamp
-	11, // 6: pulsoats.analysis.v1.NewRunRequest.detector_config:type_name -> pulsoats.core.v1.DetectorConfig
-	8,  // 7: pulsoats.analysis.v1.NewRunRequest.fees:type_name -> pulsoats.core.v1.Fees
-	9,  // 8: pulsoats.analysis.v1.ListRunsFilter.first_candle_from:type_name -> google.protobuf.Timestamp
-	9,  // 9: pulsoats.analysis.v1.ListRunsFilter.last_candle_to:type_name -> google.protobuf.Timestamp
-	9,  // 10: pulsoats.analysis.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
-	9,  // 11: pulsoats.analysis.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
-	0,  // 12: pulsoats.analysis.v1.ListRunsPagedRequest.scope:type_name -> pulsoats.analysis.v1.RunScope
-	4,  // 13: pulsoats.analysis.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.analysis.v1.ListRunsFilter
-	1,  // 14: pulsoats.analysis.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.analysis.v1.Run
-	2,  // 15: pulsoats.analysis.v1.Analysis.NewRun:input_type -> pulsoats.analysis.v1.NewRunRequest
-	12, // 16: pulsoats.analysis.v1.Analysis.GetRun:input_type -> pulsoats.core.v1.RunID
-	12, // 17: pulsoats.analysis.v1.Analysis.GetRunArchive:input_type -> pulsoats.core.v1.RunID
-	12, // 18: pulsoats.analysis.v1.Analysis.ShareRun:input_type -> pulsoats.core.v1.RunID
-	12, // 19: pulsoats.analysis.v1.Analysis.DeleteRun:input_type -> pulsoats.core.v1.RunID
-	5,  // 20: pulsoats.analysis.v1.Analysis.ListRunsPaged:input_type -> pulsoats.analysis.v1.ListRunsPagedRequest
-	1,  // 21: pulsoats.analysis.v1.Analysis.NewRun:output_type -> pulsoats.analysis.v1.Run
-	1,  // 22: pulsoats.analysis.v1.Analysis.GetRun:output_type -> pulsoats.analysis.v1.Run
-	3,  // 23: pulsoats.analysis.v1.Analysis.GetRunArchive:output_type -> pulsoats.analysis.v1.RunArchiveChunk
-	13, // 24: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> google.protobuf.Empty
-	13, // 25: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
-	6,  // 26: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsPagedResponse
-	21, // [21:27] is the sub-list for method output_type
-	15, // [15:21] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	11, // 6: pulsoats.analysis.v1.NewRunRequest.detector:type_name -> pulsoats.core.v1.DetectorConfig
+	12, // 7: pulsoats.analysis.v1.NewRunRequest.filters:type_name -> pulsoats.core.v1.FilterConfig
+	8,  // 8: pulsoats.analysis.v1.NewRunRequest.fees:type_name -> pulsoats.core.v1.Fees
+	9,  // 9: pulsoats.analysis.v1.ListRunsFilter.first_candle_from:type_name -> google.protobuf.Timestamp
+	9,  // 10: pulsoats.analysis.v1.ListRunsFilter.last_candle_to:type_name -> google.protobuf.Timestamp
+	9,  // 11: pulsoats.analysis.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
+	9,  // 12: pulsoats.analysis.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
+	0,  // 13: pulsoats.analysis.v1.ListRunsPagedRequest.scope:type_name -> pulsoats.analysis.v1.RunScope
+	4,  // 14: pulsoats.analysis.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.analysis.v1.ListRunsFilter
+	1,  // 15: pulsoats.analysis.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.analysis.v1.Run
+	2,  // 16: pulsoats.analysis.v1.Analysis.NewRun:input_type -> pulsoats.analysis.v1.NewRunRequest
+	13, // 17: pulsoats.analysis.v1.Analysis.GetRun:input_type -> pulsoats.core.v1.RunID
+	13, // 18: pulsoats.analysis.v1.Analysis.GetRunArchive:input_type -> pulsoats.core.v1.RunID
+	13, // 19: pulsoats.analysis.v1.Analysis.ShareRun:input_type -> pulsoats.core.v1.RunID
+	13, // 20: pulsoats.analysis.v1.Analysis.DeleteRun:input_type -> pulsoats.core.v1.RunID
+	5,  // 21: pulsoats.analysis.v1.Analysis.ListRunsPaged:input_type -> pulsoats.analysis.v1.ListRunsPagedRequest
+	1,  // 22: pulsoats.analysis.v1.Analysis.NewRun:output_type -> pulsoats.analysis.v1.Run
+	1,  // 23: pulsoats.analysis.v1.Analysis.GetRun:output_type -> pulsoats.analysis.v1.Run
+	3,  // 24: pulsoats.analysis.v1.Analysis.GetRunArchive:output_type -> pulsoats.analysis.v1.RunArchiveChunk
+	14, // 25: pulsoats.analysis.v1.Analysis.ShareRun:output_type -> google.protobuf.Empty
+	14, // 26: pulsoats.analysis.v1.Analysis.DeleteRun:output_type -> google.protobuf.Empty
+	6,  // 27: pulsoats.analysis.v1.Analysis.ListRunsPaged:output_type -> pulsoats.analysis.v1.ListRunsPagedResponse
+	22, // [22:28] is the sub-list for method output_type
+	16, // [16:22] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_analysis_v1_analysis_proto_init() }
