@@ -38,6 +38,7 @@ message NewRunRequest {
   optional pulsoats.core.v1.Fees fees = 7;
   bool disable_repeats = 8;
   bool disable_stop_loss = 9;
+  bool collect_reject_log = 10;
 }
 
 message RunArchiveChunk {

@@ -177,18 +177,19 @@ func (x *Run) GetSharedAt() *timestamppb.Timestamp {
 }
 
 type NewRunRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Market          *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
-	Interval        string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
-	From            *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
-	To              *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`
-	DetectorConfig  *v1.DetectorConfig     `protobuf:"bytes,5,opt,name=detector_config,json=detectorConfig,proto3" json:"detector_config,omitempty"`
-	FiltersConfigs  []*v1.FilterConfig     `protobuf:"bytes,6,rep,name=filters_configs,json=filtersConfigs,proto3" json:"filters_configs,omitempty"`
-	Fees            *v1.Fees               `protobuf:"bytes,7,opt,name=fees,proto3,oneof" json:"fees,omitempty"`
-	DisableRepeats  bool                   `protobuf:"varint,8,opt,name=disable_repeats,json=disableRepeats,proto3" json:"disable_repeats,omitempty"`
-	DisableStopLoss bool                   `protobuf:"varint,9,opt,name=disable_stop_loss,json=disableStopLoss,proto3" json:"disable_stop_loss,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Market           *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
+	Interval         string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
+	From             *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
+	To               *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`
+	DetectorConfig   *v1.DetectorConfig     `protobuf:"bytes,5,opt,name=detector_config,json=detectorConfig,proto3" json:"detector_config,omitempty"`
+	FiltersConfigs   []*v1.FilterConfig     `protobuf:"bytes,6,rep,name=filters_configs,json=filtersConfigs,proto3" json:"filters_configs,omitempty"`
+	Fees             *v1.Fees               `protobuf:"bytes,7,opt,name=fees,proto3,oneof" json:"fees,omitempty"`
+	DisableRepeats   bool                   `protobuf:"varint,8,opt,name=disable_repeats,json=disableRepeats,proto3" json:"disable_repeats,omitempty"`
+	DisableStopLoss  bool                   `protobuf:"varint,9,opt,name=disable_stop_loss,json=disableStopLoss,proto3" json:"disable_stop_loss,omitempty"`
+	CollectRejectLog bool                   `protobuf:"varint,10,opt,name=collect_reject_log,json=collectRejectLog,proto3" json:"collect_reject_log,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *NewRunRequest) Reset() {
@@ -280,6 +281,13 @@ func (x *NewRunRequest) GetDisableRepeats() bool {
 func (x *NewRunRequest) GetDisableStopLoss() bool {
 	if x != nil {
 		return x.DisableStopLoss
+	}
+	return false
+}
+
+func (x *NewRunRequest) GetCollectRejectLog() bool {
+	if x != nil {
+		return x.CollectRejectLog
 	}
 	return false
 }
@@ -643,7 +651,7 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\tis_shared\x18\a \x01(\bR\bisShared\x12<\n" +
 	"\tshared_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x00R\bsharedAt\x88\x01\x01B\f\n" +
 	"\n" +
-	"_shared_at\"\xe0\x03\n" +
+	"_shared_at\"\x8e\x04\n" +
 	"\rNewRunRequest\x124\n" +
 	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x02 \x01(\tR\binterval\x12.\n" +
@@ -653,7 +661,9 @@ const file_analysis_v1_analysis_proto_rawDesc = "" +
 	"\x0ffilters_configs\x18\x06 \x03(\v2\x1e.pulsoats.core.v1.FilterConfigR\x0efiltersConfigs\x12/\n" +
 	"\x04fees\x18\a \x01(\v2\x16.pulsoats.core.v1.FeesH\x00R\x04fees\x88\x01\x01\x12'\n" +
 	"\x0fdisable_repeats\x18\b \x01(\bR\x0edisableRepeats\x12*\n" +
-	"\x11disable_stop_loss\x18\t \x01(\bR\x0fdisableStopLossB\a\n" +
+	"\x11disable_stop_loss\x18\t \x01(\bR\x0fdisableStopLoss\x12,\n" +
+	"\x12collect_reject_log\x18\n" +
+	" \x01(\bR\x10collectRejectLogB\a\n" +
 	"\x05_fees\"%\n" +
 	"\x0fRunArchiveChunk\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\"\xb1\a\n" +
