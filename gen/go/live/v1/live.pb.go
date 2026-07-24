@@ -101,13 +101,13 @@ func (x *Run) GetFinishedBy() string {
 }
 
 type NewRunRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Market        *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
-	Interval      string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
-	Detector      *v1.DetectorConfig     `protobuf:"bytes,3,opt,name=detector,proto3" json:"detector,omitempty"`
-	Filters       []*v1.FilterConfig     `protobuf:"bytes,4,rep,name=filters,proto3" json:"filters,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Market         *v1.MarketSpec         `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
+	Interval       string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
+	DetectorConfig *v1.DetectorConfig     `protobuf:"bytes,3,opt,name=detector_config,json=detectorConfig,proto3" json:"detector_config,omitempty"`
+	FiltersConfigs []*v1.FilterConfig     `protobuf:"bytes,4,rep,name=filters_configs,json=filtersConfigs,proto3" json:"filters_configs,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *NewRunRequest) Reset() {
@@ -154,16 +154,16 @@ func (x *NewRunRequest) GetInterval() string {
 	return ""
 }
 
-func (x *NewRunRequest) GetDetector() *v1.DetectorConfig {
+func (x *NewRunRequest) GetDetectorConfig() *v1.DetectorConfig {
 	if x != nil {
-		return x.Detector
+		return x.DetectorConfig
 	}
 	return nil
 }
 
-func (x *NewRunRequest) GetFilters() []*v1.FilterConfig {
+func (x *NewRunRequest) GetFiltersConfigs() []*v1.FilterConfig {
 	if x != nil {
-		return x.Filters
+		return x.FiltersConfigs
 	}
 	return nil
 }
@@ -928,12 +928,12 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\vfinished_by\x18\x05 \x01(\tH\x01R\n" +
 	"finishedBy\x88\x01\x01B\x0e\n" +
 	"\f_finished_atB\x0e\n" +
-	"\f_finished_by\"\xd9\x01\n" +
+	"\f_finished_by\"\xf5\x01\n" +
 	"\rNewRunRequest\x124\n" +
 	"\x06market\x18\x01 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
-	"\binterval\x18\x02 \x01(\tR\binterval\x12<\n" +
-	"\bdetector\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x128\n" +
-	"\afilters\x18\x04 \x03(\v2\x1e.pulsoats.core.v1.FilterConfigR\afilters\"\xbb\x03\n" +
+	"\binterval\x18\x02 \x01(\tR\binterval\x12I\n" +
+	"\x0fdetector_config\x18\x03 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\x0edetectorConfig\x12G\n" +
+	"\x0ffilters_configs\x18\x04 \x03(\v2\x1e.pulsoats.core.v1.FilterConfigR\x0efiltersConfigs\"\xbb\x03\n" +
 	"\x0eListRunsFilter\x12\x1e\n" +
 	"\n" +
 	"categories\x18\x01 \x03(\tR\n" +
@@ -1069,8 +1069,8 @@ var file_live_v1_live_proto_depIdxs = []int32{
 	11, // 0: pulsoats.live.v1.Run.base_run:type_name -> pulsoats.core.v1.BaseRun
 	12, // 1: pulsoats.live.v1.Run.finished_at:type_name -> google.protobuf.Timestamp
 	13, // 2: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.core.v1.MarketSpec
-	14, // 3: pulsoats.live.v1.NewRunRequest.detector:type_name -> pulsoats.core.v1.DetectorConfig
-	15, // 4: pulsoats.live.v1.NewRunRequest.filters:type_name -> pulsoats.core.v1.FilterConfig
+	14, // 3: pulsoats.live.v1.NewRunRequest.detector_config:type_name -> pulsoats.core.v1.DetectorConfig
+	15, // 4: pulsoats.live.v1.NewRunRequest.filters_configs:type_name -> pulsoats.core.v1.FilterConfig
 	12, // 5: pulsoats.live.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
 	12, // 6: pulsoats.live.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
 	2,  // 7: pulsoats.live.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter

@@ -30,8 +30,8 @@ message BaseRun {
   RunStatus status = 2;
   core.v1.MarketSpec market = 3;
   string interval = 4;
-  core.v1.DetectorConfig detector = 5;
-  repeated core.v1.FilterConfig filters = 6;
+  core.v1.DetectorConfig detector_config = 5;
+  repeated core.v1.FilterConfig filters_configs = 6;
   int64 signals_count = 7;
   optional google.protobuf.Timestamp first_candle_time = 8;
   optional google.protobuf.Timestamp last_candle_time = 9;

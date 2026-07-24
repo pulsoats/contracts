@@ -179,8 +179,8 @@ type BaseRun struct {
 	Status          *RunStatus             `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	Market          *MarketSpec            `protobuf:"bytes,3,opt,name=market,proto3" json:"market,omitempty"`
 	Interval        string                 `protobuf:"bytes,4,opt,name=interval,proto3" json:"interval,omitempty"`
-	Detector        *DetectorConfig        `protobuf:"bytes,5,opt,name=detector,proto3" json:"detector,omitempty"`
-	Filters         []*FilterConfig        `protobuf:"bytes,6,rep,name=filters,proto3" json:"filters,omitempty"`
+	DetectorConfig  *DetectorConfig        `protobuf:"bytes,5,opt,name=detector_config,json=detectorConfig,proto3" json:"detector_config,omitempty"`
+	FiltersConfigs  []*FilterConfig        `protobuf:"bytes,6,rep,name=filters_configs,json=filtersConfigs,proto3" json:"filters_configs,omitempty"`
 	SignalsCount    int64                  `protobuf:"varint,7,opt,name=signals_count,json=signalsCount,proto3" json:"signals_count,omitempty"`
 	FirstCandleTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=first_candle_time,json=firstCandleTime,proto3,oneof" json:"first_candle_time,omitempty"`
 	LastCandleTime  *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_candle_time,json=lastCandleTime,proto3,oneof" json:"last_candle_time,omitempty"`
@@ -248,16 +248,16 @@ func (x *BaseRun) GetInterval() string {
 	return ""
 }
 
-func (x *BaseRun) GetDetector() *DetectorConfig {
+func (x *BaseRun) GetDetectorConfig() *DetectorConfig {
 	if x != nil {
-		return x.Detector
+		return x.DetectorConfig
 	}
 	return nil
 }
 
-func (x *BaseRun) GetFilters() []*FilterConfig {
+func (x *BaseRun) GetFiltersConfigs() []*FilterConfig {
 	if x != nil {
-		return x.Filters
+		return x.FiltersConfigs
 	}
 	return nil
 }
@@ -306,14 +306,14 @@ const file_core_v1_run_proto_rawDesc = "" +
 	"\x06run_id\x18\x01 \x01(\tR\x05runId\"Z\n" +
 	"\tRunStatus\x123\n" +
 	"\x04code\x18\x01 \x01(\x0e2\x1f.pulsoats.core.v1.RunStatusCodeR\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xda\x04\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xf6\x04\n" +
 	"\aBaseRun\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x123\n" +
 	"\x06status\x18\x02 \x01(\v2\x1b.pulsoats.core.v1.RunStatusR\x06status\x124\n" +
 	"\x06market\x18\x03 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
-	"\binterval\x18\x04 \x01(\tR\binterval\x12<\n" +
-	"\bdetector\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\bdetector\x128\n" +
-	"\afilters\x18\x06 \x03(\v2\x1e.pulsoats.core.v1.FilterConfigR\afilters\x12#\n" +
+	"\binterval\x18\x04 \x01(\tR\binterval\x12I\n" +
+	"\x0fdetector_config\x18\x05 \x01(\v2 .pulsoats.core.v1.DetectorConfigR\x0edetectorConfig\x12G\n" +
+	"\x0ffilters_configs\x18\x06 \x03(\v2\x1e.pulsoats.core.v1.FilterConfigR\x0efiltersConfigs\x12#\n" +
 	"\rsignals_count\x18\a \x01(\x03R\fsignalsCount\x12K\n" +
 	"\x11first_candle_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x0ffirstCandleTime\x88\x01\x01\x12I\n" +
 	"\x10last_candle_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x0elastCandleTime\x88\x01\x01\x129\n" +
@@ -359,8 +359,8 @@ var file_core_v1_run_proto_depIdxs = []int32{
 	0, // 0: pulsoats.core.v1.RunStatus.code:type_name -> pulsoats.core.v1.RunStatusCode
 	2, // 1: pulsoats.core.v1.BaseRun.status:type_name -> pulsoats.core.v1.RunStatus
 	4, // 2: pulsoats.core.v1.BaseRun.market:type_name -> pulsoats.core.v1.MarketSpec
-	5, // 3: pulsoats.core.v1.BaseRun.detector:type_name -> pulsoats.core.v1.DetectorConfig
-	6, // 4: pulsoats.core.v1.BaseRun.filters:type_name -> pulsoats.core.v1.FilterConfig
+	5, // 3: pulsoats.core.v1.BaseRun.detector_config:type_name -> pulsoats.core.v1.DetectorConfig
+	6, // 4: pulsoats.core.v1.BaseRun.filters_configs:type_name -> pulsoats.core.v1.FilterConfig
 	7, // 5: pulsoats.core.v1.BaseRun.first_candle_time:type_name -> google.protobuf.Timestamp
 	7, // 6: pulsoats.core.v1.BaseRun.last_candle_time:type_name -> google.protobuf.Timestamp
 	7, // 7: pulsoats.core.v1.BaseRun.created_at:type_name -> google.protobuf.Timestamp
