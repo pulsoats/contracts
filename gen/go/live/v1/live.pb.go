@@ -412,13 +412,12 @@ type Signal struct {
 	Interval          string                 `protobuf:"bytes,4,opt,name=interval,proto3" json:"interval,omitempty"`
 	DetectorCode      string                 `protobuf:"bytes,5,opt,name=detector_code,json=detectorCode,proto3" json:"detector_code,omitempty"`
 	DetectorVersion   string                 `protobuf:"bytes,6,opt,name=detector_version,json=detectorVersion,proto3" json:"detector_version,omitempty"`
-	DetectorOptsLabel string                 `protobuf:"bytes,7,opt,name=detector_opts_label,json=detectorOptsLabel,proto3" json:"detector_opts_label,omitempty"`
-	CandleTime        *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=candle_time,json=candleTime,proto3" json:"candle_time,omitempty"`
-	BuyValue          int64                  `protobuf:"varint,9,opt,name=buy_value,json=buyValue,proto3" json:"buy_value,omitempty"`
-	TakeProfitValue   int64                  `protobuf:"varint,10,opt,name=take_profit_value,json=takeProfitValue,proto3" json:"take_profit_value,omitempty"`
-	StopLossValue     int64                  `protobuf:"varint,11,opt,name=stop_loss_value,json=stopLossValue,proto3" json:"stop_loss_value,omitempty"`
-	ExpectedReturnPpm int64                  `protobuf:"varint,12,opt,name=expected_return_ppm,json=expectedReturnPpm,proto3" json:"expected_return_ppm,omitempty"`
-	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CandleTime        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=candle_time,json=candleTime,proto3" json:"candle_time,omitempty"`
+	BuyValue          int64                  `protobuf:"varint,8,opt,name=buy_value,json=buyValue,proto3" json:"buy_value,omitempty"`
+	TakeProfitValue   int64                  `protobuf:"varint,9,opt,name=take_profit_value,json=takeProfitValue,proto3" json:"take_profit_value,omitempty"`
+	StopLossValue     int64                  `protobuf:"varint,10,opt,name=stop_loss_value,json=stopLossValue,proto3" json:"stop_loss_value,omitempty"`
+	ExpectedReturnPpm int64                  `protobuf:"varint,11,opt,name=expected_return_ppm,json=expectedReturnPpm,proto3" json:"expected_return_ppm,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -495,13 +494,6 @@ func (x *Signal) GetDetectorVersion() string {
 	return ""
 }
 
-func (x *Signal) GetDetectorOptsLabel() string {
-	if x != nil {
-		return x.DetectorOptsLabel
-	}
-	return ""
-}
-
 func (x *Signal) GetCandleTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CandleTime
@@ -545,16 +537,16 @@ func (x *Signal) GetCreatedAt() *timestamppb.Timestamp {
 }
 
 type ListSignalsFilter struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunId         *string                `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3,oneof" json:"run_id,omitempty"`
-	Categories    []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
-	Symbols       []string               `protobuf:"bytes,3,rep,name=symbols,proto3" json:"symbols,omitempty"`
-	Intervals     []string               `protobuf:"bytes,4,rep,name=intervals,proto3" json:"intervals,omitempty"`
-	DetectorCodes []string               `protobuf:"bytes,5,rep,name=detector_codes,json=detectorCodes,proto3" json:"detector_codes,omitempty"`
-	CreatedFrom   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_from,json=createdFrom,proto3,oneof" json:"created_from,omitempty"`
-	CreatedTo     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_to,json=createdTo,proto3,oneof" json:"created_to,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	RunId          *string                `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3,oneof" json:"run_id,omitempty"`
+	Categories     []string               `protobuf:"bytes,2,rep,name=categories,proto3" json:"categories,omitempty"`
+	Symbols        []string               `protobuf:"bytes,3,rep,name=symbols,proto3" json:"symbols,omitempty"`
+	Intervals      []string               `protobuf:"bytes,4,rep,name=intervals,proto3" json:"intervals,omitempty"`
+	DetectorsCodes []string               `protobuf:"bytes,5,rep,name=detectors_codes,json=detectorsCodes,proto3" json:"detectors_codes,omitempty"`
+	CreatedFrom    *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_from,json=createdFrom,proto3,oneof" json:"created_from,omitempty"`
+	CreatedTo      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_to,json=createdTo,proto3,oneof" json:"created_to,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListSignalsFilter) Reset() {
@@ -615,9 +607,9 @@ func (x *ListSignalsFilter) GetIntervals() []string {
 	return nil
 }
 
-func (x *ListSignalsFilter) GetDetectorCodes() []string {
+func (x *ListSignalsFilter) GetDetectorsCodes() []string {
 	if x != nil {
-		return x.DetectorCodes
+		return x.DetectorsCodes
 	}
 	return nil
 }
@@ -957,32 +949,31 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x04runs\x18\x01 \x03(\v2\x15.pulsoats.live.v1.RunR\x04runs\x12\x19\n" +
 	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +
 	"\x0enext_before_id\x18\x03 \x01(\tH\x00R\fnextBeforeId\x88\x01\x01B\x11\n" +
-	"\x0f_next_before_id\"\x9a\x04\n" +
+	"\x0f_next_before_id\"\xea\x03\n" +
 	"\x06Signal\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
 	"\x06run_id\x18\x02 \x01(\tR\x05runId\x124\n" +
 	"\x06market\x18\x03 \x01(\v2\x1c.pulsoats.core.v1.MarketSpecR\x06market\x12\x1a\n" +
 	"\binterval\x18\x04 \x01(\tR\binterval\x12#\n" +
 	"\rdetector_code\x18\x05 \x01(\tR\fdetectorCode\x12)\n" +
-	"\x10detector_version\x18\x06 \x01(\tR\x0fdetectorVersion\x12.\n" +
-	"\x13detector_opts_label\x18\a \x01(\tR\x11detectorOptsLabel\x12;\n" +
-	"\vcandle_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"\x10detector_version\x18\x06 \x01(\tR\x0fdetectorVersion\x12;\n" +
+	"\vcandle_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"candleTime\x12\x1b\n" +
-	"\tbuy_value\x18\t \x01(\x03R\bbuyValue\x12*\n" +
-	"\x11take_profit_value\x18\n" +
-	" \x01(\x03R\x0ftakeProfitValue\x12&\n" +
-	"\x0fstop_loss_value\x18\v \x01(\x03R\rstopLossValue\x12.\n" +
-	"\x13expected_return_ppm\x18\f \x01(\x03R\x11expectedReturnPpm\x129\n" +
+	"\tbuy_value\x18\b \x01(\x03R\bbuyValue\x12*\n" +
+	"\x11take_profit_value\x18\t \x01(\x03R\x0ftakeProfitValue\x12&\n" +
+	"\x0fstop_loss_value\x18\n" +
+	" \x01(\x03R\rstopLossValue\x12.\n" +
+	"\x13expected_return_ppm\x18\v \x01(\x03R\x11expectedReturnPpm\x129\n" +
 	"\n" +
-	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xdd\x02\n" +
+	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xdf\x02\n" +
 	"\x11ListSignalsFilter\x12\x1a\n" +
 	"\x06run_id\x18\x01 \x01(\tH\x00R\x05runId\x88\x01\x01\x12\x1e\n" +
 	"\n" +
 	"categories\x18\x02 \x03(\tR\n" +
 	"categories\x12\x18\n" +
 	"\asymbols\x18\x03 \x03(\tR\asymbols\x12\x1c\n" +
-	"\tintervals\x18\x04 \x03(\tR\tintervals\x12%\n" +
-	"\x0edetector_codes\x18\x05 \x03(\tR\rdetectorCodes\x12B\n" +
+	"\tintervals\x18\x04 \x03(\tR\tintervals\x12'\n" +
+	"\x0fdetectors_codes\x18\x05 \x03(\tR\x0edetectorsCodes\x12B\n" +
 	"\fcreated_from\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\vcreatedFrom\x88\x01\x01\x12>\n" +
 	"\n" +
 	"created_to\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tcreatedTo\x88\x01\x01B\t\n" +

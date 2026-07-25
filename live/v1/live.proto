@@ -59,13 +59,12 @@ message Signal {
   string interval = 4;
   string detector_code = 5;
   string detector_version = 6;
-  string detector_opts_label = 7;
-  google.protobuf.Timestamp candle_time = 8;
-  int64 buy_value = 9;
-  int64 take_profit_value = 10;
-  int64 stop_loss_value = 11;
-  int64 expected_return_ppm = 12;
-  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp candle_time = 7;
+  int64 buy_value = 8;
+  int64 take_profit_value = 9;
+  int64 stop_loss_value = 10;
+  int64 expected_return_ppm = 11;
+  google.protobuf.Timestamp created_at = 12;
 }
 
 message ListSignalsFilter {
@@ -73,7 +72,7 @@ message ListSignalsFilter {
   repeated string categories = 2;
   repeated string symbols = 3;
   repeated string intervals = 4;
-  repeated string detector_codes = 5;
+  repeated string detectors_codes = 5;
   optional google.protobuf.Timestamp created_from = 6;
   optional google.protobuf.Timestamp created_to = 7;
 }
