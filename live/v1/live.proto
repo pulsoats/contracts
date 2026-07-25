@@ -61,12 +61,11 @@ message Signal {
   string detector_version = 6;
   string detector_opts_label = 7;
   google.protobuf.Timestamp candle_time = 8;
-  int64 candle_value = 9;
-  int64 buy_value = 10;
-  int64 take_profit_value = 11;
-  int64 stop_loss_value = 12;
-  int64 expected_return_ppm = 13;
-  google.protobuf.Timestamp created_at = 14;
+  int64 buy_value = 9;
+  int64 take_profit_value = 10;
+  int64 stop_loss_value = 11;
+  int64 expected_return_ppm = 12;
+  google.protobuf.Timestamp created_at = 13;
 }
 
 message ListSignalsFilter {

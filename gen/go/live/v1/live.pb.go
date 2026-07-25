@@ -414,12 +414,11 @@ type Signal struct {
 	DetectorVersion   string                 `protobuf:"bytes,6,opt,name=detector_version,json=detectorVersion,proto3" json:"detector_version,omitempty"`
 	DetectorOptsLabel string                 `protobuf:"bytes,7,opt,name=detector_opts_label,json=detectorOptsLabel,proto3" json:"detector_opts_label,omitempty"`
 	CandleTime        *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=candle_time,json=candleTime,proto3" json:"candle_time,omitempty"`
-	CandleValue       int64                  `protobuf:"varint,9,opt,name=candle_value,json=candleValue,proto3" json:"candle_value,omitempty"`
-	BuyValue          int64                  `protobuf:"varint,10,opt,name=buy_value,json=buyValue,proto3" json:"buy_value,omitempty"`
-	TakeProfitValue   int64                  `protobuf:"varint,11,opt,name=take_profit_value,json=takeProfitValue,proto3" json:"take_profit_value,omitempty"`
-	StopLossValue     int64                  `protobuf:"varint,12,opt,name=stop_loss_value,json=stopLossValue,proto3" json:"stop_loss_value,omitempty"`
-	ExpectedReturnPpm int64                  `protobuf:"varint,13,opt,name=expected_return_ppm,json=expectedReturnPpm,proto3" json:"expected_return_ppm,omitempty"`
-	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	BuyValue          int64                  `protobuf:"varint,9,opt,name=buy_value,json=buyValue,proto3" json:"buy_value,omitempty"`
+	TakeProfitValue   int64                  `protobuf:"varint,10,opt,name=take_profit_value,json=takeProfitValue,proto3" json:"take_profit_value,omitempty"`
+	StopLossValue     int64                  `protobuf:"varint,11,opt,name=stop_loss_value,json=stopLossValue,proto3" json:"stop_loss_value,omitempty"`
+	ExpectedReturnPpm int64                  `protobuf:"varint,12,opt,name=expected_return_ppm,json=expectedReturnPpm,proto3" json:"expected_return_ppm,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -508,13 +507,6 @@ func (x *Signal) GetCandleTime() *timestamppb.Timestamp {
 		return x.CandleTime
 	}
 	return nil
-}
-
-func (x *Signal) GetCandleValue() int64 {
-	if x != nil {
-		return x.CandleValue
-	}
-	return 0
 }
 
 func (x *Signal) GetBuyValue() int64 {
@@ -965,7 +957,7 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x04runs\x18\x01 \x03(\v2\x15.pulsoats.live.v1.RunR\x04runs\x12\x19\n" +
 	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +
 	"\x0enext_before_id\x18\x03 \x01(\tH\x00R\fnextBeforeId\x88\x01\x01B\x11\n" +
-	"\x0f_next_before_id\"\xbd\x04\n" +
+	"\x0f_next_before_id\"\x9a\x04\n" +
 	"\x06Signal\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
 	"\x06run_id\x18\x02 \x01(\tR\x05runId\x124\n" +
@@ -975,15 +967,14 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\x10detector_version\x18\x06 \x01(\tR\x0fdetectorVersion\x12.\n" +
 	"\x13detector_opts_label\x18\a \x01(\tR\x11detectorOptsLabel\x12;\n" +
 	"\vcandle_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"candleTime\x12!\n" +
-	"\fcandle_value\x18\t \x01(\x03R\vcandleValue\x12\x1b\n" +
-	"\tbuy_value\x18\n" +
-	" \x01(\x03R\bbuyValue\x12*\n" +
-	"\x11take_profit_value\x18\v \x01(\x03R\x0ftakeProfitValue\x12&\n" +
-	"\x0fstop_loss_value\x18\f \x01(\x03R\rstopLossValue\x12.\n" +
-	"\x13expected_return_ppm\x18\r \x01(\x03R\x11expectedReturnPpm\x129\n" +
+	"candleTime\x12\x1b\n" +
+	"\tbuy_value\x18\t \x01(\x03R\bbuyValue\x12*\n" +
+	"\x11take_profit_value\x18\n" +
+	" \x01(\x03R\x0ftakeProfitValue\x12&\n" +
+	"\x0fstop_loss_value\x18\v \x01(\x03R\rstopLossValue\x12.\n" +
+	"\x13expected_return_ppm\x18\f \x01(\x03R\x11expectedReturnPpm\x129\n" +
 	"\n" +
-	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xdd\x02\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xdd\x02\n" +
 	"\x11ListSignalsFilter\x12\x1a\n" +
 	"\x06run_id\x18\x01 \x01(\tH\x00R\x05runId\x88\x01\x01\x12\x1e\n" +
 	"\n" +
