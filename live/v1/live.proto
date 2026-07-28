@@ -12,10 +12,8 @@ option go_package = "github.com/pulsoats/contracts/gen/go/live/v1;livepb";
 
 message Run {
   core.v1.BaseRun base_run = 1;
-  int64 sum_profit_ppm = 2;
-  int64 avg_profit_ppm = 3;
-  optional google.protobuf.Timestamp finished_at = 4;
-  optional string finished_by = 5;
+  optional google.protobuf.Timestamp finished_at = 2;
+  optional string finished_by = 3;
 }
 
 message NewRunRequest {
@@ -90,16 +88,20 @@ message ListSignalsPagedResponse {
   optional string next_before_id = 3;
 }
 
-message Event {
+message RunStatusEvent {
   string run_id = 1;
+  core.v1.RunStatus status = 2;
+}
+
+message Event {
   oneof payload {
-    Run run = 2;
-    Signal signal = 3;
+    RunStatusEvent run_status = 1;
+    Signal signal = 2;
   }
 }
 
-message WorkerStats {
-  int32 runs_total = 1;
+message WorkerStatus {
+  int32 active_runs = 1;
   int64 signals_total = 2;
 }
 
@@ -109,10 +111,9 @@ service Live {
   rpc StopAll(google.protobuf.Empty) returns (google.protobuf.Empty); // x-user-id METADATA IS REQUIRED
   rpc RestartRun(core.v1.RunID) returns (Run); // x-user-id METADATA IS REQUIRED
   rpc GetRun(core.v1.RunID) returns (Run);
-
-  rpc StreamWorkerStats(google.protobuf.Empty) returns (stream WorkerStats);
-  rpc StreamEvents(google.protobuf.Empty) returns (stream Event);
-
   rpc ListRunsPaged(ListRunsPagedRequest) returns (ListRunsPagedResponse);
   rpc ListSignalsPaged(ListSignalsPagedRequest) returns (ListSignalsPagedResponse);
+
+  rpc StreamEvents(google.protobuf.Empty) returns (stream Event);
+  rpc GetWorkerStatus(google.protobuf.Empty) returns (WorkerStatus);
 }

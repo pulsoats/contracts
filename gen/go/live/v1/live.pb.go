@@ -27,10 +27,8 @@ const (
 type Run struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	BaseRun       *v1.BaseRun            `protobuf:"bytes,1,opt,name=base_run,json=baseRun,proto3" json:"base_run,omitempty"`
-	SumProfitPpm  int64                  `protobuf:"varint,2,opt,name=sum_profit_ppm,json=sumProfitPpm,proto3" json:"sum_profit_ppm,omitempty"`
-	AvgProfitPpm  int64                  `protobuf:"varint,3,opt,name=avg_profit_ppm,json=avgProfitPpm,proto3" json:"avg_profit_ppm,omitempty"`
-	FinishedAt    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=finished_at,json=finishedAt,proto3,oneof" json:"finished_at,omitempty"`
-	FinishedBy    *string                `protobuf:"bytes,5,opt,name=finished_by,json=finishedBy,proto3,oneof" json:"finished_by,omitempty"`
+	FinishedAt    *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=finished_at,json=finishedAt,proto3,oneof" json:"finished_at,omitempty"`
+	FinishedBy    *string                `protobuf:"bytes,3,opt,name=finished_by,json=finishedBy,proto3,oneof" json:"finished_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -70,20 +68,6 @@ func (x *Run) GetBaseRun() *v1.BaseRun {
 		return x.BaseRun
 	}
 	return nil
-}
-
-func (x *Run) GetSumProfitPpm() int64 {
-	if x != nil {
-		return x.SumProfitPpm
-	}
-	return 0
-}
-
-func (x *Run) GetAvgProfitPpm() int64 {
-	if x != nil {
-		return x.AvgProfitPpm
-	}
-	return 0
 }
 
 func (x *Run) GetFinishedAt() *timestamppb.Timestamp {
@@ -756,12 +740,63 @@ func (x *ListSignalsPagedResponse) GetNextBeforeId() string {
 	return ""
 }
 
+type RunStatusEvent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RunId         string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
+	Status        *v1.RunStatus          `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RunStatusEvent) Reset() {
+	*x = RunStatusEvent{}
+	mi := &file_live_v1_live_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RunStatusEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RunStatusEvent) ProtoMessage() {}
+
+func (x *RunStatusEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_live_v1_live_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RunStatusEvent.ProtoReflect.Descriptor instead.
+func (*RunStatusEvent) Descriptor() ([]byte, []int) {
+	return file_live_v1_live_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *RunStatusEvent) GetRunId() string {
+	if x != nil {
+		return x.RunId
+	}
+	return ""
+}
+
+func (x *RunStatusEvent) GetStatus() *v1.RunStatus {
+	if x != nil {
+		return x.Status
+	}
+	return nil
+}
+
 type Event struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	RunId string                 `protobuf:"bytes,1,opt,name=run_id,json=runId,proto3" json:"run_id,omitempty"`
 	// Types that are valid to be assigned to Payload:
 	//
-	//	*Event_Run
+	//	*Event_RunStatus
 	//	*Event_Signal
 	Payload       isEvent_Payload `protobuf_oneof:"payload"`
 	unknownFields protoimpl.UnknownFields
@@ -770,7 +805,7 @@ type Event struct {
 
 func (x *Event) Reset() {
 	*x = Event{}
-	mi := &file_live_v1_live_proto_msgTypes[9]
+	mi := &file_live_v1_live_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -782,7 +817,7 @@ func (x *Event) String() string {
 func (*Event) ProtoMessage() {}
 
 func (x *Event) ProtoReflect() protoreflect.Message {
-	mi := &file_live_v1_live_proto_msgTypes[9]
+	mi := &file_live_v1_live_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -795,14 +830,7 @@ func (x *Event) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Event.ProtoReflect.Descriptor instead.
 func (*Event) Descriptor() ([]byte, []int) {
-	return file_live_v1_live_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *Event) GetRunId() string {
-	if x != nil {
-		return x.RunId
-	}
-	return ""
+	return file_live_v1_live_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Event) GetPayload() isEvent_Payload {
@@ -812,10 +840,10 @@ func (x *Event) GetPayload() isEvent_Payload {
 	return nil
 }
 
-func (x *Event) GetRun() *Run {
+func (x *Event) GetRunStatus() *RunStatusEvent {
 	if x != nil {
-		if x, ok := x.Payload.(*Event_Run); ok {
-			return x.Run
+		if x, ok := x.Payload.(*Event_RunStatus); ok {
+			return x.RunStatus
 		}
 	}
 	return nil
@@ -834,41 +862,41 @@ type isEvent_Payload interface {
 	isEvent_Payload()
 }
 
-type Event_Run struct {
-	Run *Run `protobuf:"bytes,2,opt,name=run,proto3,oneof"`
+type Event_RunStatus struct {
+	RunStatus *RunStatusEvent `protobuf:"bytes,1,opt,name=run_status,json=runStatus,proto3,oneof"`
 }
 
 type Event_Signal struct {
-	Signal *Signal `protobuf:"bytes,3,opt,name=signal,proto3,oneof"`
+	Signal *Signal `protobuf:"bytes,2,opt,name=signal,proto3,oneof"`
 }
 
-func (*Event_Run) isEvent_Payload() {}
+func (*Event_RunStatus) isEvent_Payload() {}
 
 func (*Event_Signal) isEvent_Payload() {}
 
-type WorkerStats struct {
+type WorkerStatus struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RunsTotal     int32                  `protobuf:"varint,1,opt,name=runs_total,json=runsTotal,proto3" json:"runs_total,omitempty"`
+	ActiveRuns    int32                  `protobuf:"varint,1,opt,name=active_runs,json=activeRuns,proto3" json:"active_runs,omitempty"`
 	SignalsTotal  int64                  `protobuf:"varint,2,opt,name=signals_total,json=signalsTotal,proto3" json:"signals_total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *WorkerStats) Reset() {
-	*x = WorkerStats{}
-	mi := &file_live_v1_live_proto_msgTypes[10]
+func (x *WorkerStatus) Reset() {
+	*x = WorkerStatus{}
+	mi := &file_live_v1_live_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *WorkerStats) String() string {
+func (x *WorkerStatus) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*WorkerStats) ProtoMessage() {}
+func (*WorkerStatus) ProtoMessage() {}
 
-func (x *WorkerStats) ProtoReflect() protoreflect.Message {
-	mi := &file_live_v1_live_proto_msgTypes[10]
+func (x *WorkerStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_live_v1_live_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -879,19 +907,19 @@ func (x *WorkerStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use WorkerStats.ProtoReflect.Descriptor instead.
-func (*WorkerStats) Descriptor() ([]byte, []int) {
-	return file_live_v1_live_proto_rawDescGZIP(), []int{10}
+// Deprecated: Use WorkerStatus.ProtoReflect.Descriptor instead.
+func (*WorkerStatus) Descriptor() ([]byte, []int) {
+	return file_live_v1_live_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *WorkerStats) GetRunsTotal() int32 {
+func (x *WorkerStatus) GetActiveRuns() int32 {
 	if x != nil {
-		return x.RunsTotal
+		return x.ActiveRuns
 	}
 	return 0
 }
 
-func (x *WorkerStats) GetSignalsTotal() int64 {
+func (x *WorkerStatus) GetSignalsTotal() int64 {
 	if x != nil {
 		return x.SignalsTotal
 	}
@@ -902,14 +930,12 @@ var File_live_v1_live_proto protoreflect.FileDescriptor
 
 const file_live_v1_live_proto_rawDesc = "" +
 	"\n" +
-	"\x12live/v1/live.proto\x12\x10pulsoats.live.v1\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\x1a\x11core/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x8f\x02\n" +
+	"\x12live/v1/live.proto\x12\x10pulsoats.live.v1\x1a\x14core/v1/detect.proto\x1a\x14core/v1/market.proto\x1a\x11core/v1/run.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xc3\x01\n" +
 	"\x03Run\x124\n" +
-	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12$\n" +
-	"\x0esum_profit_ppm\x18\x02 \x01(\x03R\fsumProfitPpm\x12$\n" +
-	"\x0eavg_profit_ppm\x18\x03 \x01(\x03R\favgProfitPpm\x12@\n" +
-	"\vfinished_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\n" +
+	"\bbase_run\x18\x01 \x01(\v2\x19.pulsoats.core.v1.BaseRunR\abaseRun\x12@\n" +
+	"\vfinished_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\n" +
 	"finishedAt\x88\x01\x01\x12$\n" +
-	"\vfinished_by\x18\x05 \x01(\tH\x01R\n" +
+	"\vfinished_by\x18\x03 \x01(\tH\x01R\n" +
 	"finishedBy\x88\x01\x01B\x0e\n" +
 	"\f_finished_atB\x0e\n" +
 	"\f_finished_by\"\xf5\x01\n" +
@@ -992,27 +1018,30 @@ const file_live_v1_live_proto_rawDesc = "" +
 	"\asignals\x18\x01 \x03(\v2\x18.pulsoats.live.v1.SignalR\asignals\x12\x19\n" +
 	"\bhas_more\x18\x02 \x01(\bR\ahasMore\x12)\n" +
 	"\x0enext_before_id\x18\x03 \x01(\tH\x00R\fnextBeforeId\x88\x01\x01B\x11\n" +
-	"\x0f_next_before_id\"\x88\x01\n" +
-	"\x05Event\x12\x15\n" +
-	"\x06run_id\x18\x01 \x01(\tR\x05runId\x12)\n" +
-	"\x03run\x18\x02 \x01(\v2\x15.pulsoats.live.v1.RunH\x00R\x03run\x122\n" +
-	"\x06signal\x18\x03 \x01(\v2\x18.pulsoats.live.v1.SignalH\x00R\x06signalB\t\n" +
-	"\apayload\"Q\n" +
-	"\vWorkerStats\x12\x1d\n" +
+	"\x0f_next_before_id\"\\\n" +
+	"\x0eRunStatusEvent\x12\x15\n" +
+	"\x06run_id\x18\x01 \x01(\tR\x05runId\x123\n" +
+	"\x06status\x18\x02 \x01(\v2\x1b.pulsoats.core.v1.RunStatusR\x06status\"\x89\x01\n" +
+	"\x05Event\x12A\n" +
 	"\n" +
-	"runs_total\x18\x01 \x01(\x05R\trunsTotal\x12#\n" +
-	"\rsignals_total\x18\x02 \x01(\x03R\fsignalsTotal2\x95\x05\n" +
+	"run_status\x18\x01 \x01(\v2 .pulsoats.live.v1.RunStatusEventH\x00R\trunStatus\x122\n" +
+	"\x06signal\x18\x02 \x01(\v2\x18.pulsoats.live.v1.SignalH\x00R\x06signalB\t\n" +
+	"\apayload\"T\n" +
+	"\fWorkerStatus\x12\x1f\n" +
+	"\vactive_runs\x18\x01 \x01(\x05R\n" +
+	"activeRuns\x12#\n" +
+	"\rsignals_total\x18\x02 \x01(\x03R\fsignalsTotal2\x92\x05\n" +
 	"\x04Live\x12@\n" +
 	"\x06NewRun\x12\x1f.pulsoats.live.v1.NewRunRequest\x1a\x15.pulsoats.live.v1.Run\x12:\n" +
 	"\aStopRun\x12\x17.pulsoats.core.v1.RunID\x1a\x16.google.protobuf.Empty\x129\n" +
 	"\aStopAll\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12<\n" +
 	"\n" +
 	"RestartRun\x12\x17.pulsoats.core.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x128\n" +
-	"\x06GetRun\x12\x17.pulsoats.core.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x12L\n" +
-	"\x11StreamWorkerStats\x12\x16.google.protobuf.Empty\x1a\x1d.pulsoats.live.v1.WorkerStats0\x01\x12A\n" +
-	"\fStreamEvents\x12\x16.google.protobuf.Empty\x1a\x17.pulsoats.live.v1.Event0\x01\x12`\n" +
+	"\x06GetRun\x12\x17.pulsoats.core.v1.RunID\x1a\x15.pulsoats.live.v1.Run\x12`\n" +
 	"\rListRunsPaged\x12&.pulsoats.live.v1.ListRunsPagedRequest\x1a'.pulsoats.live.v1.ListRunsPagedResponse\x12i\n" +
-	"\x10ListSignalsPaged\x12).pulsoats.live.v1.ListSignalsPagedRequest\x1a*.pulsoats.live.v1.ListSignalsPagedResponseB5Z3github.com/pulsoats/contracts/gen/go/live/v1;livepbb\x06proto3"
+	"\x10ListSignalsPaged\x12).pulsoats.live.v1.ListSignalsPagedRequest\x1a*.pulsoats.live.v1.ListSignalsPagedResponse\x12A\n" +
+	"\fStreamEvents\x12\x16.google.protobuf.Empty\x1a\x17.pulsoats.live.v1.Event0\x01\x12I\n" +
+	"\x0fGetWorkerStatus\x12\x16.google.protobuf.Empty\x1a\x1e.pulsoats.live.v1.WorkerStatusB5Z3github.com/pulsoats/contracts/gen/go/live/v1;livepbb\x06proto3"
 
 var (
 	file_live_v1_live_proto_rawDescOnce sync.Once
@@ -1026,7 +1055,7 @@ func file_live_v1_live_proto_rawDescGZIP() []byte {
 	return file_live_v1_live_proto_rawDescData
 }
 
-var file_live_v1_live_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_live_v1_live_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_live_v1_live_proto_goTypes = []any{
 	(*Run)(nil),                      // 0: pulsoats.live.v1.Run
 	(*NewRunRequest)(nil),            // 1: pulsoats.live.v1.NewRunRequest
@@ -1037,58 +1066,61 @@ var file_live_v1_live_proto_goTypes = []any{
 	(*ListSignalsFilter)(nil),        // 6: pulsoats.live.v1.ListSignalsFilter
 	(*ListSignalsPagedRequest)(nil),  // 7: pulsoats.live.v1.ListSignalsPagedRequest
 	(*ListSignalsPagedResponse)(nil), // 8: pulsoats.live.v1.ListSignalsPagedResponse
-	(*Event)(nil),                    // 9: pulsoats.live.v1.Event
-	(*WorkerStats)(nil),              // 10: pulsoats.live.v1.WorkerStats
-	(*v1.BaseRun)(nil),               // 11: pulsoats.core.v1.BaseRun
-	(*timestamppb.Timestamp)(nil),    // 12: google.protobuf.Timestamp
-	(*v1.MarketSpec)(nil),            // 13: pulsoats.core.v1.MarketSpec
-	(*v1.DetectorConfig)(nil),        // 14: pulsoats.core.v1.DetectorConfig
-	(*v1.FilterConfig)(nil),          // 15: pulsoats.core.v1.FilterConfig
-	(*v1.RunID)(nil),                 // 16: pulsoats.core.v1.RunID
-	(*emptypb.Empty)(nil),            // 17: google.protobuf.Empty
+	(*RunStatusEvent)(nil),           // 9: pulsoats.live.v1.RunStatusEvent
+	(*Event)(nil),                    // 10: pulsoats.live.v1.Event
+	(*WorkerStatus)(nil),             // 11: pulsoats.live.v1.WorkerStatus
+	(*v1.BaseRun)(nil),               // 12: pulsoats.core.v1.BaseRun
+	(*timestamppb.Timestamp)(nil),    // 13: google.protobuf.Timestamp
+	(*v1.MarketSpec)(nil),            // 14: pulsoats.core.v1.MarketSpec
+	(*v1.DetectorConfig)(nil),        // 15: pulsoats.core.v1.DetectorConfig
+	(*v1.FilterConfig)(nil),          // 16: pulsoats.core.v1.FilterConfig
+	(*v1.RunStatus)(nil),             // 17: pulsoats.core.v1.RunStatus
+	(*v1.RunID)(nil),                 // 18: pulsoats.core.v1.RunID
+	(*emptypb.Empty)(nil),            // 19: google.protobuf.Empty
 }
 var file_live_v1_live_proto_depIdxs = []int32{
-	11, // 0: pulsoats.live.v1.Run.base_run:type_name -> pulsoats.core.v1.BaseRun
-	12, // 1: pulsoats.live.v1.Run.finished_at:type_name -> google.protobuf.Timestamp
-	13, // 2: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.core.v1.MarketSpec
-	14, // 3: pulsoats.live.v1.NewRunRequest.detector_config:type_name -> pulsoats.core.v1.DetectorConfig
-	15, // 4: pulsoats.live.v1.NewRunRequest.filters_configs:type_name -> pulsoats.core.v1.FilterConfig
-	12, // 5: pulsoats.live.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
-	12, // 6: pulsoats.live.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
+	12, // 0: pulsoats.live.v1.Run.base_run:type_name -> pulsoats.core.v1.BaseRun
+	13, // 1: pulsoats.live.v1.Run.finished_at:type_name -> google.protobuf.Timestamp
+	14, // 2: pulsoats.live.v1.NewRunRequest.market:type_name -> pulsoats.core.v1.MarketSpec
+	15, // 3: pulsoats.live.v1.NewRunRequest.detector_config:type_name -> pulsoats.core.v1.DetectorConfig
+	16, // 4: pulsoats.live.v1.NewRunRequest.filters_configs:type_name -> pulsoats.core.v1.FilterConfig
+	13, // 5: pulsoats.live.v1.ListRunsFilter.created_from:type_name -> google.protobuf.Timestamp
+	13, // 6: pulsoats.live.v1.ListRunsFilter.created_to:type_name -> google.protobuf.Timestamp
 	2,  // 7: pulsoats.live.v1.ListRunsPagedRequest.filter:type_name -> pulsoats.live.v1.ListRunsFilter
 	0,  // 8: pulsoats.live.v1.ListRunsPagedResponse.runs:type_name -> pulsoats.live.v1.Run
-	13, // 9: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
-	12, // 10: pulsoats.live.v1.Signal.candle_time:type_name -> google.protobuf.Timestamp
-	12, // 11: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
-	12, // 12: pulsoats.live.v1.ListSignalsFilter.created_from:type_name -> google.protobuf.Timestamp
-	12, // 13: pulsoats.live.v1.ListSignalsFilter.created_to:type_name -> google.protobuf.Timestamp
+	14, // 9: pulsoats.live.v1.Signal.market:type_name -> pulsoats.core.v1.MarketSpec
+	13, // 10: pulsoats.live.v1.Signal.candle_time:type_name -> google.protobuf.Timestamp
+	13, // 11: pulsoats.live.v1.Signal.created_at:type_name -> google.protobuf.Timestamp
+	13, // 12: pulsoats.live.v1.ListSignalsFilter.created_from:type_name -> google.protobuf.Timestamp
+	13, // 13: pulsoats.live.v1.ListSignalsFilter.created_to:type_name -> google.protobuf.Timestamp
 	6,  // 14: pulsoats.live.v1.ListSignalsPagedRequest.filter:type_name -> pulsoats.live.v1.ListSignalsFilter
 	5,  // 15: pulsoats.live.v1.ListSignalsPagedResponse.signals:type_name -> pulsoats.live.v1.Signal
-	0,  // 16: pulsoats.live.v1.Event.run:type_name -> pulsoats.live.v1.Run
-	5,  // 17: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
-	1,  // 18: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
-	16, // 19: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.core.v1.RunID
-	17, // 20: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
-	16, // 21: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.core.v1.RunID
-	16, // 22: pulsoats.live.v1.Live.GetRun:input_type -> pulsoats.core.v1.RunID
-	17, // 23: pulsoats.live.v1.Live.StreamWorkerStats:input_type -> google.protobuf.Empty
-	17, // 24: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
-	3,  // 25: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
-	7,  // 26: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
-	0,  // 27: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
-	17, // 28: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
-	17, // 29: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
-	0,  // 30: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
-	0,  // 31: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
-	10, // 32: pulsoats.live.v1.Live.StreamWorkerStats:output_type -> pulsoats.live.v1.WorkerStats
-	9,  // 33: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
-	4,  // 34: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
-	8,  // 35: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
-	27, // [27:36] is the sub-list for method output_type
-	18, // [18:27] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	17, // 16: pulsoats.live.v1.RunStatusEvent.status:type_name -> pulsoats.core.v1.RunStatus
+	9,  // 17: pulsoats.live.v1.Event.run_status:type_name -> pulsoats.live.v1.RunStatusEvent
+	5,  // 18: pulsoats.live.v1.Event.signal:type_name -> pulsoats.live.v1.Signal
+	1,  // 19: pulsoats.live.v1.Live.NewRun:input_type -> pulsoats.live.v1.NewRunRequest
+	18, // 20: pulsoats.live.v1.Live.StopRun:input_type -> pulsoats.core.v1.RunID
+	19, // 21: pulsoats.live.v1.Live.StopAll:input_type -> google.protobuf.Empty
+	18, // 22: pulsoats.live.v1.Live.RestartRun:input_type -> pulsoats.core.v1.RunID
+	18, // 23: pulsoats.live.v1.Live.GetRun:input_type -> pulsoats.core.v1.RunID
+	3,  // 24: pulsoats.live.v1.Live.ListRunsPaged:input_type -> pulsoats.live.v1.ListRunsPagedRequest
+	7,  // 25: pulsoats.live.v1.Live.ListSignalsPaged:input_type -> pulsoats.live.v1.ListSignalsPagedRequest
+	19, // 26: pulsoats.live.v1.Live.StreamEvents:input_type -> google.protobuf.Empty
+	19, // 27: pulsoats.live.v1.Live.GetWorkerStatus:input_type -> google.protobuf.Empty
+	0,  // 28: pulsoats.live.v1.Live.NewRun:output_type -> pulsoats.live.v1.Run
+	19, // 29: pulsoats.live.v1.Live.StopRun:output_type -> google.protobuf.Empty
+	19, // 30: pulsoats.live.v1.Live.StopAll:output_type -> google.protobuf.Empty
+	0,  // 31: pulsoats.live.v1.Live.RestartRun:output_type -> pulsoats.live.v1.Run
+	0,  // 32: pulsoats.live.v1.Live.GetRun:output_type -> pulsoats.live.v1.Run
+	4,  // 33: pulsoats.live.v1.Live.ListRunsPaged:output_type -> pulsoats.live.v1.ListRunsPagedResponse
+	8,  // 34: pulsoats.live.v1.Live.ListSignalsPaged:output_type -> pulsoats.live.v1.ListSignalsPagedResponse
+	10, // 35: pulsoats.live.v1.Live.StreamEvents:output_type -> pulsoats.live.v1.Event
+	11, // 36: pulsoats.live.v1.Live.GetWorkerStatus:output_type -> pulsoats.live.v1.WorkerStatus
+	28, // [28:37] is the sub-list for method output_type
+	19, // [19:28] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_live_v1_live_proto_init() }
@@ -1103,8 +1135,8 @@ func file_live_v1_live_proto_init() {
 	file_live_v1_live_proto_msgTypes[6].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[7].OneofWrappers = []any{}
 	file_live_v1_live_proto_msgTypes[8].OneofWrappers = []any{}
-	file_live_v1_live_proto_msgTypes[9].OneofWrappers = []any{
-		(*Event_Run)(nil),
+	file_live_v1_live_proto_msgTypes[10].OneofWrappers = []any{
+		(*Event_RunStatus)(nil),
 		(*Event_Signal)(nil),
 	}
 	type x struct{}
@@ -1113,7 +1145,7 @@ func file_live_v1_live_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_live_v1_live_proto_rawDesc), len(file_live_v1_live_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
