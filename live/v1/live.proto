@@ -100,9 +100,9 @@ message Event {
   }
 }
 
-message WorkerStatus {
+message WorkerStats {
   int32 active_runs = 1;
-  int64 signals_total = 2;
+  int32 signals_total = 2;
 }
 
 service Live {
@@ -115,5 +115,5 @@ service Live {
   rpc ListSignalsPaged(ListSignalsPagedRequest) returns (ListSignalsPagedResponse);
 
   rpc StreamEvents(google.protobuf.Empty) returns (stream Event);
-  rpc GetWorkerStatus(google.protobuf.Empty) returns (WorkerStatus);
+  rpc GetWorkerStats(google.protobuf.Empty) returns (WorkerStats);
 }
